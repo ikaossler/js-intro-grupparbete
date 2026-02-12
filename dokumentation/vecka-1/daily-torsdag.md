@@ -2,7 +2,18 @@
 
 
 
-Dagens scrum master: namn
+## Dagens agenda
+***Git fördjupning***
 
-## Namn: Maria Birath
+*Vi gjorde övningsuppgifter på Git och pratade om ett tema inför uppgiften*
 
+## Deltagare
+
+### Chiara Jukkola
+Närvarande
+### Filip Brandt
+Närvarande
+### Ika Ossler
+Närvarande
+### Maria Birath
+Närvarande
