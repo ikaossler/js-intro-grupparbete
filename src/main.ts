@@ -8,7 +8,7 @@ type RoomDefinition = {
 };
 // Load the room definitions from a JSON file and initialize the rooms on the page
 async function loadRooms(): Promise<void> {
-  const response = await fetch("/rooms.json");
+  const response = await fetch(`${import.meta.env.BASE_URL}rooms.json`);
   const rooms = (await response.json()) as RoomDefinition[];
 
   const mariaRoom = rooms.find((room) => room.id === "room1");
