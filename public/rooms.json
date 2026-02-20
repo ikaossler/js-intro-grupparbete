@@ -1,0 +1,24 @@
+[
+  {
+    "id": "room1",
+    "name": "Verification Code",
+    "description": "A verification code has been sent. Click start to begin your room."
+  }
+
+  ,{
+    "id": "room2",
+    "name": "9999",
+    "description": "8888"
+  }
+    ,{
+    "id": "room3",
+    "name": "7777",
+    "description": "9999"
+  }
+
+    ,{
+    "id": "room4",
+    "name": "Exit Room",
+    "description": "You have escaped the internet hell. Congratulations!"
+  }
+]
