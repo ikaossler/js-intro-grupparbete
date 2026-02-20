@@ -3,35 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Error 404</title>
   </head>
   <body>
+    <header class="site-header">
+      <h1>Error 404</h1>
+      <button id="login-btn"></button>
+      <div class="progress-wrap">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <div id="timer"></div>
+
+
+    </header>
+
     <main>
-      <section id="start"></section>
+      <section id="start">
+<div class="start-content">
+  <h2>Error 404</h2>
+  <p>Welcome to Internet Hell. Every room is a different online nightmare. Solve the traps, beat the timers, and escape.</p>
+  <button id="start-btn">Start Game</button>
+  <div class="high-score">
+    <h3>High Score</h3>
+    <p id="high-score-value">0</p>
+</div>
 
-      <section id="room1" aria-labelledby="room1-title">
-        <h2 id="room1-title">Verification Code</h2>
-        <p>A verification code has been sent.</p>
-
-        <button id="resend-btn" type="button">Resend?</button>
-
-        <p>
-          Code:
-          <span id="flash-code" aria-live="polite">------</span>
-        </p>
-
-        <label for="code-input">Enter code</label>
-        <input
-          id="code-input"
-          name="code-input"
-          type="text"
-          maxlength="6"
-          autocomplete="one-time-code"
-        />
-
-        <button id="check-btn" type="button">Check</button>
-        <p id="room1-message" aria-live="polite"></p>
       </section>
+
+      <section id="room1"></section>
 
       <section id="room2"></section>
 
@@ -40,6 +39,6 @@
       <section id="room4"></section>
     </main>
 
-    <script type="module" src="/main.ts"></script>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
