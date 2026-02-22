@@ -1,3 +1,17 @@
+/* Dölj allt utom ditt rum */
+body > *:not(main) {
+  display: none;
+}
+
+#start, #room1, #room2, #room3 {
+  display: none !important;
+}
+
+#room4 {
+  display: block !important;
+}
+
+
 #room4 {
     background-color: black;
     color: #00b32d;

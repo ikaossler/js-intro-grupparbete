@@ -1,7 +1,8 @@
-import './room4.css';
+//import './room4.css';
 
 const passwordInput = document.getElementById('password-input') as HTMLInputElement;
 const submitButton = document.getElementById('room4-submit') as HTMLButtonElement;
+const showRequirementsBtn = document.getElementById('show-requirements-btn') as HTMLButtonElement; 
 const requirementsList = document.getElementById('requirements-list') as HTMLUListElement;
 const messageElement = document.getElementById('room4-message') as HTMLParagraphElement;
 
@@ -30,14 +31,11 @@ function displayRequirements() {
     requirementsList.appendChild(li);
   });
 
-  // Hide requirements after X seconds
+  // göm kraven efter 5 sec
   setTimeout(() => {
     requirementsList.style.display = "none";
   }, 5000)
 } 
-
-//Visa kraven när sidan laddas
-displayRequirements();
 
 passwordInput.addEventListener('input', () => {
     const value = passwordInput.value;
