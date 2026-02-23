@@ -37,6 +37,10 @@ function displayRequirements() {
   }, 5000)
 } 
 
+showRequirementsBtn.addEventListener("click", () => {
+  displayRequirements();
+});
+
 passwordInput.addEventListener('input', () => {
     const value = passwordInput.value;
 });
@@ -56,11 +60,17 @@ submitButton.addEventListener("click", () => {
 
         passwordInput.value = '';
 
+        setTimeout(() => {
+        messageElement.textContent = ''; // ← LÄGG TILL DENNA RAD
+        displayRequirements();
+    }, 3000);
+}
+
         //vänta i 1 sekunder, sen visas kraven igen
         setTimeout(() => {
             displayRequirements();
         }, 3000); //1000ms = 1 sekund
     }
-    });
+    );
 
 

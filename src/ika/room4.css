@@ -9,12 +9,18 @@ body > *:not(main) {
 
 #room4 {
   display: block !important;
+  background-color: #000000;
+  color: #00b32d;
+  font-family: monospace;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;       
 }
 
-
-#room4 {
-    background-color: black;
-    color: #00b32d;
-    font-family: monospace;
-    padding: 2rem;
+#show-requirements-btn {
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
