@@ -5,6 +5,7 @@ const submitButton = document.getElementById('room4-submit') as HTMLButtonElemen
 const showRequirementsBtn = document.getElementById('show-requirements-btn') as HTMLButtonElement; 
 const requirementsList = document.getElementById('requirements-list') as HTMLUListElement;
 const messageElement = document.getElementById('room4-message') as HTMLParagraphElement;
+const timerElement = document.getElementById('room4-timer') as HTMLDivElement;
 
 // Dagens datum
 const todaysDate = new Date().getDate();
@@ -18,6 +19,30 @@ const requirements = [
   { id: 5, text: "Must contain at least one special character (!@#$...)", check: (pw: string) => /[!@#$%^&*(),.?":{}|<>]/.test(pw) },
   { id: 6, text: "You must ask nicely", check: (pw: string) => pw.toLowerCase().includes("please") },
 ];
+
+//Timer
+let startTime = 0;
+let timerInterval: number | null = null;
+
+function startTimer() {
+  startTime = Date.now();
+  
+  timerInterval = setInterval(() => {
+    const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+    const minutes = Math.floor(elapsedTime / 60);
+    const seconds = elapsedTime % 60;
+    
+    timerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerInterval !== null) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+}
+
 
 // Funktion för att displaya kraven
 function displayRequirements() {
@@ -39,6 +64,7 @@ function displayRequirements() {
 
 showRequirementsBtn.addEventListener("click", () => {
   displayRequirements();
+  startTimer();
 });
 
 passwordInput.addEventListener('input', () => {
@@ -51,6 +77,7 @@ submitButton.addEventListener("click", () => {
     const allPassed = requirements.every(req => req.check(password));
 
     if (allPassed) {
+      stopTimer();
         messageElement.textContent = "✅ SUCCESS! Password accepted!";
         messageElement.style.color = 'green';
         //TODO: Gå vidare till nästa del/rum
@@ -65,12 +92,5 @@ submitButton.addEventListener("click", () => {
         displayRequirements();
     }, 3000);
 }
-
-        //vänta i 1 sekunder, sen visas kraven igen
-        setTimeout(() => {
-            displayRequirements();
-        }, 3000); //1000ms = 1 sekund
-    }
-    );
-
+})
 
