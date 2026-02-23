@@ -1,4 +1,4 @@
-export function initMariaRoom(room: HTMLElement): void {
+export function initMariaRoom(room: HTMLElement, onComplete: () => void): void {
   room.innerHTML = `
     <h2 id="room1-title">Verification Code</h2>
     <p>A verification code has been sent.</p>
@@ -35,6 +35,7 @@ export function initMariaRoom(room: HTMLElement): void {
   let latestCode = "";
   let previousCode = "";
   let failedAttempts = 0;
+  let isCompleted = false;
 
   function generateCode(): string {
     return Math.floor(100000 + Math.random() * 900000).toString();
@@ -60,6 +61,12 @@ export function initMariaRoom(room: HTMLElement): void {
 
     if (userValue === previousCode) {
       message.textContent = "Access granted. Door unlocked.";
+      if (!isCompleted) {
+        isCompleted = true;
+        setTimeout(() => {
+          onComplete();
+        }, 700);
+      }
       return;
     }
 
