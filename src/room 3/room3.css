@@ -246,12 +246,10 @@
     100% { clip-path: inset(0 0 95% 0); }
   }
 
-  /* Draggable */
   .popup { cursor: default; }
   .popup-titlebar { cursor: grab; }
   .popup-titlebar:active { cursor: grabbing; }
 
-  /* Resize handle indicator */
   .popup::after {
     content: '⣿';
     position: absolute;

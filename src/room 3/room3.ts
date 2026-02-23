@@ -100,6 +100,16 @@ const WINDOW_TITLE_JUNK: string[] = [
 ];
 
 /*******************************************/
+/************** START KNAPP ****************/
+/*******************************************/
+
+document.querySelector("#start-btn")?.addEventListener("click", () => {
+    const btn = document.querySelector("#start-btn") as HTMLButtonElement;
+    btn.style.display = "none";
+    initialSpawn();
+});
+
+/*******************************************/
 /***************** STATE *******************/
 /*******************************************/
 
