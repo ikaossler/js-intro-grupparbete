@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Error 404</title>
   </head>
+  
   <body>
     <header class="site-header">
       <h1>Error 404</h1>
@@ -13,29 +14,29 @@
         <div id="progress-bar" class="progress-bar"></div>
       </div>
       <div id="timer"></div>
-
-
     </header>
 
     <main>
-      <section id="start">
-<div class="start-content">
-  <h2>Error 404</h2>
-  <p>Welcome to Internet Hell. Every room is a different online nightmare. Solve the traps, beat the timers, and escape.</p>
-  <button id="start-btn">Start Game</button>
-  <div class="high-score">
-    <h3>High Score</h3>
-    <p id="high-score-value">0</p>
-</div>
-</div>
+      <section id="start" visually-hidden="true">
+        <div class="start-content">
+          <h2>Error 404</h2>
+          <p>Welcome to Internet Hell. Every room is a different online nightmare. Solve the traps, beat the timers, and escape.</p>
+          <button id="start-btn">Start Game</button>
+        <div class="high-score">
+          <h3>High Score</h3>
+          <p id="high-score-value">0</p>
+        </div>
+        </div>
       </section>
 
       <section id="room1"></section>
 
       <section id="room2"></section>
 
+      <!---------- Kickis rum ---------->
       <section id="room3">
         <div id="gameContainer"></div>
+        <div id="room3-timer">Time: 20:00</div>
 
         <button id="start-room3-btn" type="button">Start the game</button>
 

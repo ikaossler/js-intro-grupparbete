@@ -19,8 +19,8 @@ const REBUSES: Rebus[] = [
     {
       text: "🏠 + 🦁 = ?",
       hint: "ett ord",
-      answer: "husdjur",
-      altAnswers: ["hus djur"]
+      answer: "HUSDJUR",
+      altAnswers: ["HUSDJUR", "HUS DJUR", "PET", "PETS"]
     },
     {
         text: "🐍 + 📱 = ?",
@@ -29,22 +29,82 @@ const REBUSES: Rebus[] = [
         altAnswers: ["SNAKE", "SNAKE GAME", "SNAKE SPEL"]
     },
     {
-        text: "S\nT\nA\nR",
-        hint: "What is the word doing?",
-        answer: "STARING",
-        altAnswers: ["STARING", "STAR"]
+        text: "👁️ + 🥶 + 🐻",
+        hint: "Ett djur",
+        answer: "ISBJÖRN",
+        altAnswers: ["ISBJÖRN", "IS BJÖRN", "ISBEAR", "IS BEAR"]
     },
     {
-        text: "B\nE\nA\nR",
-        hint: "What is the word doing?",
-        answer: "BEARING",
-        altAnswers: ["BEARING", "BEAR"]
+        text: "🔥 + ❤️ + 🧊 + ⛓️",
+        hint: "Ett ord",
+        answer: "KALLHJÄRTAD",
+        altAnswers: ["KALLHJÄRTAD", "KALL HJÄRTAD", "COLDHEARTED", "COLD HEARTED"]
     },
     {
-        text: "F\nL\nY",
-        hint: "What is the word doing?",
-        answer: "FLYING",
-        altAnswers: ["FLYING", "FLY"]
+        text: "❤️ + 💔 + 🌧️",
+        hint: "Ett ord",
+        answer: "HJÄRTESORG",
+        altAnswers: ["HJÄRTESORG", "HEARTSICK", "HEART SICK"]
+    },
+    {
+        text: "☀️ + 👓 + 🧴",
+        hint: "Ett ord",
+        answer: "SOLKRÄM",
+        altAnswers: ["SOLKRÄM", "SOL KRÄM", "SUNSCREEN", "SUN SCREEN"]
+    },
+    {
+        text: "❄️ + 🏃 + 👟",
+        hint: "Ett ord",
+        answer: "SNÖSKOR",
+        altAnswers: ["SNÖSKOR", "SNOWSHOES", "SNOW SHOES"]
+    },
+    {
+        text: "☀️ + 🌸 + 🌱",
+        hint: "Ett ord",
+        answer: "SOMMARÄNG",
+        altAnswers: ["SOMMARÄNG", "SUMMER MEADOW", "SUMMER MEADOW"]
+    },
+    {
+        text: "👁️ + 🌊 + 🍵 + 🗝️",
+        hint: "Ett ord",
+        answer: "IDENTITET",
+        altAnswers: ["IDENTITET", "IDENTITY", "IDENTITY"]
+    },
+    {
+        text: "⏰ + 🪟 + 🤔 + 💡",
+        hint: "Ett ord",
+        answer: "INSIKT",
+        altAnswers: ["INSIKT", "INSIGHT", "INSIGHT"]
+    },
+    {
+        text: "🔥 + 🦊 + ❄️ + 🎭",
+        hint: "Ett ord",
+        answer: "RÄVSPEL",
+        altAnswers: ["RÄVSPEL", "RÄV SPEL", "FOX GAME", "FOX GAME"]
+    },
+    {
+        text: "🧠 + 🗝️ + 🚪 + 🌑",
+        hint: "Ett ord",
+        answer: "HEMLIGHET",
+        altAnswers: ["HEMLIGHET", "SECRET", "SECRET"]
+    },
+    {
+        text: "🧠 + 🚂 + 👟",
+        hint: "Ett ord",
+        answer: "TANKEBANA",
+        altAnswers: ["TANKEBANA", "THOUGHT TRAIN", "THOUGHT TRAIN"]
+    },
+    {
+        text: "❤️ + ➡️ + 🎯",
+        hint: "Ett ord",
+        answer: "MÅLINRIKTAD",
+        altAnswers: ["MÅLINRIKTAD", "TARGET ORIENTED", "TARGET ORIENTED"]
+    },
+    {
+        text: "📖 + 🌙 + ⏰",
+        hint: "Ett ord",
+        answer: "GODNATTSAGA",
+        altAnswers: ["GODNATTSAGA", "GOOD NIGHT STORY", "GOOD NIGHT STORY"]
     }
 ];
 
@@ -116,7 +176,7 @@ document.querySelector("#start-btn")?.addEventListener("click", () => {
 const solvedRebuses: Set<number> = new Set<number>();
 let closedCount: number = 0;
 let activePopups: number = 0;
-const MAX_POPUPS: number = 15;
+const MAX_POPUPS: number = 25;
 
 /*******************************************/
 /***************** HELPERS *****************/
