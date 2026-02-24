@@ -17,16 +17,16 @@ interface Rebus {
 
 const REBUSES: Rebus[] = [
     {
-        text: "R E A D",
-        hint: "What is the word doing?",
-        answer: "READING",
-        altAnswers: ["READING", "READ"]
+      text: "🏠 + 🦁 = ?",
+      hint: "ett ord",
+      answer: "husdjur",
+      altAnswers: ["hus djur"]
     },
     {
-        text: "C\nA\nR",
-        hint: "What is the word doing?",
-        answer: "CAR",
-        altAnswers: ["CAR"]
+        text: "🐍 + 📱 = ?",
+        hint: "Spel",
+        answer: "SNAKE",
+        altAnswers: ["SNAKE", "SNAKE GAME", "SNAKE SPEL"]
     },
     {
         text: "S\nT\nA\nR",
