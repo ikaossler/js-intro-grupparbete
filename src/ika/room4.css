@@ -1,24 +1,6 @@
-/* Dölj allt utom ditt rum */
-body > *:not(main) {
-  display: none;
-}
-
-#start, #room1, #room2, #room3 {
-  display: none !important;
-}
-
-#room4 {
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  background-color: #000000;
-  color: #00b32d;
-  font-family: monospace;
-  padding: 1rem;
-}
 
 #room4 h2 {
-  font-size: 1.5rem;           /* Mindre rubrik */
+  font-size: 1.5rem;           
   margin-bottom: 0.5rem;
 }
 
@@ -29,29 +11,29 @@ body > *:not(main) {
 }
 
 #room4-game {
-  max-width: 500px;          /* Smalare container */
+  max-width: 500px;         
   width: 100%;
   margin: 0 auto;
 }
 
 #room4-description {
-  font-size: 0.85rem;         /* Mindre beskrivning */
+  font-size: 0.85rem;         
   margin-bottom: 1rem;
 }
 
 #show-requirements-btn,
 #room4-submit {
   width: 100%;
-  padding: 0.70rem;          /* Mindre padding */
+  padding: 0.70rem;          
   background-color: #00b32d;
   border: 2px solid #39ff14;
   color: #000000;
   font-family: monospace;
-  font-size: 1rem;           /* Mindre text */
+  font-size: 1rem;         
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s;
-  margin-bottom: 1rem;       /* Mindre spacing */
+  margin-bottom: 1rem;     
   box-sizing: border-box;
 }
 
@@ -66,12 +48,12 @@ body > *:not(main) {
 
 #password-input {
   width: 100%;
-  padding: 0.75rem;          /* Mindre padding */
+  padding: 0.75rem;      
   background-color: #0d1f0d;
   border: 2px solid #00ff41;
   color: #39ff14;
   font-family: monospace;
-  font-size: 1rem;           /* Mindre text */
+  font-size: 1rem;           
   margin-bottom: 1rem;
   box-sizing: border-box;
 }
