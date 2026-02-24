@@ -88,7 +88,7 @@ submitButton.addEventListener("click", () => {
         passwordInput.value = '';
 
         setTimeout(() => {
-        messageElement.textContent = ''; // ← LÄGG TILL DENNA RAD
+        messageElement.textContent = ''; 
         displayRequirements();
     }, 3000);
 }
