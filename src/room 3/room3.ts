@@ -17,10 +17,10 @@ interface Rebus {
 
 const REBUSES: Rebus[] = [
     {
-      text: "🏠 + 🦁 = ?",
-      hint: "ett ord",
-      answer: "HUSDJUR",
-      altAnswers: ["HUSDJUR", "HUS DJUR", "PET", "PETS"]
+        text: "🏠 + 🦁 = ?",
+        hint: "ett ord",
+        answer: "HUSDJUR",
+        altAnswers: ["HUSDJUR", "HUS DJUR", "PET", "PETS"]
     },
     {
         text: "🐍 + 📱 = ?",
@@ -162,12 +162,59 @@ const WINDOW_TITLE_JUNK: string[] = [
 /*******************************************/
 /************** START KNAPP ****************/
 /*******************************************/
+let intervalsStarted: boolean = false;
 
-document.querySelector("#start-btn")?.addEventListener("click", () => {
-    const btn = document.querySelector("#start-btn") as HTMLButtonElement;
+document.querySelector("#start-room3-btn")?.addEventListener("click", () => {
+    const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
     btn.style.display = "none";
-    initialSpawn();
+    startGame();
 });
+
+function startGame(): void {
+  startTimer();
+  initialSpawn();
+
+  if (!intervalsStarted) {
+     intervalsStarted = true;
+
+  setInterval(() => {
+    if (activePopups < MAX_POPUPS && solvedRebuses.size < REBUSES.length) {
+      spawnPopup();
+    }
+    }, 1200);
+
+    setInterval(() => {
+      if (activePopups < MAX_POPUPS - 2 && solvedRebuses.size < REBUSES.length) {
+        spawnPopup();
+        setTimeout(spawnPopup, 300);
+      }
+    }, 3500);
+}
+}
+
+/*******************************************/
+/***************** TIMER *******************/
+/*******************************************/
+
+let timerInterval: number | null = null;
+let timerSeconds: number = 0;
+
+function startTimer(): void {
+  timerSeconds = 600;
+  timerInterval = setInterval(() => {
+    timerSeconds++;
+    const min = String(Math.floor(timerSeconds / 60)).padStart(2, "0");
+    const sec = String(timerSeconds % 60).padStart(2, "0");
+    (document.querySelector("#room3-timer") as HTMLElement).textContent = `${min}:${sec}`;
+  }, 1000);
+}
+
+function stopTimer(): void {
+  if (timerInterval !== null) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
+}
 
 /*******************************************/
 /***************** STATE *******************/
@@ -348,6 +395,7 @@ function checkRebus(input: HTMLInputElement, idx: number): void {
         popup.style.transform = "scale(0)";
         popup.style.opacity = "0";
         popup.style.transition = "transform 0.15s, opacity 0.15s";
+        
         setTimeout(() => {
           popup.remove();
           activePopups--;
@@ -397,6 +445,7 @@ function fakeSubmit(input: HTMLInputElement, id: string): void {
 
 function checkWin(): void {
   if (solvedRebuses.size >= 10) {
+    stopTimer();
     setTimeout(() => {
       document.getElementById("win-screen")?.classList.add("show");
     }, 800);
@@ -412,9 +461,11 @@ function restartGame(): void {
   (document.getElementById("closed-count") as HTMLElement).textContent = "0";
   (document.getElementById("progress-bar") as HTMLElement).style.width = "0%";
   document.getElementById("win-screen")?.classList.remove("show");
+  stopTimer();
+  (document.querySelector("#room3-timer") as HTMLElement).textContent = "10:00";
 
   document.querySelectorAll<HTMLElement>(".popup").forEach((p) => p.remove());
-  initialSpawn();
+  startGame();
 }
 
 /*******************************************/
@@ -494,18 +545,7 @@ function initialSpawn(): void {
 (document.getElementById("solved-count") as HTMLElement).textContent = "0";
 
 
-setInterval(() => {
-  if (activePopups < MAX_POPUPS && solvedRebuses.size < REBUSES.length) {
-    spawnPopup();
-  }
-}, 1200);
-
-
-setInterval(() => {
-  if (activePopups < MAX_POPUPS - 2 && solvedRebuses.size < REBUSES.length) {
-    spawnPopup();
-    setTimeout(spawnPopup, 300);
-  }
-}, 3500);
-
-initialSpawn();
+(window as any).closePopup = closePopup;
+(window as any).checkRebus = checkRebus;
+(window as any).fakeSubmit = fakeSubmit;
+(window as any).restartGame = restartGame;
