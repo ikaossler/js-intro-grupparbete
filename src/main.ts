@@ -1,6 +1,6 @@
 import "./style.css"; // Import the main stylesheet for the application
-import "./ika/room4.css";
-  import "./ika/room4.ts";
+import "./room 4/room4.css";
+import "./room 4/room4";
 import { initMariaRoom } from "./rooms/maria"; // Import the room initialization function from the maria room module
 // This file is the entry point of the application. It loads the room definitions from a JSON file
 type RoomDefinition = {
