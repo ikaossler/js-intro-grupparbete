@@ -1,3 +1,8 @@
+import "./maria.css";
+
+// This file contains the logic for the first room, 
+// which involves a two-step verification process with a twist.
+
 export function initMariaRoom(room: HTMLElement, onComplete: () => void): void {
   room.innerHTML = `
     <h2 id="room1-title">Verification Code</h2>
@@ -15,7 +20,7 @@ export function initMariaRoom(room: HTMLElement, onComplete: () => void): void {
     <input
       id="code-input"
       name="code-input"
-      type="text"
+      type="password"
       maxlength="6"
       autocomplete="one-time-code"
     />
@@ -23,58 +28,90 @@ export function initMariaRoom(room: HTMLElement, onComplete: () => void): void {
     <button id="check-btn" type="button">Verify</button>
     <p id="room1-message" aria-live="polite"></p>
   `;
-
+  // Get references to the interactive elements within the room.
   const resendButton = room.querySelector<HTMLButtonElement>("#resend-btn");
   const flashCode = room.querySelector<HTMLElement>("#flash-code");
   const codeInput = room.querySelector<HTMLInputElement>("#code-input");
   const checkButton = room.querySelector<HTMLButtonElement>("#check-btn");
   const message = room.querySelector<HTMLElement>("#room1-message");
-
+    // If any of the required elements are missing, we cannot proceed with the room logic.
   if (!resendButton || !flashCode || !codeInput || !checkButton || !message) return;
-
+  // State variables to manage the verification code logic.
   let latestCode = "";
   let previousCode = "";
   let failedAttempts = 0;
   let isCompleted = false;
+  let phase: "step1" | "step2" = "step1";
 
+  // Function to generate a random 6-digit code.
   function generateCode(): string {
     return Math.floor(100000 + Math.random() * 900000).toString();
   }
-
+  // Event listener for the resend button to generate and display a new code.
   resendButton.addEventListener("click", () => {
     previousCode = latestCode;
     latestCode = generateCode();
-
+    // Flash the new code to the user.
     flashCode.textContent = latestCode;
     setTimeout(() => {
       flashCode.textContent = "------";
     }, 500);
   });
-
+// Event listener for the check button to validate the entered code based on the current phase of verification.
   checkButton.addEventListener("click", () => {
     const userValue = codeInput.value.trim();
-
+ // Validate the user input against the appropriate code based on the current phase of verification.
     if (!previousCode) {
       message.textContent = "Invalid code.";
       return;
     }
-
+// First phase: Validate against the previous code. If correct, move to the second phase. 
+// If incorrect, provide hints and track failed attempts.
+    if (phase === "step1") {
+      if (userValue === previousCode) {
+        message.textContent = "Access granted. Door unlocked...";
+        phase = "step2";
+        failedAttempts = 0;
+        codeInput.value = "";
+ // After a short delay, prompt the user for the second step of verification.
+        setTimeout(() => {
+          message.textContent =
+            "Security update: Two-step verification required.\nEnter the first valid code again.";
+        }, 900);
+        return;
+      }
+      // Incorrect code entered in the first step. Provide hints based on the number of failed attempts.
+      failedAttempts += 1;
+      // Provide increasingly specific hints after each failed attempt, up to a certain limit.
+      const hints = [
+        "Invalid code.",
+        "Invalid code. Hint: First comes first. Second won't help you.",
+        "Invalid code. Hint: Use the code that came first, not the most recent one.",
+      ];
+      // After 3 failed attempts, provide a more direct hint about the process of obtaining the code.
+      message.textContent =
+        hints[failedAttempts - 1] ??
+        "Invalid code. Hint: Press Resend twice, then enter the first of those two codes.";
+      return;
+    }
+    // Second phase: Validate against the previous code again. If correct, complete the verification process.
     if (userValue === previousCode) {
-      message.textContent = "Access granted. Door unlocked.";
+      message.textContent = "Two-step verification complete. Escape successful.";
       if (!isCompleted) {
         isCompleted = true;
-        setTimeout(() => {
+        const continueButton = document.createElement("button");
+        continueButton.type = "button";
+        continueButton.id = "continue-btn";
+        continueButton.textContent = "Continue to room 2";
+        continueButton.addEventListener("click", () => {
           onComplete();
-        }, 700);
+        });
+        room.appendChild(continueButton);
       }
       return;
     }
-
-    failedAttempts += 1;
-    if (failedAttempts >= 2) {
-      message.textContent = "Invalid code. Hint: format or timing might matter.";
-    } else {
-      message.textContent = "Invalid code.";
-    }
+    // Incorrect code entered in the second step. Provide a hint that the same rule applies.
+    message.textContent =
+      "Second step failed. Hint: Same rule applies here.\nThe first valid code wins.";
   });
 }
