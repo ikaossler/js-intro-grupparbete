@@ -1,6 +1,7 @@
 import "./style.css"; // Import the main stylesheet for the application
 import "./room 4/room4.css";
 import "./room 4/room4";
+import "./room 3/room3";
 import { initMariaRoom } from "./rooms/maria"; // Import the room initialization function from the maria room module
 // This file is the entry point of the application. It loads the room definitions from a JSON file
 type RoomDefinition = {
@@ -65,6 +66,8 @@ async function loadRooms(): Promise<void> {
   const room3Section = document.querySelector<HTMLElement>("#room3");
   const room4Section = document.querySelector<HTMLElement>("#room4");
 
+
+
 // If any of the required elements are missing, we cannot proceed.
   if (
     !startButton ||
@@ -84,6 +87,7 @@ async function loadRooms(): Promise<void> {
 
   startButton.addEventListener("click", () => {
     showSection("room1");
+      startTotalTimer();
     initMariaRoom(room1Section, () => {
       showSection("room2");
       renderSimpleRoom(room2Section, room2, "to-room3-btn", "Go to room 3", () => {
@@ -91,6 +95,7 @@ async function loadRooms(): Promise<void> {
         renderSimpleRoom(room3Section, room3, "to-room4-btn", "Go to room 4", () => {
           showSection("room4");
           renderFinalRoom(room4Section, room4);
+          stopTotalTimer();
         });
       });
     });
@@ -98,3 +103,37 @@ async function loadRooms(): Promise<void> {
 }
 
 void loadRooms();
+
+
+
+/**********************************************
+ ********************TIMER*********************
+ **********************************************/
+
+ // Total timer för hela spelet
+let totalStartTime = 0;
+let totalTimerInterval: number | null = null;
+
+function startTotalTimer() {
+  totalStartTime = Date.now();
+  
+  totalTimerInterval = setInterval(() => {
+    const elapsedTime = Math.floor((Date.now() - totalStartTime) / 1000);
+    const minutes = Math.floor(elapsedTime / 60);
+    const seconds = elapsedTime % 60;
+    
+    const timerElement = document.getElementById('timer');
+    if (timerElement) {
+      timerElement.textContent = `Total Time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+  }, 1000);
+}
+
+function stopTotalTimer() {
+  if (totalTimerInterval !== null) {
+    clearInterval(totalTimerInterval);
+    totalTimerInterval = null;
+  }
+}
+
+
