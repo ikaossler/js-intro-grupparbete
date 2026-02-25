@@ -21,3 +21,19 @@ p {
   text-align: center;
   padding: 2rem;
 }
+
+/*------------- SLUTSIDAN ------------------*/
+
+#game-over {
+  /* display: none; */  /* Kommenterat bort denna för nu eftersom jag vill kunna se sidan medan jag jobar på den */
+  background-color: pink;
+  color: black;
+  font-family: monospace;
+  padding: 2rem;
+  text-align: center;
+}
+
+#game-over h2 {
+  color: black;
+  font-size: 2rem;
+}
