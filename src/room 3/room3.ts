@@ -1,4 +1,5 @@
 import './room3.css';
+import { showSection, SectionId } from '../main';
 
 /*******************************************/
 /***************** TYPES *******************/
@@ -215,6 +216,14 @@ function stopTimer(): void {
     timerInterval = null;
   }
 }
+
+/*******************************************/
+/***************** TIMER *******************/
+/*******************************************/
+
+document.querySelector("#next-room-btn")?.addEventListener("click", () => {
+  showSection("room4");
+});
 
 /*******************************************/
 /***************** STATE *******************/
