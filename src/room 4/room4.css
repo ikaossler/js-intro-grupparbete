@@ -1,3 +1,11 @@
+/* TEMPORÄRT - visa bara mitt rum */
+#start, #room1, #room2, #room3, #game-over {
+  display: none !important;
+}
+
+#room4 {
+  display: block !important;
+}
 
 #room4 h2 {
   font-size: 1.5rem;           
