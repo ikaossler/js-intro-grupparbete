@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Error 404</title>
   </head>
+  
   <body>
     <header class="site-header">
       <h1>Error 404</h1>
@@ -13,28 +14,58 @@
         <div id="progress-bar" class="progress-bar"></div>
       </div>
       <div id="timer"></div>
-
-
     </header>
 
     <main>
-      <section id="start">
-<div class="start-content">
-  <h2>Error 404</h2>
-  <p>Welcome to Internet Hell. Every room is a different online nightmare. Solve the traps, beat the timers, and escape.</p>
-  <button id="start-btn">Start Game</button>
-  <div class="high-score">
-    <h3>High Score</h3>
-    <p id="high-score-value">0</p>
-</div>
-</div>
+      <section id="start" visually-hidden="true">
+        <div class="start-content">
+          <h2>Error 404</h2>
+          <p>Welcome to Internet Hell. Every room is a different online nightmare. Solve the traps, beat the timers, and escape.</p>
+          <button id="start-btn">Start Game</button>
+        <div class="high-score">
+          <h3>High Score</h3>
+          <p id="high-score-value">0</p>
+        </div>
+        </div>
       </section>
 
       <section id="room1"></section>
 
-      <section id="room2"></section>
+      <section id="room2"></section> 
 
-      <section id="room3"></section>
+      <!---------- Kickis rum ---------->
+      <section id="room3">
+        <div id="gameContainer"></div>
+        <div id="room3-timer">Time: 20:00</div>
+
+        <button id="start-room3-btn" type="button">Start the game</button>
+
+        <div id="background-art">
+          <span>POPUP CHAMBER v2.0</span>
+          <span>>>> INITIALIZING CHAOS PROTOCOL <<<</span>
+          <span>SOLVE THE REBUS PUZZLES</span>
+          <span>█▓▒░ GOOD LUCK ░▒▓█</span>
+          <span>ERROR 404</span>
+        </div>
+
+        <div id="hud">
+          <div>⚠ POPUP-RUMMET</div>
+          <div class="rebus-score">REBUSAR LÖSTA: <span id="solved-count">0</span> / 10</div>
+          <div class="popup-count">STÄNGDA: <span id="closed-count">0</span></div>
+        </div>
+
+        <div id="progress-bar-wrap">
+          <div id="progress-bar"></div>
+        </div>
+
+        <div id="win-screen">
+          <h2>DU KLARADE DET!</h2>
+          <p>Du har överlevt Internet Hell och besegrat alla rum!</p>
+          <div class="answer">10 / 10 KORREKTA</div>
+          <button id="restart-btn" type="button">Spela Igen</button>
+          <button id="next-room-btn" type="button">Nästa Rum</button>
+        </div>
+      </section>
 
 
       <!----------Ikas rum-------------->
@@ -62,6 +93,7 @@
       </section>
     </main>
 
+    
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
