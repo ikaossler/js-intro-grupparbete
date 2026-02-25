@@ -12,10 +12,10 @@ type RoomDefinition = {
 // but for simplicity, we are using a single HTML file with multiple sections for each room.
 
 const sectionOrder = ["start", "room1", "room2", "room3", "room4"] as const;
-type SectionId = (typeof sectionOrder)[number];
+export type SectionId = (typeof sectionOrder)[number];
 
 // Utility function to show only the active section and hide the others.
-function showSection(activeId: SectionId): void {
+export function showSection(activeId: SectionId): void {
   sectionOrder.forEach((id) => {
     const section = document.querySelector<HTMLElement>(`#${id}`);
     if (!section) return;
