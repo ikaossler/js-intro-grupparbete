@@ -161,7 +161,7 @@ const WINDOW_TITLE_JUNK: string[] = [
 ];
 
 /*******************************************/
-/************** START KNAPP ****************/
+/************** START BUTTON ***************/
 /*******************************************/
 let intervalsStarted: boolean = false;
 
@@ -218,7 +218,7 @@ function stopTimer(): void {
 }
 
 /*******************************************/
-/***************** TIMER *******************/
+/********** NEXT ROOM BUTTON ***************/
 /*******************************************/
 
 document.querySelector("#next-room-btn")?.addEventListener("click", () => {
