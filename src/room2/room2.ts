@@ -21,6 +21,9 @@ const CAPTCHA_ROUNDS: ICaptchaRound[] = [
             { imageSrc: `${BASE_URL}img/Batman.jpeg`, isCorrect: false,  altText: "Batman" },
             { imageSrc: `${BASE_URL}img/Voldemort.jpeg`, isCorrect: true,  altText: "Voldemort" },
             { imageSrc: `${BASE_URL}img/V.jpeg`, isCorrect: false,  altText: "V" },
+            { imageSrc: `${BASE_URL}img/Morpheus.jpeg`, isCorrect: false,  altText: "Morpheus" },
+            { imageSrc: `${BASE_URL}img/John-Wick.jpeg`, isCorrect: false,  altText: "John Wick" },
+            { imageSrc: `${BASE_URL}img/Smith.jpeg`, isCorrect: true,  altText: "Agent Smith" },
         ],
     },
     {
