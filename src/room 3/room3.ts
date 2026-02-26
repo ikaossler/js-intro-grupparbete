@@ -252,7 +252,7 @@ function normalise(s: string): string {
 
 function updateProgress(): void {
     const pct: number = (solvedRebuses.size / REBUSES.length) * 100;
-    (document.querySelector("#progress-bar") as HTMLElement).style.width = Math.min(pct, 100) + "%";
+    (document.querySelector("#progress-bar-room3") as HTMLElement).style.width = Math.min(pct, 100) + "%";
 }
 
 /*******************************************/

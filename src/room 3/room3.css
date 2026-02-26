@@ -82,14 +82,14 @@
 }
 
   /* Progress bar */
-  #progress-bar-wrap {
+  #progress-bar-wrap-room3 {
     position: fixed;
     bottom: 0; left: 0; right: 0;
     height: 8px;
     background: rgba(255,255,255,0.05);
     z-index: 1000;
   }
-  #progress-bar {
+  #progress-bar-room3 {
     height: 100%;
     background: linear-gradient(90deg, var(--green), var(--cyan));
     width: 0%;
