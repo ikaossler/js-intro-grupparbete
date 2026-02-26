@@ -40,7 +40,7 @@
     z-index: 9999;
   }
 
-  #background-art {
+  .background-art-room3 {
     position: fixed;
     inset: 0;
     display: flex;
@@ -52,7 +52,7 @@
     pointer-events: none;
     z-index: 0;
   }
-  #background-art span {
+  .background-art-room3 span {
     font-family: 'Press Start 2P', monospace;
     font-size: clamp(10px, 3vw, 28px);
     color: var(--green);
@@ -60,7 +60,7 @@
   }
 
   /* HUD */
-  #hud {
+  .hud {
     position: fixed;
     top: 0; left: 0; right: 0;
     display: flex;
@@ -74,22 +74,22 @@
     font-size: 12px;
     color: var(--green);
   }
-  #hud .rebus-score { 
+  .hud .rebus-score { 
     color: var(--yellow); 
 }
-  #hud .popup-count { 
+  .hud .popup-count { 
     color: var(--cyan); 
 }
 
   /* Progress bar */
-  #progress-bar-wrap {
+  .progress-bar-wrap-room3 {
     position: fixed;
     bottom: 0; left: 0; right: 0;
     height: 8px;
     background: rgba(255,255,255,0.05);
     z-index: 1000;
   }
-  #progress-bar {
+  .progress-bar-room3 {
     height: 100%;
     background: linear-gradient(90deg, var(--green), var(--cyan));
     width: 0%;
@@ -98,7 +98,7 @@
   }
 
   /* WIN screen */
-  #win-screen {
+  .win-screen-room3 {
     display: none;
     position: fixed;
     inset: 0;
@@ -112,11 +112,11 @@
     text-align: center;
     padding: 30px;
   }
-  #win-screen.show { display: flex; }
-  #win-screen h1 { font-size: clamp(16px, 4vw, 36px); color: var(--yellow); text-shadow: 0 0 20px var(--yellow); animation: blink 0.6s infinite; }
-  #win-screen p { font-size: clamp(8px, 1.5vw, 14px); color: var(--green); line-height: 2; }
-  #win-screen .answer { color: var(--cyan); font-size: clamp(10px, 2vw, 18px); margin-top: 10px; }
-  #restart-btn {
+  .win-screen-room3.show { display: flex; }
+  .win-screen-room3 h1 { font-size: clamp(16px, 4vw, 36px); color: var(--yellow); text-shadow: 0 0 20px var(--yellow); animation: blink 0.6s infinite; }
+  .win-screen-room3 p { font-size: clamp(8px, 1.5vw, 14px); color: var(--green); line-height: 2; }
+  .win-screen-room3 .answer { color: var(--cyan); font-size: clamp(10px, 2vw, 18px); margin-top: 10px; }
+  .win-screen-room3 .restart-btn-room3 {
     margin-top: 20px;
     padding: 12px 24px;
     background: transparent;
@@ -127,7 +127,7 @@
     cursor: pointer;
     transition: all 0.2s;
   }
-  #restart-btn:hover { background: var(--green); color: #000; box-shadow: 0 0 20px var(--green); }
+  .win-screen-room3 .restart-btn-room3:hover { background: var(--green); color: #000; box-shadow: 0 0 20px var(--green); }
 
   /* POPUP BAS */
   .popup {

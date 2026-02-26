@@ -5,7 +5,7 @@ import { showSection, SectionId } from '../main';
 /***************** TYPES *******************/
 /*******************************************/
 
-interface Rebus {
+interface IRebus {
     text: string;
     hint: string;
     answer: string;
@@ -16,7 +16,7 @@ interface Rebus {
 /***************** DATA ********************/
 /*******************************************/
 
-const REBUSES: Rebus[] = [
+const REBUSES: IRebus[] = [
     {
         text: "🏠 + 🦁 = ?",
         hint: "ett ord",
@@ -168,10 +168,10 @@ let intervalsStarted: boolean = false;
 document.querySelector("#start-room3-btn")?.addEventListener("click", () => {
     const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
     btn.style.display = "none";
-    startGame();
+    startRoom3();
 });
 
-function startGame(): void {
+function startRoom3(): void {
   startTimer();
   initialSpawn();
 
@@ -190,7 +190,7 @@ function startGame(): void {
         setTimeout(spawnPopup, 300);
       }
     }, 3500);
-}
+  }
 }
 
 /*******************************************/
@@ -259,12 +259,12 @@ function updateProgress(): void {
 /**************** POPUP LOGIC **************/
 /*******************************************/
 
-interface PopupOption {
+interface IPopupOption {
     x: number;
     y: number;
 }
 
-function randomPos(w:number = 320, h:number = 240): PopupOption {
+function randomPos(w:number = 320, h:number = 240): IPopupOption {
     const hudH = 36;
     const barH = 8;
     const x: number = Math.random() * (window.innerWidth - w - 20) + 10;
@@ -320,7 +320,7 @@ function spawnJunkPopup(): void {
 }
 
 function spawnRebusPopup(idx: number): void {
-  const rebus: Rebus = REBUSES[idx];
+  const rebus: IRebus = REBUSES[idx];
   const popup: HTMLDivElement = document.createElement("div");
   popup.className = "popup rebus-popup";
   popup.dataset.rebusIdx = String(idx);
@@ -375,7 +375,7 @@ function closePopup(btn: HTMLButtonElement): void {
 
 function checkRebus(input: HTMLInputElement, idx: number): void {
   const val: string = normalise(input.value.trim());
-  const rebus: Rebus = REBUSES[idx];
+  const rebus: IRebus = REBUSES[idx];
 
   const correct: string[] = [rebus.answer, ...(rebus.altAnswers ?? [])].map(normalise);
   const fb = document.getElementById("rf-" + idx) as HTMLElement;
@@ -474,7 +474,7 @@ function restartGame(): void {
   (document.querySelector("#room3-timer") as HTMLElement).textContent = "10:00";
 
   document.querySelectorAll<HTMLElement>(".popup").forEach((p) => p.remove());
-  startGame();
+  startRoom3();
 }
 
 /*******************************************/
