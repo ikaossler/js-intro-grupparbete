@@ -1,6 +1,5 @@
 import "./room1.css";
 
-
 export function initRoom1(room: HTMLElement, onComplete: () => void): void {
   // Get references to the interactive elements within the room.
   const resendButton = room.querySelector<HTMLButtonElement>("#resend-btn");
@@ -9,7 +8,7 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
   const checkButton = room.querySelector<HTMLButtonElement>("#check-btn");
   const message = room.querySelector<HTMLElement>("#room1-message");
   const roomTimerEl = room.querySelector<HTMLElement>("#room1-timer");
-    // If any of the required elements are missing, we cannot proceed with the room logic.
+  // If any of the required elements are missing, we cannot proceed with the room logic.
   if (!resendButton || !flashCode || !codeInput || !checkButton || !message || !roomTimerEl) return;
   const startTime = Date.now();
   const timerId = window.setInterval(() => {
@@ -41,23 +40,23 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
       flashCode.textContent = "------";
     }, 500);
   });
-// Event listener for the check button to validate the entered code based on the current phase of verification.
+  // Event listener for the check button to validate the entered code based on the current phase of verification.
   checkButton.addEventListener("click", () => {
     const userValue = codeInput.value.trim();
- // Validate the user input against the appropriate code based on the current phase of verification.
+    // Validate the user input against the appropriate code based on the current phase of verification.
     if (!previousCode) {
       message.textContent = "Invalid code.";
       return;
     }
-// First phase: Validate against the previous code. If correct, move to the second phase. 
-// If incorrect, provide hints and track failed attempts.
+    // First phase: Validate against the previous code. If correct, move to the second phase.
+    // If incorrect, provide hints and track failed attempts.
     if (phase === "step1") {
       if (userValue === previousCode) {
         message.textContent = "Access granted. Door unlocked...";
         phase = "step2";
         failedAttempts = 0;
         codeInput.value = "";
- // After a short delay, prompt the user for the second step of verification.
+        // After a short delay, prompt the user for the second step of verification.
         setTimeout(() => {
           message.textContent =
             "Security update: Two-step verification required.\nEnter the first valid code again.";

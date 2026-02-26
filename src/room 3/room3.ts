@@ -1,15 +1,15 @@
-import './room3.css';
-import { showSection, SectionId } from '../main';
+import "./room3.css";
+import { showSection, SectionId } from "../main";
 
 /*******************************************/
 /***************** TYPES *******************/
 /*******************************************/
 
 interface Rebus {
-    text: string;
-    hint: string;
-    answer: string;
-    altAnswers?: string[];
+  text: string;
+  hint: string;
+  answer: string;
+  altAnswers?: string[];
 }
 
 /*******************************************/
@@ -17,100 +17,100 @@ interface Rebus {
 /*******************************************/
 
 const REBUSES: Rebus[] = [
-    {
-        text: "🏠 + 🦁 = ?",
-        hint: "ett ord",
-        answer: "HUSDJUR",
-        altAnswers: ["HUSDJUR", "HUS DJUR", "PET", "PETS"]
-    },
-    {
-        text: "🐍 + 📱 = ?",
-        hint: "Spel",
-        answer: "SNAKE",
-        altAnswers: ["SNAKE", "SNAKE GAME", "SNAKE SPEL"]
-    },
-    {
-        text: "👁️ + 🥶 + 🐻",
-        hint: "Ett djur",
-        answer: "ISBJÖRN",
-        altAnswers: ["ISBJÖRN", "IS BJÖRN", "ISBEAR", "IS BEAR"]
-    },
-    {
-        text: "🔥 + ❤️ + 🧊 + ⛓️",
-        hint: "Ett ord",
-        answer: "KALLHJÄRTAD",
-        altAnswers: ["KALLHJÄRTAD", "KALL HJÄRTAD", "COLDHEARTED", "COLD HEARTED"]
-    },
-    {
-        text: "❤️ + 💔 + 🌧️",
-        hint: "Ett ord",
-        answer: "HJÄRTESORG",
-        altAnswers: ["HJÄRTESORG", "HEARTSICK", "HEART SICK"]
-    },
-    {
-        text: "☀️ + 👓 + 🧴",
-        hint: "Ett ord",
-        answer: "SOLKRÄM",
-        altAnswers: ["SOLKRÄM", "SOL KRÄM", "SUNSCREEN", "SUN SCREEN"]
-    },
-    {
-        text: "❄️ + 🏃 + 👟",
-        hint: "Ett ord",
-        answer: "SNÖSKOR",
-        altAnswers: ["SNÖSKOR", "SNOWSHOES", "SNOW SHOES"]
-    },
-    {
-        text: "☀️ + 🌸 + 🌱",
-        hint: "Ett ord",
-        answer: "SOMMARÄNG",
-        altAnswers: ["SOMMARÄNG", "SUMMER MEADOW", "SUMMER MEADOW"]
-    },
-    {
-        text: "👁️ + 🌊 + 🍵 + 🗝️",
-        hint: "Ett ord",
-        answer: "IDENTITET",
-        altAnswers: ["IDENTITET", "IDENTITY", "IDENTITY"]
-    },
-    {
-        text: "⏰ + 🪟 + 🤔 + 💡",
-        hint: "Ett ord",
-        answer: "INSIKT",
-        altAnswers: ["INSIKT", "INSIGHT", "INSIGHT"]
-    },
-    {
-        text: "🔥 + 🦊 + ❄️ + 🎭",
-        hint: "Ett ord",
-        answer: "RÄVSPEL",
-        altAnswers: ["RÄVSPEL", "RÄV SPEL", "FOX GAME", "FOX GAME"]
-    },
-    {
-        text: "🧠 + 🗝️ + 🚪 + 🌑",
-        hint: "Ett ord",
-        answer: "HEMLIGHET",
-        altAnswers: ["HEMLIGHET", "SECRET", "SECRET"]
-    },
-    {
-        text: "🧠 + 🚂 + 👟",
-        hint: "Ett ord",
-        answer: "TANKEBANA",
-        altAnswers: ["TANKEBANA", "THOUGHT TRAIN", "THOUGHT TRAIN"]
-    },
-    {
-        text: "❤️ + ➡️ + 🎯",
-        hint: "Ett ord",
-        answer: "MÅLINRIKTAD",
-        altAnswers: ["MÅLINRIKTAD", "TARGET ORIENTED", "TARGET ORIENTED"]
-    },
-    {
-        text: "📖 + 🌙 + ⏰",
-        hint: "Ett ord",
-        answer: "GODNATTSAGA",
-        altAnswers: ["GODNATTSAGA", "GOOD NIGHT STORY", "GOOD NIGHT STORY"]
-    }
+  {
+    text: "🏠 + 🦁 = ?",
+    hint: "ett ord",
+    answer: "HUSDJUR",
+    altAnswers: ["HUSDJUR", "HUS DJUR", "PET", "PETS"],
+  },
+  {
+    text: "🐍 + 📱 = ?",
+    hint: "Spel",
+    answer: "SNAKE",
+    altAnswers: ["SNAKE", "SNAKE GAME", "SNAKE SPEL"],
+  },
+  {
+    text: "👁️ + 🥶 + 🐻",
+    hint: "Ett djur",
+    answer: "ISBJÖRN",
+    altAnswers: ["ISBJÖRN", "IS BJÖRN", "ISBEAR", "IS BEAR"],
+  },
+  {
+    text: "🔥 + ❤️ + 🧊 + ⛓️",
+    hint: "Ett ord",
+    answer: "KALLHJÄRTAD",
+    altAnswers: ["KALLHJÄRTAD", "KALL HJÄRTAD", "COLDHEARTED", "COLD HEARTED"],
+  },
+  {
+    text: "❤️ + 💔 + 🌧️",
+    hint: "Ett ord",
+    answer: "HJÄRTESORG",
+    altAnswers: ["HJÄRTESORG", "HEARTSICK", "HEART SICK"],
+  },
+  {
+    text: "☀️ + 👓 + 🧴",
+    hint: "Ett ord",
+    answer: "SOLKRÄM",
+    altAnswers: ["SOLKRÄM", "SOL KRÄM", "SUNSCREEN", "SUN SCREEN"],
+  },
+  {
+    text: "❄️ + 🏃 + 👟",
+    hint: "Ett ord",
+    answer: "SNÖSKOR",
+    altAnswers: ["SNÖSKOR", "SNOWSHOES", "SNOW SHOES"],
+  },
+  {
+    text: "☀️ + 🌸 + 🌱",
+    hint: "Ett ord",
+    answer: "SOMMARÄNG",
+    altAnswers: ["SOMMARÄNG", "SUMMER MEADOW", "SUMMER MEADOW"],
+  },
+  {
+    text: "👁️ + 🌊 + 🍵 + 🗝️",
+    hint: "Ett ord",
+    answer: "IDENTITET",
+    altAnswers: ["IDENTITET", "IDENTITY", "IDENTITY"],
+  },
+  {
+    text: "⏰ + 🪟 + 🤔 + 💡",
+    hint: "Ett ord",
+    answer: "INSIKT",
+    altAnswers: ["INSIKT", "INSIGHT", "INSIGHT"],
+  },
+  {
+    text: "🔥 + 🦊 + ❄️ + 🎭",
+    hint: "Ett ord",
+    answer: "RÄVSPEL",
+    altAnswers: ["RÄVSPEL", "RÄV SPEL", "FOX GAME", "FOX GAME"],
+  },
+  {
+    text: "🧠 + 🗝️ + 🚪 + 🌑",
+    hint: "Ett ord",
+    answer: "HEMLIGHET",
+    altAnswers: ["HEMLIGHET", "SECRET", "SECRET"],
+  },
+  {
+    text: "🧠 + 🚂 + 👟",
+    hint: "Ett ord",
+    answer: "TANKEBANA",
+    altAnswers: ["TANKEBANA", "THOUGHT TRAIN", "THOUGHT TRAIN"],
+  },
+  {
+    text: "❤️ + ➡️ + 🎯",
+    hint: "Ett ord",
+    answer: "MÅLINRIKTAD",
+    altAnswers: ["MÅLINRIKTAD", "TARGET ORIENTED", "TARGET ORIENTED"],
+  },
+  {
+    text: "📖 + 🌙 + ⏰",
+    hint: "Ett ord",
+    answer: "GODNATTSAGA",
+    altAnswers: ["GODNATTSAGA", "GOOD NIGHT STORY", "GOOD NIGHT STORY"],
+  },
 ];
 
 const JUNK_TEXTS: string[] = [
-     "⚠️ VARNING: Din dator har 0 virus. Grattis!",
+  "⚠️ VARNING: Din dator har 0 virus. Grattis!",
   "🍕 Du glömde stänga av ugnen... eller?",
   "📣 VIKTIGT MEDDELANDE: Ingenting har hänt.",
   "🐸 En groda blinkade just åt dig.",
@@ -153,11 +153,21 @@ const JUNK_TEXTS: string[] = [
   "🕹️ Tryck på alla knappar! Det händer ändå ingenting.",
   "🌀 LADDNINGSANIMATION: ████░░░░░░ 40% klar. (Kommer aldrig bli 100%.)",
   "🐔 Hönan eller ägget? Vi vet inte. Stäng rutan.",
-  "📎 Hej! Vill du ha hjälp med din popup? (Det kan jag inte ge.)"
+  "📎 Hej! Vill du ha hjälp med din popup? (Det kan jag inte ge.)",
 ];
 
 const WINDOW_TITLE_JUNK: string[] = [
-    "VIKTIG INFO", "FELMEDDELANDE", "UPDATERING", "ALERT", "NOTIS", "VARNING", "FYI", "CHEAT CODE", "HEMLIG INFO", "TOP SECRET", "POPUP #" + Math.floor(Math.random() * 9999)
+  "VIKTIG INFO",
+  "FELMEDDELANDE",
+  "UPDATERING",
+  "ALERT",
+  "NOTIS",
+  "VARNING",
+  "FYI",
+  "CHEAT CODE",
+  "HEMLIG INFO",
+  "TOP SECRET",
+  "POPUP #" + Math.floor(Math.random() * 9999),
 ];
 
 /*******************************************/
@@ -166,9 +176,9 @@ const WINDOW_TITLE_JUNK: string[] = [
 let intervalsStarted: boolean = false;
 
 document.querySelector("#start-room3-btn")?.addEventListener("click", () => {
-    const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
-    btn.style.display = "none";
-    startGame();
+  const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
+  btn.style.display = "none";
+  startGame();
 });
 
 function startGame(): void {
@@ -176,12 +186,12 @@ function startGame(): void {
   initialSpawn();
 
   if (!intervalsStarted) {
-     intervalsStarted = true;
+    intervalsStarted = true;
 
-  setInterval(() => {
-    if (activePopups < MAX_POPUPS && solvedRebuses.size < REBUSES.length) {
-      spawnPopup();
-    }
+    setInterval(() => {
+      if (activePopups < MAX_POPUPS && solvedRebuses.size < REBUSES.length) {
+        spawnPopup();
+      }
     }, 1200);
 
     setInterval(() => {
@@ -190,7 +200,7 @@ function startGame(): void {
         setTimeout(spawnPopup, 300);
       }
     }, 3500);
-}
+  }
 }
 
 /*******************************************/
@@ -239,20 +249,16 @@ const MAX_POPUPS: number = 25;
 /*******************************************/
 
 function randomPick<T>(arr: T[]): T {
-    return arr[Math.floor(Math.random() * arr.length)];
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function normalise(s: string): string {
-    return s
-        .toLowerCase()
-        .replace(/å/g, "a")
-        .replace(/ä/g, "a")
-        .replace(/ö/g, "o");
+  return s.toLowerCase().replace(/å/g, "a").replace(/ä/g, "a").replace(/ö/g, "o");
 }
 
 function updateProgress(): void {
-    const pct: number = (solvedRebuses.size / REBUSES.length) * 100;
-    (document.querySelector("#progress-bar") as HTMLElement).style.width = Math.min(pct, 100) + "%";
+  const pct: number = (solvedRebuses.size / REBUSES.length) * 100;
+  (document.querySelector("#progress-bar") as HTMLElement).style.width = Math.min(pct, 100) + "%";
 }
 
 /*******************************************/
@@ -260,45 +266,42 @@ function updateProgress(): void {
 /*******************************************/
 
 interface PopupOption {
-    x: number;
-    y: number;
+  x: number;
+  y: number;
 }
 
-function randomPos(w:number = 320, h:number = 240): PopupOption {
-    const hudH = 36;
-    const barH = 8;
-    const x: number = Math.random() * (window.innerWidth - w - 20) + 10;
-    const y: number = Math.random() * (window.innerHeight - h - hudH - barH - 20) + hudH + barH + 10;
-    return { x, y };
+function randomPos(w: number = 320, h: number = 240): PopupOption {
+  const hudH = 36;
+  const barH = 8;
+  const x: number = Math.random() * (window.innerWidth - w - 20) + 10;
+  const y: number = Math.random() * (window.innerHeight - h - hudH - barH - 20) + hudH + barH + 10;
+  return { x, y };
 }
 
 function spawnPopup(): void {
-    if (activePopups >= MAX_POPUPS) return;
+  if (activePopups >= MAX_POPUPS) return;
 
-    const unsolved: number[] = REBUSES.map((_, i) => i).filter(i => !solvedRebuses.has(i)
-    );
-    const showRebus: boolean =
-    unsolved.length > 0 &&
-    (Math.random() < 0.35 || closedCount % 4 === 3);
+  const unsolved: number[] = REBUSES.map((_, i) => i).filter((i) => !solvedRebuses.has(i));
+  const showRebus: boolean = unsolved.length > 0 && (Math.random() < 0.35 || closedCount % 4 === 3);
 
-    if (showRebus) {
-        const rebusIndex: number = randomPick(unsolved);
-        spawnRebusPopup(rebusIndex);
-    } else {
-        spawnJunkPopup();
-    }
+  if (showRebus) {
+    const rebusIndex: number = randomPick(unsolved);
+    spawnRebusPopup(rebusIndex);
+  } else {
+    spawnJunkPopup();
+  }
 }
 
 function spawnJunkPopup(): void {
-    const popup: HTMLDivElement = document.createElement("div");
-    popup.className = "popup junk-popup";
+  const popup: HTMLDivElement = document.createElement("div");
+  popup.className = "popup junk-popup";
 
-    const text: string = randomPick(JUNK_TEXTS);
-    const title: string = randomPick(WINDOW_TITLE_JUNK);
-    const fakeId: string = "junk-" + Math.random().toString(36).slice(2, 8);
-    const { x, y } = randomPos(280, 200);
+  const text: string = randomPick(JUNK_TEXTS);
+  const title: string = randomPick(WINDOW_TITLE_JUNK);
+  const fakeId: string = "junk-" + Math.random().toString(36).slice(2, 8);
+  const { x, y } = randomPos(280, 200);
 
-    popup.style.left = x + "px";
+  popup.style.left = x + "px";
   popup.style.top = y + "px";
 
   popup.innerHTML = `
@@ -367,8 +370,7 @@ function closePopup(btn: HTMLButtonElement): void {
     popup.remove();
     activePopups--;
     closedCount++;
-    (document.getElementById("closed-count") as HTMLElement).textContent =
-      String(closedCount);
+    (document.getElementById("closed-count") as HTMLElement).textContent = String(closedCount);
     spawnPopup();
   }, 120);
 }
@@ -381,10 +383,7 @@ function checkRebus(input: HTMLInputElement, idx: number): void {
   const fb = document.getElementById("rf-" + idx) as HTMLElement;
 
   const isCorrect: boolean = correct.some(
-    (c) =>
-      val === c ||
-      (val.includes(c) && val.length >= 3) ||
-      (c.includes(val) && val.length >= 3)
+    (c) => val === c || (val.includes(c) && val.length >= 3) || (c.includes(val) && val.length >= 3)
   );
 
   if (isCorrect) {
@@ -392,19 +391,18 @@ function checkRebus(input: HTMLInputElement, idx: number): void {
     fb.className = "answer-feedback right";
     solvedRebuses.add(idx);
 
-    (document.getElementById("solved-count") as HTMLElement).textContent =
-      String(solvedRebuses.size);
+    (document.getElementById("solved-count") as HTMLElement).textContent = String(
+      solvedRebuses.size
+    );
     updateProgress();
 
     setTimeout(() => {
-      const popup = document.querySelector<HTMLElement>(
-        `.popup[data-rebus-idx="${idx}"]`
-      );
+      const popup = document.querySelector<HTMLElement>(`.popup[data-rebus-idx="${idx}"]`);
       if (popup) {
         popup.style.transform = "scale(0)";
         popup.style.opacity = "0";
         popup.style.transition = "transform 0.15s, opacity 0.15s";
-        
+
         setTimeout(() => {
           popup.remove();
           activePopups--;
@@ -438,7 +436,7 @@ function fakeSubmit(input: HTMLInputElement, id: string): void {
     "✗ Du svarade något. Det hjälpte inte.",
     "✗ Hmm. Nope.",
     "✗ Intressant svar. Men fel.",
-    "✗ 404 – Rätt svar hittades ej."
+    "✗ 404 – Rätt svar hittades ej.",
   ];
 
   const fb = document.getElementById(id) as HTMLElement;
@@ -509,7 +507,6 @@ function makeDraggable(popup: HTMLElement): void {
     popup.style.zIndex = "500";
   });
 
-  
   titlebar.addEventListener(
     "touchstart",
     (e: TouchEvent) => {
@@ -550,9 +547,7 @@ function initialSpawn(): void {
   }
 }
 
-
 (document.getElementById("solved-count") as HTMLElement).textContent = "0";
-
 
 (window as any).closePopup = closePopup;
 (window as any).checkRebus = checkRebus;

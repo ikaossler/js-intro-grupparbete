@@ -1,260 +1,358 @@
 :root {
-    --green: #00ff41;
-    --red: #ff0040;
-    --yellow: #ffe600;
-    --cyan: #00f0ff;
-    --bg: #0a0a0a;
-    --panel: #111;
-  }
-
-  * { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0;
-    }
-
-  body {
-    background: var(--bg);
-    font-family: 'VT323', monospace;
-    color: var(--green);
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw;
-    cursor: crosshair;
-    user-select: none;
-  }
-
-  /* Scanlines effect */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0,0,0,0.15) 2px,
-      rgba(0,0,0,0.15) 4px
-    );
-    pointer-events: none;
-    z-index: 9999;
-  }
-
-  #background-art {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 12px;
-    opacity: 0.08;
-    pointer-events: none;
-    z-index: 0;
-  }
-  #background-art span {
-    font-family: 'Press Start 2P', monospace;
-    font-size: clamp(10px, 3vw, 28px);
-    color: var(--green);
-    white-space: nowrap;
-  }
-
-  /* HUD */
-  #hud {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 16px;
-    background: rgba(0,255,65,0.07);
-    border-bottom: 2px solid var(--green);
-    z-index: 1000;
-    font-family: 'Press Start 2P', monospace;
-    font-size: 12px;
-    color: var(--green);
-  }
-  #hud .rebus-score { 
-    color: var(--yellow); 
-}
-  #hud .popup-count { 
-    color: var(--cyan); 
+  --green: #00ff41;
+  --red: #ff0040;
+  --yellow: #ffe600;
+  --cyan: #00f0ff;
+  --bg: #0a0a0a;
+  --panel: #111;
 }
 
-  /* Progress bar */
-  #progress-bar-wrap {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    height: 8px;
-    background: rgba(255,255,255,0.05);
-    z-index: 1000;
-  }
-  #progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, var(--green), var(--cyan));
-    width: 0%;
-    transition: width 0.3s;
-    box-shadow: 0 0 8px var(--green);
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  /* WIN screen */
-  #win-screen {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.95);
-    z-index: 99999;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-    font-family: 'Press Start 2P', monospace;
-    text-align: center;
-    padding: 30px;
-  }
-  #win-screen.show { display: flex; }
-  #win-screen h1 { font-size: clamp(16px, 4vw, 36px); color: var(--yellow); text-shadow: 0 0 20px var(--yellow); animation: blink 0.6s infinite; }
-  #win-screen p { font-size: clamp(8px, 1.5vw, 14px); color: var(--green); line-height: 2; }
-  #win-screen .answer { color: var(--cyan); font-size: clamp(10px, 2vw, 18px); margin-top: 10px; }
-  #restart-btn {
-    margin-top: 20px;
-    padding: 12px 24px;
-    background: transparent;
-    border: 3px solid var(--green);
-    color: var(--green);
-    font-family: 'Press Start 2P', monospace;
-    font-size: 11px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  #restart-btn:hover { background: var(--green); color: #000; box-shadow: 0 0 20px var(--green); }
+body {
+  background: var(--bg);
+  font-family: "VT323", monospace;
+  color: var(--green);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  cursor: crosshair;
+  user-select: none;
+}
 
-  /* POPUP BAS */
-  .popup {
-    position: fixed;
-    min-width: 240px;
-    max-width: 340px;
-    background: #111;
-    border: 2px solid var(--green);
-    box-shadow: 0 0 12px rgba(0,255,65,0.3), inset 0 0 30px rgba(0,0,0,0.8);
-    z-index: 500;
-    animation: popIn 0.15s cubic-bezier(0.2,1.6,0.6,1);
-    font-family: 'VT323', monospace;
-  }
+/* Scanlines effect */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
 
-  /* Alla popup-typer har SAMMA gröna färg – förvirrande! */
-  .popup.rebus-popup { border-color: var(--green); box-shadow: 0 0 12px rgba(0,255,65,0.3); }
-  .popup.junk-popup  { border-color: var(--green); box-shadow: 0 0 12px rgba(0,255,65,0.3); }
-  .popup.info-popup  { border-color: var(--green); box-shadow: 0 0 12px rgba(0,255,65,0.3); }
+#background-art {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+#background-art span {
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(10px, 3vw, 28px);
+  color: var(--green);
+  white-space: nowrap;
+}
 
-  .popup-titlebar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 4px 8px;
-    background: rgba(0,255,65,0.08);
-    border-bottom: 1px solid var(--green);
-    font-size: 14px;
-    letter-spacing: 1px;
-    color: var(--green);
-  }
-  .popup.rebus-popup .popup-titlebar { color: var(--green); }
-  .popup.junk-popup  .popup-titlebar { color: var(--green); }
-  .popup.info-popup  .popup-titlebar { color: var(--green); }
+/* HUD */
+#hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 16px;
+  background: rgba(0, 255, 65, 0.07);
+  border-bottom: 2px solid var(--green);
+  z-index: 1000;
+  font-family: "Press Start 2P", monospace;
+  font-size: 12px;
+  color: var(--green);
+}
+#hud .rebus-score {
+  color: var(--yellow);
+}
+#hud .popup-count {
+  color: var(--cyan);
+}
 
-  .popup-titlebar .title-text { font-family: 'Press Start 2P', monospace; font-size: 7px; }
+/* Progress bar */
+#progress-bar-wrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 1000;
+}
+#progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), var(--cyan));
+  width: 0%;
+  transition: width 0.3s;
+  box-shadow: 0 0 8px var(--green);
+}
 
-  .close-btn {
-    background: transparent;
-    border: 1px solid var(--green);
-    color: var(--green);
-    font-family: 'Press Start 2P', monospace;
-    font-size: 8px;
-    padding: 2px 6px;
-    cursor: pointer;
-    transition: all 0.1s;
-    line-height: 1;
-  }
-  .close-btn:hover { background: var(--green); color: #000; }
+/* WIN screen */
+#win-screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  font-family: "Press Start 2P", monospace;
+  text-align: center;
+  padding: 30px;
+}
+#win-screen.show {
+  display: flex;
+}
+#win-screen h1 {
+  font-size: clamp(16px, 4vw, 36px);
+  color: var(--yellow);
+  text-shadow: 0 0 20px var(--yellow);
+  animation: blink 0.6s infinite;
+}
+#win-screen p {
+  font-size: clamp(8px, 1.5vw, 14px);
+  color: var(--green);
+  line-height: 2;
+}
+#win-screen .answer {
+  color: var(--cyan);
+  font-size: clamp(10px, 2vw, 18px);
+  margin-top: 10px;
+}
+#restart-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: transparent;
+  border: 3px solid var(--green);
+  color: var(--green);
+  font-family: "Press Start 2P", monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+#restart-btn:hover {
+  background: var(--green);
+  color: #000;
+  box-shadow: 0 0 20px var(--green);
+}
 
-  .popup-body {
-    padding: 12px 14px;
-    font-size: 20px;
-    line-height: 1.5;
-    color: #eee;
-    min-height: 60px;
-  }
+/* POPUP BAS */
+.popup {
+  position: fixed;
+  min-width: 240px;
+  max-width: 340px;
+  background: #111;
+  border: 2px solid var(--green);
+  box-shadow:
+    0 0 12px rgba(0, 255, 65, 0.3),
+    inset 0 0 30px rgba(0, 0, 0, 0.8);
+  z-index: 500;
+  animation: popIn 0.15s cubic-bezier(0.2, 1.6, 0.6, 1);
+  font-family: "VT323", monospace;
+}
 
-  .popup.rebus-popup .popup-body { font-size: 22px; color: #fff; }
+/* Alla popup-typer har SAMMA gröna färg – förvirrande! */
+.popup.rebus-popup {
+  border-color: var(--green);
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
+}
+.popup.junk-popup {
+  border-color: var(--green);
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
+}
+.popup.info-popup {
+  border-color: var(--green);
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
+}
 
-  /* Alla popups har ett svarsfält – samma styling oavsett typ */
-  .answer-input-wrap {
-    padding: 8px 14px 12px;
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .answer-input {
-    flex: 1;
-    min-width: 100px;
-    background: rgba(0,0,0,0.5);
-    border: 1px solid var(--green);
-    color: var(--green);
-    font-family: 'VT323', monospace;
-    font-size: 18px;
-    padding: 4px 8px;
-    outline: none;
-  }
-  .answer-input::placeholder { color: rgba(0,255,65,0.35); }
-  .answer-submit {
-    background: transparent;
-    border: 1px solid var(--green);
-    color: var(--green);
-    font-family: 'Press Start 2P', monospace;
-    font-size: 7px;
-    padding: 4px 8px;
-    cursor: pointer;
-  }
-  .answer-submit:hover { background: var(--green); color: #000; }
-  .answer-feedback {
-    padding: 0 14px 8px;
-    font-size: 16px;
-    min-height: 20px;
-  }
-  .answer-feedback.wrong { color: var(--red); animation: shake 0.3s; }
-  .answer-feedback.right { color: var(--green); }
+.popup-titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  background: rgba(0, 255, 65, 0.08);
+  border-bottom: 1px solid var(--green);
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--green);
+}
+.popup.rebus-popup .popup-titlebar {
+  color: var(--green);
+}
+.popup.junk-popup .popup-titlebar {
+  color: var(--green);
+}
+.popup.info-popup .popup-titlebar {
+  color: var(--green);
+}
 
-  /* Animation */
-  @keyframes popIn {
-    from { transform: scale(0.5) rotate(-5deg); opacity: 0; }
-    to   { transform: scale(1) rotate(0deg); opacity: 1; }
-  }
-  @keyframes shake {
-    0%,100% { transform: translateX(0); }
-    25%      { transform: translateX(-6px); }
-    75%      { transform: translateX(6px); }
-  }
-  @keyframes blink {
-    0%,100% { opacity: 1; }
-    50%      { opacity: 0.3; }
-  }
-  @keyframes glitch {
-    0%   { clip-path: inset(0 0 95% 0); transform: skewX(0deg); }
-    10%  { clip-path: inset(40% 0 50% 0); transform: skewX(-4deg); }
-    20%  { clip-path: inset(80% 0 10% 0); transform: skewX(3deg); }
-    30%  { clip-path: inset(10% 0 80% 0); transform: skewX(0deg); }
-    100% { clip-path: inset(0 0 95% 0); }
-  }
+.popup-titlebar .title-text {
+  font-family: "Press Start 2P", monospace;
+  font-size: 7px;
+}
 
-  .popup { cursor: default; }
-  .popup-titlebar { cursor: grab; }
-  .popup-titlebar:active { cursor: grabbing; }
+.close-btn {
+  background: transparent;
+  border: 1px solid var(--green);
+  color: var(--green);
+  font-family: "Press Start 2P", monospace;
+  font-size: 8px;
+  padding: 2px 6px;
+  cursor: pointer;
+  transition: all 0.1s;
+  line-height: 1;
+}
+.close-btn:hover {
+  background: var(--green);
+  color: #000;
+}
 
-  .popup::after {
-    content: '⣿';
-    position: absolute;
-    bottom: 2px; right: 4px;
-    font-size: 10px;
-    opacity: 0.2;
-    pointer-events: none;
+.popup-body {
+  padding: 12px 14px;
+  font-size: 20px;
+  line-height: 1.5;
+  color: #eee;
+  min-height: 60px;
+}
+
+.popup.rebus-popup .popup-body {
+  font-size: 22px;
+  color: #fff;
+}
+
+/* Alla popups har ett svarsfält – samma styling oavsett typ */
+.answer-input-wrap {
+  padding: 8px 14px 12px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.answer-input {
+  flex: 1;
+  min-width: 100px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--green);
+  color: var(--green);
+  font-family: "VT323", monospace;
+  font-size: 18px;
+  padding: 4px 8px;
+  outline: none;
+}
+.answer-input::placeholder {
+  color: rgba(0, 255, 65, 0.35);
+}
+.answer-submit {
+  background: transparent;
+  border: 1px solid var(--green);
+  color: var(--green);
+  font-family: "Press Start 2P", monospace;
+  font-size: 7px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+.answer-submit:hover {
+  background: var(--green);
+  color: #000;
+}
+.answer-feedback {
+  padding: 0 14px 8px;
+  font-size: 16px;
+  min-height: 20px;
+}
+.answer-feedback.wrong {
+  color: var(--red);
+  animation: shake 0.3s;
+}
+.answer-feedback.right {
+  color: var(--green);
+}
+
+/* Animation */
+@keyframes popIn {
+  from {
+    transform: scale(0.5) rotate(-5deg);
+    opacity: 0;
   }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+@keyframes glitch {
+  0% {
+    clip-path: inset(0 0 95% 0);
+    transform: skewX(0deg);
+  }
+  10% {
+    clip-path: inset(40% 0 50% 0);
+    transform: skewX(-4deg);
+  }
+  20% {
+    clip-path: inset(80% 0 10% 0);
+    transform: skewX(3deg);
+  }
+  30% {
+    clip-path: inset(10% 0 80% 0);
+    transform: skewX(0deg);
+  }
+  100% {
+    clip-path: inset(0 0 95% 0);
+  }
+}
+
+.popup {
+  cursor: default;
+}
+.popup-titlebar {
+  cursor: grab;
+}
+.popup-titlebar:active {
+  cursor: grabbing;
+}
+
+.popup::after {
+  content: "⣿";
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  font-size: 10px;
+  opacity: 0.2;
+  pointer-events: none;
+}
