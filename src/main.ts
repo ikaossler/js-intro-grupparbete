@@ -1,4 +1,5 @@
 import "./style.css";
+import "./room2/room2.css";
 import "./rooms/room4";
 import { initRoom1 } from "./rooms/room1";
 import { renderCaptchaRoom } from "./room2/room2";
