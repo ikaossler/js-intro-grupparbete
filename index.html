@@ -33,7 +33,32 @@
         </div>
       </section>
 
-      <section id="room1"></section>
+      <section id="room1">
+        <h2 id="room1-title">Verification Code</h2>
+        <p>A verification code has been sent.</p>
+        <p>Enter your verification code to escape.</p>
+
+        <button id="resend-btn" type="button">Resend</button>
+
+        <p id="room1-timer">Time: 00:00</p>
+
+        <p>
+          Code:
+          <span id="flash-code" aria-live="polite">------</span>
+        </p>
+
+        <label for="code-input">Verification code</label>
+        <input
+          id="code-input"
+          name="code-input"
+          type="password"
+          maxlength="6"
+          autocomplete="one-time-code"
+        />
+
+        <button id="check-btn" type="button">Verify</button>
+        <p id="room1-message" aria-live="polite"></p>
+      </section>
 
       <section id="room2"></section>
 
