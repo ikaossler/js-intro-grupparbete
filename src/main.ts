@@ -1,17 +1,7 @@
-import "./style.css"; // Import the main stylesheet for the application
-import "./room2/room2.css"; // Import room2 styles
-import "./room4/room4.css";
-  import "./room4/room4.ts";
-import { initRoom1 } from "./rooms/room1"; // Import the room initialization function from the maria room module
-import { renderCaptchaRoom } from "./room2/room2"; // Import the captcha room renderer
-// This file is the entry point of the application. It loads the room definitions from a JSON file
-type RoomDefinition = {
-  id: string;
-  name: string;
-  description: string;
-};
-// In a real application, you would likely have separate HTML files or templates for each room, 
-// but for simplicity, we are using a single HTML file with multiple sections for each room.
+import "./style.css";
+import "./rooms/room4";
+import { initRoom1 } from "./rooms/room1";
+import { renderCaptchaRoom } from "./room2/room2";
 
 const sectionOrder = ["start", "room1", "room2", "room3", "room4"] as const;
 export type SectionId = (typeof sectionOrder)[number];

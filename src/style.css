@@ -1,12 +1,22 @@
-:root {
-  
+#game-over {
+  /* display: none; */ /* Kommenterat bort denna för nu eftersom jag vill kunna se sidan medan jag jobar på den */
+  background-color: pink;
+  color: black;
+  font-family: monospace;
+  padding: 2rem;
+  text-align: center;
+}
+
+#game-over h2 {
+  color: black;
+  font-size: 2rem;
 }
 
 body {
-    font-family: monospace, sans-serif;
-line-height: 1.5;
+  font-family: monospace, sans-serif;
+  line-height: 1.5;
   font-weight: 400px;
-  
+
   margin: 0;
   min-height: 100vh;
   display: grid;
@@ -17,6 +27,7 @@ line-height: 1.5;
 p {
   color: #00b32d;
 }
+
 .container {
   text-align: center;
   padding: 2rem;
@@ -50,13 +61,12 @@ p {
 .progress-bar {
   width: 0%;
   height: 100%;
-  background:
-    repeating-linear-gradient(
-      to right,
-      #39ff14 0,
-      #39ff14 2.5rem,
-      #062206 2.5rem,
-      #062206 3rem
-    );
+  background: repeating-linear-gradient(
+    to right,
+    #39ff14 0,
+    #39ff14 2.5rem,
+    #062206 2.5rem,
+    #062206 3rem
+  );
   transition: width 0.25s ease;
 }

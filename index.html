@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Error 404</title>
   </head>
-  
+
   <body>
     <header class="site-header">
       <h1>Error 404</h1>
@@ -13,19 +13,22 @@
       <div class="progress-wrap">
         <div id="progress-bar" class="progress-bar"></div>
       </div>
-      <div id="timer"></div>
+      <div id="total-time">Total Time: 0:00</div>
     </header>
 
     <main>
       <section id="start" visually-hidden="true">
         <div class="start-content">
           <h2>Error 404</h2>
-          <p>Welcome to Internet Hell. Every room is a different online nightmare. Solve the traps, beat the timers, and escape.</p>
+          <p>
+            Welcome to Internet Hell. Every room is a different online nightmare. Solve the traps,
+            beat the timers, and escape.
+          </p>
           <button id="start-btn">Start Game</button>
-        <div class="high-score">
-          <h3>High Score</h3>
-          <p id="high-score-value">0</p>
-        </div>
+          <div class="high-score">
+            <h3>High Score</h3>
+            <p id="high-score-value">0</p>
+          </div>
         </div>
       </section>
 
@@ -56,6 +59,7 @@
         <p id="room1-message" aria-live="polite"></p>
       </section>
 
+<<<<<<< HEAD
       <!----------Filips rum ---------->
       <section id="room2">
         <h2 class="captcha-room-title">Confirm you are human</h2>
@@ -66,6 +70,9 @@
 
         <div id="captcha-room"></div>
       </section>
+=======
+      <section id="room2"></section>
+>>>>>>> main
 
       <!---------- Kickis rum ---------->
       <section id="room3">
@@ -76,7 +83,7 @@
 
         <div id="background-art">
           <span>POPUP CHAMBER v2.0</span>
-          <span>>>> INITIALIZING CHAOS PROTOCOL <<<</span>
+          <span>>>>INITIALIZING CHAOS PROTOCOL <<<</span>
           <span>SOLVE THE REBUS PUZZLES</span>
           <span>█▓▒░ GOOD LUCK ░▒▓█</span>
           <span>ERROR 404</span>
@@ -101,16 +108,15 @@
         </div>
       </section>
 
-
       <!----------Ikas rum-------------->
 
-      <section id="room4"> 
+      <section class="room4">
         <h2>Enter Your Password... Please</h2>
-        <p id="room4-description">For your security, please create a strong password. </p>
-          <div id="room4-timer">Time: 0:00</div> 
-        <button id="show-requirements-btn">Show Requirements</button>
+        <p class="room4-description">For your security, please create a strong password.</p>
+        <div id="room4-timer">Time: 0:00</div>
+        <button class="show-requirements-btn">Show Requirements</button>
 
-        <div id="room4-game">
+        <div class="room4-game">
           <input
             type="text"
             id="password-input"
@@ -125,9 +131,26 @@
           <p id="room4-message"></p>
         </div>
       </section>
+
+      <section id="game-over">
+        <div class="game-over-content">
+          <h2>Congratulations!</h2>
+          <p>You escaped Internet Hell!</p>
+
+          <div id="final-time">
+            <p>Total Time: <span id="total-time-display">0:00</span></p>
+          </div>
+
+          <div id="highscore-display">
+            <h3>High Scores</h3>
+            <ol id="highscore-list">
+              <!-- Highscore läggs in här via JS senare -->
+            </ol>
+          </div>
+        </div>
+      </section>
     </main>
 
-    
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
