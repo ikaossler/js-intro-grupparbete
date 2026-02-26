@@ -1,3 +1,8 @@
+/* TEMPORÄRT - visa bara mitt rum */
+#start, #room1, #room2, #room4, #game-over {
+  display: none !important;
+}
+
 :root {
     --green: #00ff41;
     --red: #ff0040;

@@ -1,6 +1,8 @@
 import "./style.css";
 import "./room 4/room4.css";
 import "./room 4/room4";
+import "./room 3/room3.css";
+import "./room 3/room3";
 //
 import { initRoom1 } from "./rooms/room1";
 
