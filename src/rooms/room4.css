@@ -1,13 +1,3 @@
-/* Döljer allt annat än mitt rum. KOM IHÅG ATT TA BORT INNAN PR */
-
-#start,
-#room1,
-#room2,
-#room3,
-#game-over {
-  display: none !important;
-}
-
 /*********************************************
 *****************ANIMATIONER******************
 **********************************************/
