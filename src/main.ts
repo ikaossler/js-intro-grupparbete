@@ -1,7 +1,6 @@
 import "./style.css";
-import "./room 4/room4.css";
-import "./room 4/room4";
-//
+import "./rooms/room4.css";
+import "./rooms/room4";
 import { initRoom1 } from "./rooms/room1";
 
 const sectionOrder = ["start", "room1", "room2", "room3", "room4"] as const;

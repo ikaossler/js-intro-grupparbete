@@ -65,6 +65,13 @@ function displayRequirements() {
 showRequirementsBtn.addEventListener("click", () => {
   displayRequirements();
   startTimer();
+
+    //Visa input-rutan och Submit-knappen efter att man klickat på show requrements-knappen
+  passwordInput.style.display = 'block';
+  submitButton.style.display = 'block';
+
+    //Dölj show requirements-knappen 
+  showRequirementsBtn.style.display = 'none';
 });
 
 passwordInput.addEventListener('input', () => {
