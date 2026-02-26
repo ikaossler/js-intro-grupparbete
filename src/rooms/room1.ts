@@ -1,41 +1,25 @@
-import "./maria.css";
+import "./room1.css";
 
-// This file contains the logic for the first room, 
-// which involves a two-step verification process with a twist.
 
-export function initMariaRoom(room: HTMLElement, onComplete: () => void): void {
-  room.innerHTML = `
-    <h2 id="room1-title">Verification Code</h2>
-    <p>A verification code has been sent.</p>
-    <p>Enter your verification code to escape.</p>
-
-    <button id="resend-btn" type="button">Resend</button>
-
-    <p>
-      Code:
-      <span id="flash-code" aria-live="polite">------</span>
-    </p>
-
-    <label for="code-input">Verification code</label>
-    <input
-      id="code-input"
-      name="code-input"
-      type="password"
-      maxlength="6"
-      autocomplete="one-time-code"
-    />
-
-    <button id="check-btn" type="button">Verify</button>
-    <p id="room1-message" aria-live="polite"></p>
-  `;
+export function initRoom1(room: HTMLElement, onComplete: () => void): void {
   // Get references to the interactive elements within the room.
   const resendButton = room.querySelector<HTMLButtonElement>("#resend-btn");
   const flashCode = room.querySelector<HTMLElement>("#flash-code");
   const codeInput = room.querySelector<HTMLInputElement>("#code-input");
   const checkButton = room.querySelector<HTMLButtonElement>("#check-btn");
   const message = room.querySelector<HTMLElement>("#room1-message");
+  const roomTimerEl = room.querySelector<HTMLElement>("#room1-timer");
     // If any of the required elements are missing, we cannot proceed with the room logic.
-  if (!resendButton || !flashCode || !codeInput || !checkButton || !message) return;
+  if (!resendButton || !flashCode || !codeInput || !checkButton || !message || !roomTimerEl) return;
+  const startTime = Date.now();
+  const timerId = window.setInterval(() => {
+    const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+    const minutes = Math.floor(elapsedSeconds / 60);
+    const seconds = elapsedSeconds % 60;
+
+    roomTimerEl.textContent = `Time: ${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  }, 1000);
+
   // State variables to manage the verification code logic.
   let latestCode = "";
   let previousCode = "";
@@ -104,6 +88,7 @@ export function initMariaRoom(room: HTMLElement, onComplete: () => void): void {
         continueButton.id = "continue-btn";
         continueButton.textContent = "Continue to room 2";
         continueButton.addEventListener("click", () => {
+          window.clearInterval(timerId);
           onComplete();
         });
         room.appendChild(continueButton);
