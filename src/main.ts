@@ -1,7 +1,5 @@
 import "./style.css";
-import "./room 4/room4.css";
-import "./room 4/room4";
-//
+import "./rooms/room4";
 import { initRoom1 } from "./rooms/room1";
 
 const sectionOrder = ["start", "room1", "room2", "room3", "room4"] as const;
@@ -25,12 +23,12 @@ function updateProgress(roomNumber: number): void {
 function initRooms(): void {
   const room1Section = document.querySelector<HTMLElement>("#room1");
   const room2Section = document.querySelector<HTMLElement>("#room2");
-// If the first room section is not found, we cannot proceed with initializing the rooms.
+  // If the first room section is not found, we cannot proceed with initializing the rooms.
   if (!room1Section) return;
-// Update the progress bar to indicate the start of the game.
+  // Update the progress bar to indicate the start of the game.
   updateProgress(0);
-// Initialize room 1 and provide a callback to update progress and
-// scroll to the next room upon completion.
+  // Initialize room 1 and provide a callback to update progress and
+  // scroll to the next room upon completion.
   initRoom1(room1Section, () => {
     updateProgress(2);
     room2Section?.scrollIntoView({ behavior: "smooth", block: "start" });
