@@ -20,6 +20,11 @@
   font-weight: 700;
 }
 
+#room1-timer {
+  margin: 0.5rem 0 1rem;
+  color: #39ff14;
+}
+
 #room1 #code-input {
   width: 100%;
   max-width: 16rem;
