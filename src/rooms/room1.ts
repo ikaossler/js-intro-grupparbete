@@ -1,7 +1,7 @@
-import "./maria.css";
+import "./room1.css";
 
 
-export function initMariaRoom(room: HTMLElement, onComplete: () => void): void {
+export function initRoom1(room: HTMLElement, onComplete: () => void): void {
   // Get references to the interactive elements within the room.
   const resendButton = room.querySelector<HTMLButtonElement>("#resend-btn");
   const flashCode = room.querySelector<HTMLElement>("#flash-code");
