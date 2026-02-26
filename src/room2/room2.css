@@ -25,3 +25,8 @@
     height: auto;
     display: block;
 }
+
+.captcha-room-title, .captcha-room-timer-wrapper, .captcha-room-prompt {
+    text-align: center;
+    margin-bottom: 20px;
+}
