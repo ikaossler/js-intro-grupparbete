@@ -9,8 +9,15 @@
   <body>
     <header class="site-header">
       <h1>Error 404</h1>
-      <button id="login-btn"></button>
-      <div class="progress-wrap">
+      <button id="login-btn" aria-label="Logga in"></button>
+      <div
+        class="progress-wrap"
+        role="progressbar"
+        aria-label="Spelprogress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+      >
         <div id="progress-bar" class="progress-bar"></div>
       </div>
       <div id="total-time">Total Time: 0:00</div>
@@ -32,32 +39,46 @@
         </div>
       </section>
 
-      <section id="room1">
-        <h2 id="room1-title">Verification Code</h2>
-        <p>A verification code has been sent.</p>
-        <p>Enter your verification code to escape.</p>
+      <!--
+        ╔══════════════════════════════════════════════╗
+        ║                 MARIA START                  ║
+        ╚══════════════════════════════════════════════╝
+      -->
+      <section id="room1" class="room1">
+        <h2 id="room1-title" class="room1-title">Verification Code</h2>
+        <p class="room1-text">A verification code has been sent.</p>
+        <p class="room1-text">Enter your verification code to escape.</p>
 
-        <button id="resend-btn" type="button">Resend</button>
+        <button id="resend-btn" class="room1-button" type="button">Resend</button>
 
-        <p id="room1-timer">Time: 00:00</p>
+        <p id="room1-timer" class="room1-timer">Time: 00:00</p>
 
         <p>
           Code:
-          <span id="flash-code" aria-live="polite">------</span>
+          <span id="flash-code" class="room1-code" aria-live="polite">------</span>
         </p>
 
-        <label for="code-input">Verification code</label>
+        <label class="room1-label" for="code-input">Verification code</label>
         <input
           id="code-input"
+          class="room1-input"
           name="code-input"
           type="password"
           maxlength="6"
           autocomplete="one-time-code"
         />
 
-        <button id="check-btn" type="button">Verify</button>
-        <p id="room1-message" aria-live="polite"></p>
+        <button id="check-btn" class="room1-button" type="button">Verify</button>
+        <button id="room1-continue-btn" class="room1-button" type="button" hidden>
+          Continue to room 2
+        </button>
+        <p id="room1-message" class="room1-message" aria-live="polite"></p>
       </section>
+      <!--
+        ╔══════════════════════════════════════════════╗
+        ║                  MARIA END                   ║
+        ╚══════════════════════════════════════════════╝
+      -->
 
       <section id="room2"></section>
 
