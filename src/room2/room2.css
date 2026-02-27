@@ -13,6 +13,7 @@
     background: none;
     cursor: pointer;
     overflow: hidden;
+    position: relative;
 }
 
 .captcha-item.selected {
@@ -22,8 +23,22 @@
 
 .captcha-item img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+    object-fit: cover;
+}
+
+.captcha-item-label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.25rem;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    font-size: 0.85rem;
+    pointer-events: none;
 }
 
 .captcha-room-title, .captcha-room-timer-wrapper, .captcha-room-prompt {
