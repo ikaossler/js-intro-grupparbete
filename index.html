@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:," />
     <title>Error 404</title>
   </head>
 
@@ -59,16 +60,25 @@
         <p id="room1-message" aria-live="polite"></p>
       </section>
 
-      <section id="room2"></section>
+      <!----------Filips rum ---------->
+      <section id="room2">
+        <h2 class="captcha-room-title">Confirm you are human</h2>
+        <div class="captcha-room-timer-wrapper" id="room2-timer-wrapper">
+          <span>Time: </span>
+          <span id="captcha-timer">0:00</span>
+        </div>
+
+        <div id="captcha-room"></div>
+      </section>
 
       <!---------- Kickis rum ---------->
       <section id="room3">
-        <div id="gameContainer"></div>
+        <div id="gameContainerRoom3"></div>
         <div id="room3-timer">Time: 20:00</div>
 
         <button id="start-room3-btn" type="button">Start the game</button>
 
-        <div id="background-art">
+        <div id="background-art-room3" class="background-art-room3">
           <span>POPUP CHAMBER v2.0</span>
           <span>>>>INITIALIZING CHAOS PROTOCOL <<<</span>
           <span>SOLVE THE REBUS PUZZLES</span>
@@ -76,22 +86,22 @@
           <span>ERROR 404</span>
         </div>
 
-        <div id="hud">
+        <div id="hud" class="hud">
           <div>⚠ POPUP-RUMMET</div>
           <div class="rebus-score">REBUSAR LÖSTA: <span id="solved-count">0</span> / 10</div>
           <div class="popup-count">STÄNGDA: <span id="closed-count">0</span></div>
         </div>
 
-        <div id="progress-bar-wrap">
-          <div id="progress-bar"></div>
+        <div id="progress-bar-wrap-room3" class="progress-bar-wrap">
+          <div id="progress-bar-room3" class="progress-bar-room3"></div>
         </div>
 
-        <div id="win-screen">
+        <div id="win-screen-room3">
           <h2>DU KLARADE DET!</h2>
           <p>Du har överlevt Internet Hell och besegrat alla rum!</p>
           <div class="answer">10 / 10 KORREKTA</div>
-          <button id="restart-btn" type="button">Spela Igen</button>
-          <button id="next-room-btn" type="button">Nästa Rum</button>
+          <button id="restart-btn-room3" type="button">Spela Igen</button>
+          <button id="next-room-btn-room3" type="button">Nästa Rum</button>
         </div>
       </section>
 

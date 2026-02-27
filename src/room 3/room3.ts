@@ -6,10 +6,10 @@ import { showSection, SectionId } from "../main";
 /*******************************************/
 
 interface Rebus {
-  text: string;
-  hint: string;
-  answer: string;
-  altAnswers?: string[];
+    text: string;
+    hint: string;
+    answer: string;
+    altAnswers?: string[];
 }
 
 /*******************************************/
@@ -17,96 +17,96 @@ interface Rebus {
 /*******************************************/
 
 const REBUSES: Rebus[] = [
-  {
-    text: "🏠 + 🦁 = ?",
-    hint: "ett ord",
-    answer: "HUSDJUR",
-    altAnswers: ["HUSDJUR", "HUS DJUR", "PET", "PETS"],
-  },
-  {
-    text: "🐍 + 📱 = ?",
-    hint: "Spel",
-    answer: "SNAKE",
-    altAnswers: ["SNAKE", "SNAKE GAME", "SNAKE SPEL"],
-  },
-  {
-    text: "👁️ + 🥶 + 🐻",
-    hint: "Ett djur",
-    answer: "ISBJÖRN",
-    altAnswers: ["ISBJÖRN", "IS BJÖRN", "ISBEAR", "IS BEAR"],
-  },
-  {
-    text: "🔥 + ❤️ + 🧊 + ⛓️",
-    hint: "Ett ord",
-    answer: "KALLHJÄRTAD",
-    altAnswers: ["KALLHJÄRTAD", "KALL HJÄRTAD", "COLDHEARTED", "COLD HEARTED"],
-  },
-  {
-    text: "❤️ + 💔 + 🌧️",
-    hint: "Ett ord",
-    answer: "HJÄRTESORG",
-    altAnswers: ["HJÄRTESORG", "HEARTSICK", "HEART SICK"],
-  },
-  {
-    text: "☀️ + 👓 + 🧴",
-    hint: "Ett ord",
-    answer: "SOLKRÄM",
-    altAnswers: ["SOLKRÄM", "SOL KRÄM", "SUNSCREEN", "SUN SCREEN"],
-  },
-  {
-    text: "❄️ + 🏃 + 👟",
-    hint: "Ett ord",
-    answer: "SNÖSKOR",
-    altAnswers: ["SNÖSKOR", "SNOWSHOES", "SNOW SHOES"],
-  },
-  {
-    text: "☀️ + 🌸 + 🌱",
-    hint: "Ett ord",
-    answer: "SOMMARÄNG",
-    altAnswers: ["SOMMARÄNG", "SUMMER MEADOW", "SUMMER MEADOW"],
-  },
-  {
-    text: "👁️ + 🌊 + 🍵 + 🗝️",
-    hint: "Ett ord",
-    answer: "IDENTITET",
-    altAnswers: ["IDENTITET", "IDENTITY", "IDENTITY"],
-  },
-  {
-    text: "⏰ + 🪟 + 🤔 + 💡",
-    hint: "Ett ord",
-    answer: "INSIKT",
-    altAnswers: ["INSIKT", "INSIGHT", "INSIGHT"],
-  },
-  {
-    text: "🔥 + 🦊 + ❄️ + 🎭",
-    hint: "Ett ord",
-    answer: "RÄVSPEL",
-    altAnswers: ["RÄVSPEL", "RÄV SPEL", "FOX GAME", "FOX GAME"],
-  },
-  {
-    text: "🧠 + 🗝️ + 🚪 + 🌑",
-    hint: "Ett ord",
-    answer: "HEMLIGHET",
-    altAnswers: ["HEMLIGHET", "SECRET", "SECRET"],
-  },
-  {
-    text: "🧠 + 🚂 + 👟",
-    hint: "Ett ord",
-    answer: "TANKEBANA",
-    altAnswers: ["TANKEBANA", "THOUGHT TRAIN", "THOUGHT TRAIN"],
-  },
-  {
-    text: "❤️ + ➡️ + 🎯",
-    hint: "Ett ord",
-    answer: "MÅLINRIKTAD",
-    altAnswers: ["MÅLINRIKTAD", "TARGET ORIENTED", "TARGET ORIENTED"],
-  },
-  {
-    text: "📖 + 🌙 + ⏰",
-    hint: "Ett ord",
-    answer: "GODNATTSAGA",
-    altAnswers: ["GODNATTSAGA", "GOOD NIGHT STORY", "GOOD NIGHT STORY"],
-  },
+    {
+        text: "🏠 + 🦁 = ?",
+        hint: "ett ord",
+        answer: "HUSDJUR",
+        altAnswers: ["HUSDJUR", "HUS DJUR", "PET", "PETS"]
+    },
+    {
+        text: "🐍 + 📱 = ?",
+        hint: "Spel",
+        answer: "SNAKE",
+        altAnswers: ["SNAKE", "SNAKE GAME", "SNAKE SPEL"]
+    },
+    {
+        text: "👁️ + 🥶 + 🐻",
+        hint: "Ett djur",
+        answer: "ISBJÖRN",
+        altAnswers: ["ISBJÖRN", "IS BJÖRN", "ISBEAR", "IS BEAR"]
+    },
+    {
+        text: "🔥 + ❤️ + 🧊 + ⛓️",
+        hint: "Ett ord",
+        answer: "KALLHJÄRTAD",
+        altAnswers: ["KALLHJÄRTAD", "KALL HJÄRTAD", "COLDHEARTED", "COLD HEARTED"]
+    },
+    {
+        text: "❤️ + 💔 + 🌧️",
+        hint: "Ett ord",
+        answer: "HJÄRTESORG",
+        altAnswers: ["HJÄRTESORG", "HEARTSICK", "HEART SICK"]
+    },
+    {
+        text: "☀️ + 👓 + 🧴",
+        hint: "Ett ord",
+        answer: "SOLKRÄM",
+        altAnswers: ["SOLKRÄM", "SOL KRÄM", "SUNSCREEN", "SUN SCREEN"]
+    },
+    {
+        text: "❄️ + 🏃 + 👟",
+        hint: "Ett ord",
+        answer: "SNÖSKOR",
+        altAnswers: ["SNÖSKOR", "SNOWSHOES", "SNOW SHOES"]
+    },
+    {
+        text: "☀️ + 🌸 + 🌱",
+        hint: "Ett ord",
+        answer: "SOMMARÄNG",
+        altAnswers: ["SOMMARÄNG", "SUMMER MEADOW", "SUMMER MEADOW"]
+    },
+    {
+        text: "👁️ + 🌊 + 🍵 + 🗝️",
+        hint: "Ett ord",
+        answer: "IDENTITET",
+        altAnswers: ["IDENTITET", "IDENTITY", "IDENTITY"]
+    },
+    {
+        text: "⏰ + 🪟 + 🤔 + 💡",
+        hint: "Ett ord",
+        answer: "INSIKT",
+        altAnswers: ["INSIKT", "INSIGHT", "INSIGHT"]
+    },
+    {
+        text: "🔥 + 🦊 + ❄️ + 🎭",
+        hint: "Ett ord",
+        answer: "RÄVSPEL",
+        altAnswers: ["RÄVSPEL", "RÄV SPEL", "FOX GAME", "FOX GAME"]
+    },
+    {
+        text: "🧠 + 🗝️ + 🚪 + 🌑",
+        hint: "Ett ord",
+        answer: "HEMLIGHET",
+        altAnswers: ["HEMLIGHET", "SECRET", "SECRET"]
+    },
+    {
+        text: "🧠 + 🚂 + 👟",
+        hint: "Ett ord",
+        answer: "TANKEBANA",
+        altAnswers: ["TANKEBANA", "THOUGHT TRAIN", "THOUGHT TRAIN"]
+    },
+    {
+        text: "❤️ + ➡️ + 🎯",
+        hint: "Ett ord",
+        answer: "MÅLINRIKTAD",
+        altAnswers: ["MÅLINRIKTAD", "TARGET ORIENTED", "TARGET ORIENTED"]
+    },
+    {
+        text: "📖 + 🌙 + ⏰",
+        hint: "Ett ord",
+        answer: "GODNATTSAGA",
+        altAnswers: ["GODNATTSAGA", "GOOD NIGHT STORY", "GOOD NIGHT STORY"]
+    }
 ];
 
 const JUNK_TEXTS: string[] = [
@@ -176,12 +176,12 @@ const WINDOW_TITLE_JUNK: string[] = [
 let intervalsStarted: boolean = false;
 
 document.querySelector("#start-room3-btn")?.addEventListener("click", () => {
-  const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
-  btn.style.display = "none";
-  startGame();
+    const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
+    btn.style.display = "none";
+    startGame();
 });
 
-function startGame(): void {
+function startRoom3(): void {
   startTimer();
   initialSpawn();
 
@@ -266,16 +266,16 @@ function updateProgress(): void {
 /*******************************************/
 
 interface PopupOption {
-  x: number;
-  y: number;
+    x: number;
+    y: number;
 }
 
-function randomPos(w: number = 320, h: number = 240): PopupOption {
-  const hudH = 36;
-  const barH = 8;
-  const x: number = Math.random() * (window.innerWidth - w - 20) + 10;
-  const y: number = Math.random() * (window.innerHeight - h - hudH - barH - 20) + hudH + barH + 10;
-  return { x, y };
+function randomPos(w:number = 320, h:number = 240): PopupOption {
+    const hudH = 36;
+    const barH = 8;
+    const x: number = Math.random() * (window.innerWidth - w - 20) + 10;
+    const y: number = Math.random() * (window.innerHeight - h - hudH - barH - 20) + hudH + barH + 10;
+    return { x, y };
 }
 
 function spawnPopup(): void {
@@ -323,7 +323,7 @@ function spawnJunkPopup(): void {
 }
 
 function spawnRebusPopup(idx: number): void {
-  const rebus: Rebus = REBUSES[idx];
+  const rebus: IRebus = REBUSES[idx];
   const popup: HTMLDivElement = document.createElement("div");
   popup.className = "popup rebus-popup";
   popup.dataset.rebusIdx = String(idx);
@@ -377,7 +377,7 @@ function closePopup(btn: HTMLButtonElement): void {
 
 function checkRebus(input: HTMLInputElement, idx: number): void {
   const val: string = normalise(input.value.trim());
-  const rebus: Rebus = REBUSES[idx];
+  const rebus: IRebus = REBUSES[idx];
 
   const correct: string[] = [rebus.answer, ...(rebus.altAnswers ?? [])].map(normalise);
   const fb = document.getElementById("rf-" + idx) as HTMLElement;
@@ -472,7 +472,7 @@ function restartGame(): void {
   (document.querySelector("#room3-timer") as HTMLElement).textContent = "10:00";
 
   document.querySelectorAll<HTMLElement>(".popup").forEach((p) => p.remove());
-  startGame();
+  startRoom3();
 }
 
 /*******************************************/
