@@ -1,7 +1,7 @@
 import "./style.css";
 import "./room2/room2.css";
-import { initRoom1 } from "./rooms/room1";
 import "./rooms/room4";
+import { initRoom1 } from "./rooms/room1";
 import { renderCaptchaRoom } from "./room2/room2";
 
 // OBS! Rummen initieras just nu på olika sätt.
@@ -43,7 +43,6 @@ function initRooms(): void {
   if (!room1Section || !room2Section) return;
   // Startläge: ingen progression ännu.
   updateProgress(0);
-
   const captchaRoom = renderCaptchaRoom(() => {
     updateProgress(3);
     room3Section?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -54,7 +53,6 @@ function initRooms(): void {
   } else {
     room2Section.appendChild(captchaRoom);
   }
-
   // När room1 är klart: uppdatera progress och scrolla till room2.
   initRoom1(room1Section, () => {
     updateProgress(2);
