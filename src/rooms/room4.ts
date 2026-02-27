@@ -2,12 +2,11 @@ import "./room4.css";
 
 const passwordInput = document.getElementById("password-input") as HTMLInputElement;
 const submitButton = document.getElementById("room4-submit") as HTMLButtonElement;
-const showRequirementsBtn = document.querySelector(
-  ".room4 .show-requirements-btn"
-) as HTMLButtonElement;
+const showRequirementsBtn = document.querySelector(".room4 .show-requirements-btn") as HTMLButtonElement;
 const requirementsList = document.getElementById("requirements-list") as HTMLUListElement;
 const messageElement = document.getElementById("room4-message") as HTMLParagraphElement;
 const timerElement = document.getElementById("room4-timer") as HTMLDivElement;
+const errorSound = new Audio('src/sounds/error.mp3');
 
 // Dagens datum
 const todaysDate = new Date().getDate();
@@ -102,6 +101,7 @@ submitButton.addEventListener("click", () => {
     messageElement.style.color = "green";
     //TODO: Gå vidare till nästa del/rum
   } else {
+    errorSound.play()
     messageElement.textContent = "❌ ERROR: Password does not meet all requirements";
     messageElement.style.color = "red";
 

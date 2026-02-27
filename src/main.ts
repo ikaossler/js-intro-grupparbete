@@ -1,8 +1,9 @@
 import "./style.css";
-import "./room2/room2.css";
-import "./rooms/room4";
 import { initRoom1 } from "./rooms/room1";
 import { renderCaptchaRoom } from "./room2/room2";
+import "./room2/room2.css";
+import "./rooms/room4";
+
 
 const sectionOrder = ["start", "room1", "room2", "room3", "room4"] as const;
 export type SectionId = (typeof sectionOrder)[number];
