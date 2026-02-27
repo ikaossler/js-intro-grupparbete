@@ -36,3 +36,22 @@ function initRooms(): void {
 }
 // Start the application by initializing the rooms and setting up the initial state.
 initRooms();
+
+/********************************************/
+/**************** ABOUT US*******************/
+/********************************************/
+
+const section = document.querySelector<HTMLElement>(".about-us");
+
+if (section) {
+  const observer = new IntersectionObserver((entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        section.classList.add("animate");
+        observer.disconnect();
+      }
+    });
+  }), { threshold: 0.2 });
+
+  observer.observe(section);
+}

@@ -1,5 +1,5 @@
 /* TEMPORÄRT - visa bara mitt rum */
-#start, #room1, #room2, .room4, #game-over, #room3 {
+#start, #room1, #room2, .room4, #game-over, #about {
   display: none !important;
 }
 
@@ -21,7 +21,6 @@ body {
   font-family: monospace, sans-serif;
   line-height: 1.5;
   font-weight: 400px;
-
   margin: 0;
   min-height: 100vh;
   display: grid;
@@ -81,6 +80,44 @@ p {
   margin: 0 auto;
   text-align: left;
   padding: 1rem;
+  overflow: hidden;
+}
+
+.about-us.animate .about-us-content {
+  animation: slideDown 3s ease forwards, glitch 0.8s steps(1) forwards;
+}
+.about-us-content {
+  opacity: 0;
+  transform: translateY(-40px);
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glitch {
+  0%   { clip-path: inset(0 0 100% 0); color: #39ff14; transform: translateX(0); }
+  10%  { clip-path: inset(10% 0 60% 0); color: #ff003c; transform: translateX(-4px); }
+  20%  { clip-path: inset(30% 0 40% 0); color: #00eaff; transform: translateX(4px); }
+  30%  { clip-path: inset(0 0 80% 0);   color: #39ff14; transform: translateX(-2px); }
+  40%  { clip-path: inset(50% 0 20% 0); color: #ff003c; transform: translateX(2px); }
+  50%  { clip-path: inset(20% 0 50% 0); color: #fff;    transform: translateX(0); }
+  60%  { clip-path: inset(0 0 30% 0);   color: #00eaff; transform: translateX(-3px); }
+  70%  { clip-path: inset(70% 0 10% 0); color: #39ff14; transform: translateX(3px); }
+  80%  { clip-path: inset(0 0 10% 0);   color: #ff003c; transform: translateX(-1px); }
+  90%  { clip-path: inset(0 0 5% 0);    color: #fff;    transform: translateX(1px); }
+  100% { clip-path: inset(0 0 0 0);     color: inherit; transform: translateX(0); }
 }
 
 .about-us-btn {

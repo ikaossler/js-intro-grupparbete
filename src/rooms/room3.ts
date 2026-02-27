@@ -20,8 +20,8 @@ const REBUSES: IRebus[] = [
     {
         text: "🏠 + 🦁 = ?",
         hint: "ett ord",
-        answer: "HUSDJUR",
-        altAnswers: ["HUSDJUR", "HUS DJUR", "PET", "PETS"]
+        answer: "PET",
+        altAnswers: ["PET", "PETS"]
     },
     {
         text: "🐍 + 📱 = ?",
@@ -32,140 +32,140 @@ const REBUSES: IRebus[] = [
     {
         text: "👁️ + 🥶 + 🐻",
         hint: "Ett djur",
-        answer: "ISBJÖRN",
-        altAnswers: ["ISBJÖRN", "IS BJÖRN", "ISBEAR", "IS BEAR"]
+        answer: "ISBEAR",
+        altAnswers: ["ISBEAR", "IS BEAR"]
     },
     {
         text: "🔥 + ❤️ + 🧊 + ⛓️",
         hint: "Ett ord",
-        answer: "KALLHJÄRTAD",
-        altAnswers: ["KALLHJÄRTAD", "KALL HJÄRTAD", "COLDHEARTED", "COLD HEARTED"]
+        answer: "COLDHEARTED",
+        altAnswers: ["COLDHEARTED", "COLD HEARTED"]
     },
     {
         text: "❤️ + 💔 + 🌧️",
         hint: "Ett ord",
-        answer: "HJÄRTESORG",
-        altAnswers: ["HJÄRTESORG", "HEARTSICK", "HEART SICK"]
+        answer: "HEARTBREAK",
+        altAnswers: ["HEARTBREAK", "HEART BREAK"]
     },
     {
         text: "☀️ + 👓 + 🧴",
         hint: "Ett ord",
-        answer: "SOLKRÄM",
-        altAnswers: ["SOLKRÄM", "SOL KRÄM", "SUNSCREEN", "SUN SCREEN"]
+        answer: "SUNSCREEN",
+        altAnswers: ["SUNSCREEN", "SUN SCREEN"]
     },
     {
         text: "❄️ + 🏃 + 👟",
         hint: "Ett ord",
-        answer: "SNÖSKOR",
-        altAnswers: ["SNÖSKOR", "SNOWSHOES", "SNOW SHOES"]
+        answer: "SNOWSHOES",
+        altAnswers: ["SNOWSHOES", "SNOW SHOES"]
     },
     {
         text: "☀️ + 🌸 + 🌱",
         hint: "Ett ord",
-        answer: "SOMMARÄNG",
-        altAnswers: ["SOMMARÄNG", "SUMMER MEADOW", "SUMMER MEADOW"]
+        answer: "SUMMER MEADOW",
+        altAnswers: ["SUMMER MEADOW", "SUMMER MEADOW"]
     },
     {
         text: "👁️ + 🌊 + 🍵 + 🗝️",
         hint: "Ett ord",
-        answer: "IDENTITET",
-        altAnswers: ["IDENTITET", "IDENTITY", "IDENTITY"]
+        answer: "IDENTITY",
+        altAnswers: ["IDENTITY", "IDENTITY", "IDENTITY"]
     },
     {
         text: "⏰ + 🪟 + 🤔 + 💡",
         hint: "Ett ord",
-        answer: "INSIKT",
-        altAnswers: ["INSIKT", "INSIGHT", "INSIGHT"]
+        answer: "INSIGHT",
+        altAnswers: ["INSIGHT", "INSIGHT", "INSIGHT"]
     },
     {
         text: "🔥 + 🦊 + ❄️ + 🎭",
         hint: "Ett ord",
-        answer: "RÄVSPEL",
-        altAnswers: ["RÄVSPEL", "RÄV SPEL", "FOX GAME", "FOX GAME"]
+        answer: "FOX PLAY",
+        altAnswers: ["FOX PLAY", "FOX GAME", "FOX GAME"]
     },
     {
         text: "🧠 + 🗝️ + 🚪 + 🌑",
         hint: "Ett ord",
-        answer: "HEMLIGHET",
-        altAnswers: ["HEMLIGHET", "SECRET", "SECRET"]
+        answer: "SECRET",
+        altAnswers: ["SECRET", "SECRET", "SECRET"]
     },
     {
         text: "🧠 + 🚂 + 👟",
         hint: "Ett ord",
-        answer: "TANKEBANA",
-        altAnswers: ["TANKEBANA", "THOUGHT TRAIN", "THOUGHT TRAIN"]
+        answer: "THOUGHT TRAIN",
+        altAnswers: ["THOUGHT TRAIN", "THOUGHT TRAIN", "THOUGHT TRAIN"]
     },
     {
         text: "❤️ + ➡️ + 🎯",
         hint: "Ett ord",
-        answer: "MÅLINRIKTAD",
-        altAnswers: ["MÅLINRIKTAD", "TARGET ORIENTED", "TARGET ORIENTED"]
+        answer: "TARGET ORIENTED",
+        altAnswers: ["TARGET ORIENTED", "TARGET ORIENTED", "TARGET ORIENTED"]
     },
     {
         text: "📖 + 🌙 + ⏰",
         hint: "Ett ord",
-        answer: "GODNATTSAGA",
-        altAnswers: ["GODNATTSAGA", "GOOD NIGHT STORY", "GOOD NIGHT STORY"]
+        answer: "GOODNIGHT STORY",
+        altAnswers: ["GOODNIGHT STORY", "GOOD NIGHT STORY", "GOOD NIGHT STORY"]
     }
 ];
 
 const JUNK_TEXTS: string[] = [
-  "⚠️ VARNING: Din dator har 0 virus. Grattis!",
-  "🍕 Du glömde stänga av ugnen... eller?",
-  "📣 VIKTIGT MEDDELANDE: Ingenting har hänt.",
-  "🐸 En groda blinkade just åt dig.",
-  "💡 Visste du att lampor lyser när de är på?",
-  "📞 MISSAT SAMTAL från: Okänd (7 gånger)",
-  "🚨 ALERT: Du har 9999 orelaterade notiser.",
-  "🌍 Jordens rotation: PÅGÅR (uppdaterat nu)",
-  "🦆 En anka vill bli din vän. Acceptera?",
+  "⚠️ WARNING: Your computer has 0 viruses. Congrats!",
+  "🍕 You forgot to turn off the oven... or did you?",
+  "📣 IMPORTANT MESSAGE: Nothing has happened.",
+  "🐸 A frog just winked at you.",
+  "💡 Did you know that lights shine when they're on?",
+  "📞 MISSED CALL from: Unknown (7 times)",
+  "🚨 ALERT: You have 9999 unrelated notifications.",
+  "🌍 Earth's rotation: ONGOING (updated just now)",
+  "🦆 A duck wants to be your friend. Accept?",
   "💾 ERROR: 'fun.exe' has stopped working",
-  "🎵 Nu spelar: [Tyst] – Volym: 0/10",
-  "☕ Påminnelse: Du har inte druckit tillräckligt vatten idag.",
-  "🔋 Batteri: 100%... men det känns inte så.",
-  "📬 Du har (1) ny tanke. Klicka här för att ignorera den.",
-  "👾 CHEAT CODE UNLOCKED: Gör ingenting annorlunda.",
-  "🎯 UPPDATERING TILLGÄNGLIG: Popup 3.0 – Nu med 50% fler popups!",
-  "🧠 FYI: Hjärnan glömmer 90% av allt. Inklusive detta.",
-  "🪴 Din krukväxt mår bra. Du behöver inte vattna den.",
-  "⏰ Det är precis rätt tid just nu.",
-  "📊 Statistik: 100% av dig läser detta just nu.",
-  "🌈 Regnbåge detekterad: INGEN regnbåge hittades i din omgivning.",
-  "🎲 Slumpen har beslutat: Inget händer.",
-  "🤖 AI-ANALYS: Du är mänsklig. Troligen.",
-  "🔐 LÖSENORD KRÄVS... nah, det räcker med X.",
-  "🐧 En pingvin har precis tänkt på dig.",
-  "📡 SIGNAL MOTTAGEN: Ingenting att rapportera.",
-  "🧦 Du har förmodligen ett par missmatchade strumpor på dig.",
-  "🌵 Visste du att kaktusar inte pratar? Bra.",
-  "🪞 Du blinkar ungefär 15 gånger per minut. Nu tänker du på det.",
-  "🦷 Kom ihåg att borsta tänderna... eller gör det inte, vi är en popup.",
-  "📺 Ingenting händer på TV just nu heller.",
-  "🎪 VÄLKOMMEN TILL POPUP-CIRKUSEN. Utgångarna är igenbommade.",
-  "💣 BOMBA DETEKTERAD: Haha nej. Men kolla upp!",
-  "🐌 En snigel försöker nå utgången. Det tar ett tag.",
-  "🎩 Trollkarlen vill visa dig ett trick. Han misslyckades.",
-  "🌮 TACO-TISDAG: Det är inte tisdag. Det spelar ingen roll.",
-  "🔔 PING! Du har inga nya meddelanden. Men nu vet du det.",
-  "🧊 Kyl-temperaturen i ditt kylskåp är okänd för oss. Trevligt.",
-  "🚪 Det finns en dörr här. Den leder till ingenstans.",
-  "🎈 EN BALLONG HAR JUST SPRUCKIT någonstans i världen.",
-  "🕹️ Tryck på alla knappar! Det händer ändå ingenting.",
-  "🌀 LADDNINGSANIMATION: ████░░░░░░ 40% klar. (Kommer aldrig bli 100%.)",
-  "🐔 Hönan eller ägget? Vi vet inte. Stäng rutan.",
-  "📎 Hej! Vill du ha hjälp med din popup? (Det kan jag inte ge.)",
+  "🎵 Now playing: [Silence] – Volume: 0/10",
+  "☕ Reminder: You haven't drunk enough water today.",
+  "🔋 Battery: 100%... but it doesn't feel like it.",
+  "📬 You have (1) new thought. Click here to ignore it.",
+  "👾 CHEAT CODE UNLOCKED: Do nothing differently.",
+  "🎯 UPDATE AVAILABLE: Popup 3.0 – Now with 50% more popups!",
+  "🧠 FYI: The brain forgets 90% of everything. Including this.",
+  "🪴 Your houseplant is doing fine. You don't need to water it.",
+  "⏰ It is exactly the right time right now.",
+  "📊 Statistics: 100% of you are reading this right now.",
+  "🌈 Rainbow detected: NO rainbow was found in your vicinity.",
+  "🎲 Randomness has decided: Nothing happens.",
+  "🤖 AI ANALYSIS: You are human. Probably.",
+  "🔐 PASSWORD REQUIRED... nah, X will do.",
+  "🐧 A penguin just thought of you.",
+  "📡 SIGNAL RECEIVED: Nothing to report.",
+  "🧦 You probably have a pair of mismatched socks on.",
+  "🌵 Did you know that cacti don't talk? Good.",
+  "🪞 You blink about 15 times per minute. Now you're thinking about it.",
+  "🦷 Remember to brush your teeth... or don't, we're just a popup.",
+  "📺 Nothing is happening on TV right now either.",
+  "🎪 WELCOME TO THE POPUP CIRCUS. The exits are sealed.",
+  "💣 BOMB DETECTED: Haha no. But look out!",
+  "🐌 A snail is trying to reach the exit. It takes a while.",
+  "🎩 The magician wanted to show you a trick. He failed.",
+  "🌮 TACO TUESDAY: It's not Tuesday. It doesn't matter.",
+  "🔔 PING! You have no new messages. But now you know.",
+  "🧊 The temperature in your fridge is unknown to us. Nice.",
+  "🚪 There is a door here. It leads nowhere.",
+  "🎈 A BALLOON HAS JUST POPPED somewhere in the world.",
+  "🕹️ Press all the buttons! Nothing will happen anyway.",
+  "🌀 LOADING ANIMATION: ████░░░░░░ 40% done. (Will never reach 100%.)",
+  "🐔 The chicken or the egg? We don't know. Close the window.",
+  "📎 Hi! Would you like help with your popup? (I can't help with that.)",
 ];
 
 const WINDOW_TITLE_JUNK: string[] = [
-  "VIKTIG INFO",
-  "FELMEDDELANDE",
-  "UPDATERING",
+  "IMPORTANT INFO",
+  "ERROR MESSAGE",
+  "UPDATE",
   "ALERT",
-  "NOTIS",
-  "VARNING",
+  "NOTIFICATION",
+  "WARNING",
   "FYI",
   "CHEAT CODE",
-  "HEMLIG INFO",
+  "SECRET INFO",
   "TOP SECRET",
   "POPUP #" + Math.floor(Math.random() * 9999),
 ];
@@ -231,8 +231,16 @@ function stopTimer(): void {
 /********** NEXT ROOM BUTTON ***************/
 /*******************************************/
 
-document.querySelector("#next-room-btn")?.addEventListener("click", () => {
+document.querySelector("#next-room-btn-room3")?.addEventListener("click", () => {
   showSection("room4");
+});
+
+/*******************************************/
+/*************** RESTART *******************/
+/*******************************************/
+
+document.querySelector("#restart-btn-room3")?.addEventListener("click", () => {
+  restartGame();
 });
 
 /*******************************************/
@@ -256,7 +264,7 @@ function normalise(s: string): string {
   return s.toLowerCase().replace(/å/g, "a").replace(/ä/g, "a").replace(/ö/g, "o");
 }
 
-function updateProgress(): void {
+function updateProgressRoom3(): void {
     const pct: number = (solvedRebuses.size / REBUSES.length) * 100;
     (document.querySelector("#progress-bar-room3") as HTMLElement).style.width = Math.min(pct, 100) + "%";
 }
@@ -311,7 +319,7 @@ function spawnJunkPopup(): void {
     </div>
     <div class="popup-body">${text}</div>
     <div class="answer-input-wrap">
-      <input class="answer-input" placeholder="Skriv svar..." onkeydown="if(event.key==='Enter')fakeSubmit(this,'${fakeId}')">
+      <input class="answer-input" placeholder="Your answer..." onkeydown="if(event.key==='Enter')fakeSubmit(this,'${fakeId}')">
       <button class="answer-submit" onclick="fakeSubmit(this.previousElementSibling,'${fakeId}')">OK</button>
     </div>
     <div class="answer-feedback" id="${fakeId}"></div>
@@ -334,12 +342,12 @@ function spawnRebusPopup(idx: number): void {
 
   popup.innerHTML = `
     <div class="popup-titlebar">
-      <span class="title-text">MEDDELANDE #${idx + 1}</span>
+      <span class="title-text">MESSAGE #${idx + 1}</span>
       <button class="close-btn" onclick="closePopup(this)">✕</button>
     </div>
     <div class="popup-body">${rebus.text}<br><small style="font-size:14px;color:#aaa">Tips: ${rebus.hint}</small></div>
     <div class="answer-input-wrap">
-      <input class="answer-input" placeholder="Skriv svar..." onkeydown="if(event.key==='Enter')checkRebus(this,${idx})">
+      <input class="answer-input" placeholder="Your answer..." onkeydown="if(event.key==='Enter')checkRebus(this,${idx})">
       <button class="answer-submit" onclick="checkRebus(this.previousElementSibling,${idx})">OK</button>
     </div>
     <div class="answer-feedback" id="rf-${idx}"></div>
@@ -370,7 +378,7 @@ function closePopup(btn: HTMLButtonElement): void {
     popup.remove();
     activePopups--;
     closedCount++;
-    (document.getElementById("closed-count") as HTMLElement).textContent = String(closedCount);
+    (document.querySelector("#closed-count-room3") as HTMLElement).textContent = String(closedCount);
     spawnPopup();
   }, 120);
 }
@@ -387,14 +395,14 @@ function checkRebus(input: HTMLInputElement, idx: number): void {
   );
 
   if (isCorrect) {
-    fb.textContent = "✓ RÄTT! Bra jobbat!";
+    fb.textContent = "✓ CORRECT! Well done!";
     fb.className = "answer-feedback right";
     solvedRebuses.add(idx);
 
-    (document.getElementById("solved-count") as HTMLElement).textContent = String(
+    (document.querySelector("#solved-count-room3") as HTMLElement).textContent = String(
       solvedRebuses.size
     );
-    updateProgress();
+    updateProgressRoom3();
 
     setTimeout(() => {
       const popup = document.querySelector<HTMLElement>(`.popup[data-rebus-idx="${idx}"]`);
@@ -412,7 +420,7 @@ function checkRebus(input: HTMLInputElement, idx: number): void {
       }
     }, 600);
   } else {
-    fb.textContent = "✗ FEL SVAR – försök igen!";
+    fb.textContent = "✗ WRONG – try again!";
     fb.className = "answer-feedback wrong";
     input.value = "";
     input.focus();
@@ -427,16 +435,16 @@ function fakeSubmit(input: HTMLInputElement, id: string): void {
   if (!input.value.trim()) return;
 
   const jokes: string[] = [
-    "✗ FEL – detta är ingen rebus.",
-    "✗ Nä. Det var fel.",
-    "✗ Verkligen? Prova igen (nej).",
-    "✗ Fel! Men bra försök.",
-    "✗ Detta är ju bara onödig info...",
-    "✗ SYSTEM ERROR: Svaret spelar ingen roll.",
-    "✗ Du svarade något. Det hjälpte inte.",
+    "✗ WRONG – this is not a rebus.",
+    "✗ Nope. That was incorrect.",
+    "✗ Really? Try again (no).",
+    "✗ Wrong! But nice try.",
+    "✗ This is just useless info...",
+    "✗ SYSTEM ERROR: The answer doesn't matter.",
+    "✗ You answered something. It didn't help.",
     "✗ Hmm. Nope.",
-    "✗ Intressant svar. Men fel.",
-    "✗ 404 – Rätt svar hittades ej.",
+    "✗ Interesting answer. But wrong.",
+    "✗ 404 – Correct answer not found.",
   ];
 
   const fb = document.getElementById(id) as HTMLElement;
@@ -454,7 +462,7 @@ function checkWin(): void {
   if (solvedRebuses.size >= 10) {
     stopTimer();
     setTimeout(() => {
-      document.getElementById("win-screen")?.classList.add("show");
+      document.querySelector<HTMLElement>("#win-screen-room3")?.classList.add("show");
     }, 800);
   }
 }
@@ -463,16 +471,19 @@ function restartGame(): void {
   solvedRebuses.clear();
   closedCount = 0;
   activePopups = 0;
+  intervalsStarted = false;
 
-  (document.getElementById("solved-count") as HTMLElement).textContent = "0";
-  (document.getElementById("closed-count") as HTMLElement).textContent = "0";
-  (document.getElementById("progress-bar") as HTMLElement).style.width = "0%";
-  document.getElementById("win-screen")?.classList.remove("show");
+  (document.querySelector("#solved-count-room3") as HTMLElement).textContent = "0";
+  (document.querySelector("#closed-count-room3") as HTMLElement).textContent = "0";
+  (document.querySelector("#progress-bar-room3") as HTMLElement).style.width = "0%";
+  document.querySelector<HTMLElement>("#win-screen-room3")?.classList.remove("show");
   stopTimer();
   (document.querySelector("#room3-timer") as HTMLElement).textContent = "10:00";
 
   document.querySelectorAll<HTMLElement>(".popup").forEach((p) => p.remove());
-  startRoom3();
+  
+  const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
+  btn.style.display = "";
 }
 
 /*******************************************/
@@ -547,7 +558,7 @@ function initialSpawn(): void {
   }
 }
 
-(document.getElementById("solved-count") as HTMLElement).textContent = "0";
+(document.querySelector("#solved-count-room3") as HTMLElement).textContent = "0";
 
 (window as any).closePopup = closePopup;
 (window as any).checkRebus = checkRebus;
