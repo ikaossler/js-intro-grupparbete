@@ -4,6 +4,65 @@ import { renderCaptchaRoom } from "./room2/room2";
 import "./room2/room2.css";
 import "./rooms/room4";
 
+/*********************************************************
+***************************TIMER**************************
+**********************************************************/
+
+const totalTimerElement = document.getElementById('total-time') as HTMLDivElement;
+
+let totalStartTime = 0;
+let totalTimerInterval: number | null = null;
+
+function startTotalTimer() {
+  totalStartTime = Date.now();
+  
+  //Skapa ett intervall som körs varje sekund
+  totalTimerInterval = setInterval(() => {
+
+    //Räkna ut hur många sekunder som gått sedan start
+    //Date.now() minus starttid ger millisekunder, dela med 1000 för sekunder
+    //Math.floor avrundar nedåt till hela sekunder
+    const elapsedTime = Math.floor((Date.now() - totalStartTime) / 1000);
+
+    //Räkna ut antal hela minuter genom att dela sekunder med 60
+    //Math.floor avrundar nedåt till hela minuter
+    const minutes = Math.floor(elapsedTime / 60);
+
+    //Räkna ut resterande sekunder efter att minuter räknats bort
+    //Modulo (%) ger resten efter division
+    const seconds = elapsedTime % 60;
+
+    //Uppdatera timer-elementets text
+    //toString() gör om nummer till text
+    //padStart(2, '0') lägger till nolla framför ensiffriga tal
+    totalTimerElement.textContent = `Total Time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+  }, 1000);  
+}
+
+export function stopTotalTimer() {
+  if (totalTimerInterval !== null) {
+    clearInterval(totalTimerInterval);
+    totalTimerInterval = null;
+  }
+}
+
+/*********************************************************
+***************************TIMER**************************
+**********************************************************/
+
+
+
+const startButton = document.getElementById('start-btn') as HTMLButtonElement;
+
+startButton?.addEventListener('click', () => {
+  startTotalTimer();
+  showSection('room1');
+});
+
+
+
+/************ALLT EFTER DENNA KOMMENTAR ÄR MARIAS KOD********************/
+
 
 const sectionOrder = ["start", "room1", "room2", "room3", "room4"] as const;
 export type SectionId = (typeof sectionOrder)[number];

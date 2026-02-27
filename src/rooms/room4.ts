@@ -1,4 +1,5 @@
 import "./room4.css";
+import { stopTotalTimer } from '../main';
 
 const passwordInput = document.getElementById("password-input") as HTMLInputElement;
 const submitButton = document.getElementById("room4-submit") as HTMLButtonElement;
@@ -97,6 +98,7 @@ submitButton.addEventListener("click", () => {
 
   if (allPassed) {
     stopRoom4Timer();
+    stopTotalTimer();
     messageElement.textContent = "✅ SUCCESS! Password accepted!";
     messageElement.style.color = "green";
     //TODO: Gå vidare till nästa del/rum
