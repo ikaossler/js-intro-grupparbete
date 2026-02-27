@@ -70,3 +70,25 @@ p {
   );
   transition: width 0.25s ease;
 }
+/* About us section */
+.about-us {
+  width: min(42rem, 92vw);
+  margin: 0 auto;
+  text-align: left;
+  padding: 1rem;
+}
+
+.about-us-btn {
+  background: #39ff14;
+  color: #000;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.about-us-btn:hover {
+  background: #00b32d;
+  box-shadow: 0 0 8px #00b32d;
+}

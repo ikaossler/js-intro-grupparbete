@@ -213,7 +213,7 @@ let timerSeconds: number = 0;
 function startTimer(): void {
   timerSeconds = 600;
   timerInterval = setInterval(() => {
-    timerSeconds++;
+    timerSeconds--;
     const min = String(Math.floor(timerSeconds / 60)).padStart(2, "0");
     const sec = String(timerSeconds % 60).padStart(2, "0");
     (document.querySelector("#room3-timer") as HTMLElement).textContent = `${min}:${sec}`;
