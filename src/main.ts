@@ -1,6 +1,8 @@
 import "./style.css";
+import "./room2/room2.css";
 import { initRoom1 } from "./rooms/room1";
 import "./rooms/room4";
+import { renderCaptchaRoom } from "./room2/room2";
 
 // OBS! Rummen initieras just nu på olika sätt.
 // room1 använder init-funktion, medan andra rum körs via side-effect import.
@@ -36,10 +38,23 @@ function updateProgress(roomNumber: number): void {
 function initRooms(): void {
   const room1Section = document.querySelector<HTMLElement>("#room1");
   const room2Section = document.querySelector<HTMLElement>("#room2");
-  // Om room1 inte finns i HTML kan vi inte starta spelet.
-  if (!room1Section) return;
+  const room3Section = document.querySelector<HTMLElement>("#room3");
+  // Om room1 eller room2 inte finns i HTML kan vi inte starta spelet.
+  if (!room1Section || !room2Section) return;
   // Startläge: ingen progression ännu.
   updateProgress(0);
+
+  const captchaRoom = renderCaptchaRoom(() => {
+    updateProgress(3);
+    room3Section?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  const captchaHost = room2Section.querySelector<HTMLElement>("#captcha-room");
+  if (captchaHost) {
+    captchaHost.replaceWith(captchaRoom);
+  } else {
+    room2Section.appendChild(captchaRoom);
+  }
+
   // När room1 är klart: uppdatera progress och scrolla till room2.
   initRoom1(room1Section, () => {
     updateProgress(2);
