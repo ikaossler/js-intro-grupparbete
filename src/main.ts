@@ -46,6 +46,26 @@ export function stopTotalTimer() {
   }
 }
 
+export function showResults() {
+  console.log('showResults körs!');
+  //Hämta elementet från html
+  const finalTimeDisplay = document.getElementById('final-time-display') as HTMLSpanElement;
+  console.log('finalTimeDisplay:', finalTimeDisplay);
+
+  //Hämta texten från totalTimerElement
+  const timeText = totalTimerElement.textContent || '0:00';
+  console.log('timeText:', timeText);
+
+  //Ta bort order "time:"
+  const timeOnly = timeText.replace('Time: ', '');
+  console.log('timeOnly:', timeOnly);
+  
+  if (finalTimeDisplay) { 
+  finalTimeDisplay.textContent = timeOnly;
+  } else {
+    console.log ('ERROR" finalTimeDisplay hittade INTE!');
+  }}
+
 /*********************************************************
 **********************************************************
 **********************************************************/
