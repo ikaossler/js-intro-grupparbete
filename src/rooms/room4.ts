@@ -1,5 +1,5 @@
 import "./room4.css";
-import { stopTotalTimer, showResults } from '../main';
+import { stopTotalTimer, showResults, addScore, getTotalTime } from '../main';
 
 const passwordInput = document.getElementById("password-input") as HTMLInputElement;
 const submitButton = document.getElementById("room4-submit") as HTMLButtonElement;
@@ -105,6 +105,7 @@ submitButton.addEventListener("click", () => {
 
     //visa results efter 2 sekunder
     setTimeout(() => {
+    addScore("TestPlayer", getTotalTime()); // TEMPORÄRT: Hårdkodat namn för test - koppla till login senare
       showResults();
     }, 2000);
   } else {

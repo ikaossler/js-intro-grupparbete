@@ -4,85 +4,12 @@ import { renderCaptchaRoom } from "./room2/room2";
 import "./room2/room2.css";
 import "./rooms/room4";
 
-/*********************************************************
-***************************TIMER**************************
-**********************************************************/
-
-const totalTimerElement = document.getElementById('total-time') as HTMLDivElement;
-
-let totalStartTime = 0;
-let totalTimerInterval: number | null = null;
-
-function startTotalTimer() {
-  totalStartTime = Date.now();
-  
-  //Skapa ett intervall som körs varje sekund
-  totalTimerInterval = setInterval(() => {
-
-    //Räkna ut hur många sekunder som gått sedan start
-    //Date.now() minus starttid ger millisekunder, dela med 1000 för sekunder
-    //Math.floor avrundar nedåt till hela sekunder
-    const elapsedTime = Math.floor((Date.now() - totalStartTime) / 1000);
-
-    //Räkna ut antal hela minuter genom att dela sekunder med 60
-    //Math.floor avrundar nedåt till hela minuter
-    const minutes = Math.floor(elapsedTime / 60);
-
-    //Räkna ut resterande sekunder efter att minuter räknats bort
-    //Modulo (%) ger resten efter division
-    const seconds = elapsedTime % 60;
-
-    //Uppdatera timer-elementets text
-    //toString() gör om nummer till text
-    //padStart(2, '0') lägger till nolla framför ensiffriga tal
-    totalTimerElement.textContent = `Total Time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
-  }, 1000);  
-}
-
-export function stopTotalTimer() {
-  if (totalTimerInterval !== null) {
-    clearInterval(totalTimerInterval);
-    totalTimerInterval = null;
-  }
-}
-
-export function showResults() {
-  console.log('showResults körs!');
-  //Hämta elementet från html
-  const finalTimeDisplay = document.getElementById('final-time-display') as HTMLSpanElement;
-  console.log('finalTimeDisplay:', finalTimeDisplay);
-
-  //Hämta texten från totalTimerElement
-  const timeText = totalTimerElement.textContent || '0:00';
-  console.log('timeText:', timeText);
-
-  //Ta bort order "time:"
-  const timeOnly = timeText.replace('Time: ', '');
-  console.log('timeOnly:', timeOnly);
-  
-  if (finalTimeDisplay) { 
-  finalTimeDisplay.textContent = timeOnly;
-  } else {
-    console.log ('ERROR" finalTimeDisplay hittade INTE!');
-  }}
-
-/*********************************************************
-**********************************************************
-**********************************************************/
-
-
-
 const startButton = document.getElementById('start-btn') as HTMLButtonElement;
 
 startButton?.addEventListener('click', () => {
   startTotalTimer();
   showSection('room1');
 });
-
-
-
-/************ALLT EFTER DENNA KOMMENTAR ÄR MARIAS KOD********************/
-
 
 // OBS! Rummen initieras just nu på olika sätt.
 // room1 använder init-funktion, medan andra rum körs via side-effect import.
@@ -141,3 +68,117 @@ function initRooms(): void {
 }
 // Startar appen.
 initRooms();
+
+
+
+/*********************************************************
+***************************TIMER**************************
+**********************************************************/
+
+const totalTimerElement = document.getElementById('total-time') as HTMLDivElement;
+
+let totalStartTime = 0;
+let totalTimerInterval: number | null = null;
+
+function startTotalTimer() {
+  totalStartTime = Date.now();
+  
+  //Skapa ett intervall som körs varje sekund
+  totalTimerInterval = setInterval(() => {
+
+    //Räkna ut hur många sekunder som gått sedan start
+    //Date.now() minus starttid ger millisekunder, dela med 1000 för sekunder
+    //Math.floor avrundar nedåt till hela sekunder
+    const elapsedTime = Math.floor((Date.now() - totalStartTime) / 1000);
+
+    //Räkna ut antal hela minuter genom att dela sekunder med 60
+    //Math.floor avrundar nedåt till hela minuter
+    const minutes = Math.floor(elapsedTime / 60);
+
+    //Räkna ut resterande sekunder efter att minuter räknats bort
+    //Modulo (%) ger resten efter division
+    const seconds = elapsedTime % 60;
+    
+
+    //Uppdatera timer-elementets text
+    //toString() gör om nummer till text
+    //padStart(2, '0') lägger till nolla framför ensiffriga tal
+    totalTimerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+  }, 1000); 
+}
+
+export function stopTotalTimer() {
+  if (totalTimerInterval !== null) {
+    clearInterval(totalTimerInterval);
+    totalTimerInterval = null;
+  }
+}
+
+export function showResults() {
+  console.log('showResults körs!');
+  //Hämta elementet från html
+  const finalTimeDisplay = document.getElementById('final-time-display') as HTMLSpanElement;
+
+  //Hämta texten från totalTimerElement
+  const timeText = totalTimerElement.textContent || '0:00';
+
+  //Ta bort order "time:"
+  const timeOnly = timeText.replace('Time: ', '');
+  
+  if (finalTimeDisplay) { 
+  finalTimeDisplay.textContent = timeOnly;
+  } else {
+  }}
+
+
+/*********************************************************
+***********************HIGHSCORE**************************
+**********************************************************/
+
+//Denna funktion röäknar ut hur många sek som gått sen start 
+//Returnerar ett nummer (tex 245 för 4min o 5 sek)
+export function getTotalTime(): number {
+  const elapsedTime = Math.floor((Date.now() - totalStartTime) / 1000);
+  return elapsedTime;
+}
+
+//Array för att lagra highscore
+let highscore: { name: string; time: number }[] = [];
+
+export function addScore(name: string, time: number) {
+//1. Lägg till nytt score
+highscore.push({ name: name, time: time });
+//2. Sortera - snabbast = bäst
+highscore.sort((a, b) => a.time - b.time);
+//3. Behåll bara top 10
+highscore = highscore.slice(0, 10);
+//4. Visa på sidan
+displayHighscores();
+/*
+Push()=lägg till i arrayen
+Sort=Sortera efter tid (lägst först)
+Slice(0,10)=Ta bara 10
+displayHighscores()=Uppdatera html
+*/
+}
+
+function displayHighscores() {
+  const highscoreList = document.getElementById('highscore-top10-list') as HTMLOListElement;
+  //Tömmer listan ifall där redan finns innehåll
+  highscoreList.innerHTML = '';
+  //Loopa ala highscore
+  highscore.forEach((score) => {
+    //skapa <li>-element
+    const li = document.createElement('li');
+
+  //formetera tiden från sek till M:SS
+  const minutes = Math.floor(score.time / 60);
+  const seconds = score.time % 60;
+  const timeFormatted = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+  //Sätt texten: "namn - tid"
+  li.textContent = `${score.name} - ${timeFormatted}`;
+  //läg till <li> i <ol>
+  highscoreList.appendChild(li);
+});
+}
