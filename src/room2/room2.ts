@@ -43,9 +43,15 @@ const CAPTCHA_ROUNDS: ICaptchaRound[] = [
     {
         prompt: "Select all kings.",
         items: [
-            { imageSrc: `${BASE_URL}img/Vader.jpeg`, isCorrect: true, altText: "Darth Vader" },
-            { imageSrc: `${BASE_URL}img/Neo.jpeg`, isCorrect: true, altText: "Neo" },
-            { imageSrc: `${BASE_URL}img/Snape.jpeg`, isCorrect: true, altText: "Snape" },
+            { imageSrc: `${BASE_URL}img/aragorn.jpeg`, isCorrect: true, altText: "Aragorn" },
+            { imageSrc: `${BASE_URL}img/robert.jpeg`, isCorrect: true, altText: "Robert Baratheon" },
+            { imageSrc: `${BASE_URL}img/aquaman.jpeg`, isCorrect: true, altText: "Aquaman" },
+            { imageSrc: `${BASE_URL}img/mufasa.jpeg`, isCorrect: true, altText: "Mufasa" },
+            { imageSrc: `${BASE_URL}img/elvis.jpeg`, isCorrect: false, altText: "Elvis Presley" },
+            { imageSrc: `${BASE_URL}img/joffrey.jpeg`, isCorrect: true, altText: "Joffrey Baratheon" },
+            { imageSrc: `${BASE_URL}img/martin-luther-king.jpeg`, isCorrect: false, altText: "Martin Luther King" },
+            { imageSrc: `${BASE_URL}img/jon.jpeg`, isCorrect: false, altText: "Jon Snow" },
+            { imageSrc: `${BASE_URL}img/freddie.jpeg`, isCorrect: false, altText: "Freddie Mercury" },
         ],
     },
 ];
@@ -217,7 +223,7 @@ function handleWrongSelection(onComplete: () => void): void {
         selectedItems = new Set();
         focusedItemIndex = 0;
         injectRoundHtml(onComplete);
-    }, 1500);
+    }, 2000);
 }
 
 function showFeedback(message: string, type: "error" | "success"): void {
