@@ -1,31 +1,33 @@
-#room1 {
+.room1 {
   border: 1px solid #39ff14;
   padding: 1rem;
   height: 26rem;
   overflow-y: hidden;
+  width: min(42rem, 92vw);
+  margin: 0 auto;
 }
 
-#room1-title {
+.room1-title {
   margin-top: 0;
   color: #39ff14;
 }
 
-#room1 p,
-#room1 label {
+.room1-text,
+.room1-label {
   color: #00b32d;
 }
 
-#flash-code {
+.room1-code {
   color: #39ff14;
   font-weight: 700;
 }
 
-#room1-timer {
+.room1-timer {
   margin: 0.5rem 0 1rem;
   color: #39ff14;
 }
 
-#room1 #code-input {
+.room1-input {
   width: 100%;
   max-width: 16rem;
   margin: 0.5rem 0 1rem;
@@ -35,9 +37,7 @@
   border: 1px solid #39ff14;
 }
 
-#room1 #resend-btn,
-#room1 #check-btn,
-#room1 #continue-btn {
+.room1-button {
   margin-right: 0.5rem;
   margin-top: 0.5rem;
   padding: 0.45rem 0.75rem;
@@ -47,13 +47,11 @@
   cursor: pointer;
 }
 
-#room1 #resend-btn:hover,
-#room1 #check-btn:hover,
-#room1 #continue-btn:hover {
+.room1-button:hover {
   background: #051205;
 }
 
-#room1-message {
+.room1-message {
   min-height: 1.5rem;
   margin-top: 0.75rem;
   color: #39ff14;
