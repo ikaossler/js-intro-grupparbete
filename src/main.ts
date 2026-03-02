@@ -6,7 +6,14 @@ import "./rooms/room4";
 
 const startButton = document.getElementById('start-btn') as HTMLButtonElement;
 
+
+let gameStarted = false;
+
 startButton?.addEventListener('click', () => {
+  if (gameStarted) {
+    return;
+  }
+  gameStarted = true;
   startTotalTimer();
   showSection('room1');
 });
@@ -69,8 +76,6 @@ function initRooms(): void {
 // Startar appen.
 initRooms();
 
-
-
 /*********************************************************
 ***************************TIMER**************************
 **********************************************************/
@@ -111,11 +116,11 @@ export function stopTotalTimer() {
   if (totalTimerInterval !== null) {
     clearInterval(totalTimerInterval);
     totalTimerInterval = null;
+  } else {
   }
 }
 
 export function showResults() {
-  console.log('showResults körs!');
   //Hämta elementet från html
   const finalTimeDisplay = document.getElementById('final-time-display') as HTMLSpanElement;
 
@@ -128,11 +133,12 @@ export function showResults() {
   if (finalTimeDisplay) { 
   finalTimeDisplay.textContent = timeOnly;
   } else {
-  }}
-
+  }
+   displayTop3();
+}
 
 /*********************************************************
-***********************HIGHSCORE**************************
+********************HIGHSCORE TOP 10**********************
 **********************************************************/
 
 //Denna funktion röäknar ut hur många sek som gått sen start 
@@ -145,21 +151,44 @@ export function getTotalTime(): number {
 //Array för att lagra highscore
 let highscore: { name: string; time: number }[] = [];
 
+// LADDA highscores från localStorage när sidan startar
+function loadHighscores() {
+  const saved = localStorage.getItem('highscores');
+  if (saved) {
+    highscore = JSON.parse(saved);
+    displayHighscores();
+  }
+}
+
 export function addScore(name: string, time: number) {
-//1. Lägg till nytt score
-highscore.push({ name: name, time: time });
-//2. Sortera - snabbast = bäst
-highscore.sort((a, b) => a.time - b.time);
-//3. Behåll bara top 10
-highscore = highscore.slice(0, 10);
-//4. Visa på sidan
-displayHighscores();
-/*
-Push()=lägg till i arrayen
-Sort=Sortera efter tid (lägst först)
-Slice(0,10)=Ta bara 10
-displayHighscores()=Uppdatera html
-*/
+  //Kolla om spelaren redan finns i listan
+  const existingIndex = highscore.findIndex(score => score.name === name);
+
+  if (existingIndex !== -1) {
+    //Spelaren finns redan
+    if (time < highscore[existingIndex].time) {  // ← Saknades {
+      //Nytt resultat är bättre -> uppdatera tiden
+      highscore[existingIndex].time = time;
+    } else {
+      //Nytt resultat är sämre -> gör ingenting, funktionen avslutas
+      return;
+    }
+  } else {  // ← Ta bort duplicerad else här
+    //Ny spelare -> lägg till i arrayen
+    highscore.push({ name: name, time: time });
+  }
+
+  //Sortera - snabbast = bäst
+  highscore.sort((a, b) => a.time - b.time);
+
+  //Behåll bara top 10
+  highscore = highscore.slice(0, 10);
+
+  //Spara i LS
+  localStorage.setItem('highscores', JSON.stringify(highscore));
+
+  //Visa på sidan
+  displayHighscores();
 }
 
 function displayHighscores() {
@@ -182,3 +211,32 @@ function displayHighscores() {
   highscoreList.appendChild(li);
 });
 }
+
+/*********************************************************
+********************HIGHSCORE TOP 3***********************
+**********************************************************/
+
+function displayTop3() {
+  const top3List = document.getElementById('top3') as HTMLOListElement;
+  
+  //Töm listan
+  top3List.innerHTML = '';
+  
+  //Tar bara de 3 första från highscore arrayen
+  const top3 = highscore.slice(0, 3);
+  
+  //Loopa och skapa <li> 
+  top3.forEach((score) => {
+    const li = document.createElement('li');
+    
+    // Formatera tiden
+    const minutes = Math.floor(score.time / 60);
+    const seconds = score.time % 60;
+    const timeFormatted = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    
+    li.textContent = `${score.name} - ${timeFormatted}`;
+    top3List.appendChild(li);
+  });
+}
+
+loadHighscores();
