@@ -26,3 +26,5 @@ Dagens scrum master: Filip Brandt
 - Inga problem
 - Behöver inte hjälp
 - Lärt sig hur man lägger in ljudfiler
+
+<img width="1706" height="750" alt="bild" src="https://github.com/user-attachments/assets/ff32d11f-b91a-4c79-a811-a1b0098a8957" />
