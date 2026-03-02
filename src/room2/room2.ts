@@ -27,19 +27,31 @@ const CAPTCHA_ROUNDS: ICaptchaRound[] = [
         ],
     },
     {
-        prompt: "Select all characters that are light.",
+        prompt: "Select all characters that are mutants.",
         items: [
-            { imageSrc: `${BASE_URL}img/Vader.jpeg`, isCorrect: false, altText: "Darth Vader" },
-            { imageSrc: `${BASE_URL}img/Snape.jpeg`, isCorrect: false, altText: "Snape" },
-            { imageSrc: `${BASE_URL}img/Neo.jpeg`, isCorrect: true, altText: "Neo" },
+            { imageSrc: `${BASE_URL}img/wolverine.jpeg`, isCorrect: true, altText: "Wolverine" },
+            { imageSrc: `${BASE_URL}img/juggernaut.jpeg`, isCorrect: false, altText: "Juggernaut" },
+            { imageSrc: `${BASE_URL}img/rogue.jpeg`, isCorrect: true, altText: "Rogue" },
+            { imageSrc: `${BASE_URL}img/deadpool.jpeg`, isCorrect: false, altText: "Deadpool" },
+            { imageSrc: `${BASE_URL}img/cyclops.jpeg`, isCorrect: true, altText: "Cyclops" },
+            { imageSrc: `${BASE_URL}img/captain-marvel.jpeg`, isCorrect: false, altText: "Captain Marvel" },
+            { imageSrc: `${BASE_URL}img/magneto.jpeg`, isCorrect: true, altText: "Magneto" },
+            { imageSrc: `${BASE_URL}img/spider-man.jpeg`, isCorrect: false, altText: "Spider-Man" },
+            { imageSrc: `${BASE_URL}img/storm.jpeg`, isCorrect: true, altText: "Storm" },
         ],
     },
     {
-        prompt: "Select all the characters you recognize.",
+        prompt: "Select all kings.",
         items: [
-            { imageSrc: `${BASE_URL}img/Vader.jpeg`, isCorrect: true, altText: "Darth Vader" },
-            { imageSrc: `${BASE_URL}img/Neo.jpeg`, isCorrect: true, altText: "Neo" },
-            { imageSrc: `${BASE_URL}img/Snape.jpeg`, isCorrect: true, altText: "Snape" },
+            { imageSrc: `${BASE_URL}img/aragorn.jpeg`, isCorrect: true, altText: "Aragorn" },
+            { imageSrc: `${BASE_URL}img/robert.jpeg`, isCorrect: true, altText: "Robert Baratheon" },
+            { imageSrc: `${BASE_URL}img/aquaman.jpeg`, isCorrect: true, altText: "Aquaman" },
+            { imageSrc: `${BASE_URL}img/mufasa.jpeg`, isCorrect: true, altText: "Mufasa" },
+            { imageSrc: `${BASE_URL}img/elvis.jpeg`, isCorrect: false, altText: "Elvis Presley" },
+            { imageSrc: `${BASE_URL}img/joffrey.jpeg`, isCorrect: true, altText: "Joffrey Baratheon" },
+            { imageSrc: `${BASE_URL}img/martin-luther-king.jpeg`, isCorrect: false, altText: "Martin Luther King" },
+            { imageSrc: `${BASE_URL}img/jon.jpeg`, isCorrect: false, altText: "Jon Snow" },
+            { imageSrc: `${BASE_URL}img/denethor.jpeg`, isCorrect: false, altText: "Lord Denethor" },
         ],
     },
 ];
@@ -141,6 +153,7 @@ function buildSingleItemHtml(item: ICaptchaItem, index: number): string {
             aria-label="${item.altText}"
             aria-pressed="${isSelected}">
             <img src="${item.imageSrc}" alt="${item.altText}" />
+            <span class="captcha-item-label">${item.altText}</span>
         </button>
     `;
 }
@@ -210,7 +223,7 @@ function handleWrongSelection(onComplete: () => void): void {
         selectedItems = new Set();
         focusedItemIndex = 0;
         injectRoundHtml(onComplete);
-    }, 1500);
+    }, 2000);
 }
 
 function showFeedback(message: string, type: "error" | "success"): void {
