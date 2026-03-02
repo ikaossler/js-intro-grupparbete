@@ -18,6 +18,37 @@
       <button id="about-btn" class="about-us-btn">About</button>
     </header>
 
+    <!---------- Log in ----------->
+    
+    <div id="auth-modal" class="modal-overlay">
+      <div class="modal-box">
+
+        <button id="modal-close-btn" class="modal-close">X</button>
+
+        <div class="modal-tabs">
+          <button class="modal-tab active" data-tab="login">Log in</button>
+          <button class="modal-tab" data-tab="register">Register</button>
+        </div>
+
+        <div id="modal-register" class="modal-form">
+          <label for="register-username">Choose a username</label>
+          <input type="text" id="register-username" placeholder="Write your username">
+          <button id="modal-register-btn">Register</button>
+          <p id="register-message" class="modal-message"></p>
+        </div>
+
+        <div id="modal-login" class="modal-form active">
+          <label for="login-username">Enter your username</label>
+          <input type="text" id="login-username" placeholder="Write your username">
+          <button id="modal-login-btn">Log in</button>
+          <p id="login-message" class="modal-message"></p>
+        </div>
+
+      </div>
+    </div>
+
+    <!----------------------------->
+
     <main>
       <section id="start" visually-hidden="true">
         <div class="start-content">
@@ -153,7 +184,7 @@
             <h4>Ika Ossler</h4>
               <p>github länk</p>
             <h4>Maria Birath</h4>
-              <p>github länk</p>
+              <p>https://github.com/mariabhai</p>
             <h4>Filip Brandt</h4>
               <p>github länk</p>
         </div>  
