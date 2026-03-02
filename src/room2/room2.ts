@@ -51,7 +51,7 @@ const CAPTCHA_ROUNDS: ICaptchaRound[] = [
             { imageSrc: `${BASE_URL}img/joffrey.jpeg`, isCorrect: true, altText: "Joffrey Baratheon" },
             { imageSrc: `${BASE_URL}img/martin-luther-king.jpeg`, isCorrect: false, altText: "Martin Luther King" },
             { imageSrc: `${BASE_URL}img/jon.jpeg`, isCorrect: false, altText: "Jon Snow" },
-            { imageSrc: `${BASE_URL}img/freddie.jpeg`, isCorrect: false, altText: "Freddie Mercury" },
+            { imageSrc: `${BASE_URL}img/denethor.jpeg`, isCorrect: false, altText: "Lord Denethor" },
         ],
     },
 ];
