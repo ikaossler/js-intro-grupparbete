@@ -39,13 +39,30 @@ let startTime = 0;
 let timerInterval: number | null = null;
 
 function startRoom4Timer() {
+  const TOTAL_SECONDS = 60; 
   startTime = Date.now();
 
   timerInterval = setInterval(() => {
     const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-    const minutes = Math.floor(elapsedTime / 60);
-    const seconds = elapsedTime % 60;
-
+    const remainingTime = TOTAL_SECONDS - elapsedTime;
+  
+    if (remainingTime <= 0) {
+      timerElement.textContent = 'Time: 0:00';
+      stopRoom4Timer();
+      
+      messageElement.textContent = "⏰ TIME'S UP! Starting over...";
+      messageElement.style.color = 'red';
+      
+      // Ladda om sidan (tillbaka till start) efter 2 sekunder
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
+      
+      return;
+    }
+    
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = remainingTime % 60;
     timerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, "0")}`;
   }, 1000);
 }
