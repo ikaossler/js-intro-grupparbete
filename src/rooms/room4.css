@@ -1,12 +1,5 @@
-/*Döljer allt annat än mitt rum. KOM IHÅG ATT TA BORT INNAN PR
-#start,
-#room1,
-#room2,
-#room3,
-#game-over {
-  display: none !important;
-}
-
+/* DEV MODE - TA BORT INNAN PR! */ 
+#room1, #room2, #room3 { display: none !important; }
 /*********************************************
 *****************ANIMATIONER******************
 **********************************************/
@@ -172,13 +165,6 @@
   padding: 0.3rem 0;
   border-bottom: 1px solid #00ff4122;
   font-size: 0.85rem;
-}
-
-#requirements-list li {
-  color: #00ff41;
-  padding: 0.4rem 0;
-  border-bottom: 1px solid #00ff4122;
-  font-size: 0.8rem;
 }
 
 #requirements-list li:last-child {

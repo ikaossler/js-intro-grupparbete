@@ -25,7 +25,7 @@ startButton?.addEventListener('click', () => {
 
 
 // Lista med alla sektioner i spelet i den ordning de finns i HTML.
-const sectionOrder = ["start", "room1", "room2", "room3", "room4"] as const;
+const sectionOrder = ["start", "room1", "room2", "room3", "room4", "results"] as const;
 
 // Skapar en typ av alla tillåtna sektionsnamn.
 // Exempel: "start" | "room1" | "room2" | "room3" | "room4".
@@ -121,6 +121,7 @@ export function stopTotalTimer() {
 }
 
 export function showResults() {
+  showSection('results');
   //Hämta elementet från html
   const finalTimeDisplay = document.getElementById('final-time-display') as HTMLSpanElement;
 
@@ -240,3 +241,16 @@ function displayTop3() {
 }
 
 loadHighscores();
+
+
+
+/*********************************************************
+**************************RESET***************************
+**********************************************************/
+
+const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement;
+
+
+resetBtn?.addEventListener('click', () => {
+  location.reload();
+});
