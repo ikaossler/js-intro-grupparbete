@@ -1,7 +1,7 @@
 /* TEMPORÄRT - visa bara mitt rum */
-#start, #room1, #room2, .room4, #game-over, #about, #room3 {
+/*#start, #room1, #room2, .room4, #game-over, #about, #room3 {
   display: none !important;
-}
+}*/
 
 :root {
   --green: #00ff41;
