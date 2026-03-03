@@ -1,9 +1,9 @@
 /* TEMPORÄRT - visa bara mitt rum */
-/*#start, #room1, #room2, .room4, #game-over, #about, #room3 {
+#start, #room1, #room2, .room4, #reset, #about {
   display: none !important;
-}*/
+}
 
-:root {
+.popup {
   --green: #00ff41;
   --red: #ff0040;
   --yellow: #ffe600;
@@ -12,13 +12,13 @@
   --panel: #111;
 }
 
-* {
+#room3 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body {
+#room3 {
   background: var(--bg);
   font-family: "VT323", monospace;
   color: var(--green);
@@ -30,7 +30,7 @@ body {
 }
 
 /* Scanlines effect */
-body::before {
+#room3::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -46,7 +46,7 @@ body::before {
 }
 
 #room3 ~ * ,
-body:has(#room3.active) {
+#room3:has(#room3.active) {
   overflow: hidden;
   height: 100vh;
   display: block;
