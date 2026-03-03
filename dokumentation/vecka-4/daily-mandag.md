@@ -1,4 +1,4 @@
-# Daily Standup: veckodag 2026-01-02
+# Daily Standup: veckodag 2026-03-02
 
 Dagens scrum master: Filip Brandt
 
