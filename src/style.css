@@ -1,7 +1,7 @@
 /* TEMPORÄRT - visa bara mitt rum */
-#start, #room1, #room2, .room4, #game-over, #about {
+/*#start, #room1, #room2, .room4, #game-over, #about {
   display: none !important;
-}
+}*/
 
 #game-over {
   /* display: none; */ /* Kommenterat bort denna för nu eftersom jag vill kunna se sidan medan jag jobar på den */
@@ -76,17 +76,30 @@ p {
 }
 /* About us section */
 .about-us {
-  width: min(42rem, 92vw);
-  margin: 0 auto;
-  text-align: left;
-  padding: 1rem;
-  overflow: hidden;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1001;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
 }
 
-.about-us.animate .about-us-content {
+.about-us.open {
+  display: flex;
+}
+
+.about-us.open .about-us-content {
   animation: slideDown 3s ease forwards, glitch 0.8s steps(1) forwards;
 }
 .about-us-content {
+  width: min(42rem, 92vw);
+  padding: 2rem;
+  background: #060f06;
+  border: 1px solid #1a4d1a;
+  overflow-y: auto;
+  max-height: 85vh;
   opacity: 0;
   transform: translateY(-40px);
 }

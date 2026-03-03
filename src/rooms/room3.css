@@ -1,5 +1,5 @@
 /* TEMPORÄRT - visa bara mitt rum */
-#start, #room1, #room2, #room4, #game-over, #room3 {
+#start, #room1, #room2, .room4, #game-over, #about, #room3 {
   display: none !important;
 }
 

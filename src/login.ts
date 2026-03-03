@@ -223,7 +223,7 @@ function switchTab(tab: HTMLButtonElement): void {
     });
 
     tab.classList.add("active");
-    const formId : string = "modal-" + tab.dataset.tab;
+    const formId : string = "#modal-" + tab.dataset.tab;
     const activeForm = document.querySelector(formId) as HTMLDivElement;
     activeForm.classList.add("active");
 }
