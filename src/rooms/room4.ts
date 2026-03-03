@@ -122,7 +122,7 @@ submitButton.addEventListener("click", () => {
 
     //visa results efter 1 sekunder
  setTimeout(() => {
-  addScore(getLoggedInUser(), getTotalTime());
+  addScore(getLoggedInUser(), getTotalTime()); //Fixa detta med Kicki 
   showResults();
 }, 1000);
   } else {

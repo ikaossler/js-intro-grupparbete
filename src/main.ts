@@ -285,7 +285,7 @@ const shareFeedback = document.getElementById('share-feedback') as HTMLParagraph
 
 shareBtn?.addEventListener('click', () => {
   const timeText = totalTimerElement.textContent?.replace('Time: ', '') || '0:00';
-  const shareText = `I completed Error 404 in ${timeText}! Can you beat my record? 👾 https://your-link-here`;
+  const shareText = `I completed Error 404 in ${timeText}! Can you beat my record? 👾 https://länka-repot-här`;
   
   navigator.clipboard.writeText(shareText).then(() => {
     shareFeedback.textContent = '✅ Copied to clipboard!';
