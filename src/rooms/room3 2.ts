@@ -5,7 +5,7 @@ import { showSection, SectionId } from "../main";
 /***************** TYPES *******************/
 /*******************************************/
 
-interface Rebus {
+interface IRebus {
     text: string;
     hint: string;
     answer: string;
@@ -16,7 +16,7 @@ interface Rebus {
 /***************** DATA ********************/
 /*******************************************/
 
-const REBUSES: Rebus[] = [
+const REBUSES: IRebus[] = [
     {
         text: "🏠 + 🦁 = ?",
         hint: "ett ord",
@@ -178,7 +178,7 @@ let intervalsStarted: boolean = false;
 document.querySelector("#start-room3-btn")?.addEventListener("click", () => {
     const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
     btn.style.display = "none";
-    startGame();
+    startRoom3();
 });
 
 function startRoom3(): void {
