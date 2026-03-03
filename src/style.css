@@ -73,11 +73,11 @@ p {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
+  /*background: rgba(0, 0, 0, 0.85);*/
   z-index: 1001;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(4px);
+  /*backdrop-filter: blur(4px);*/
 }
 
 .about-us.open {
