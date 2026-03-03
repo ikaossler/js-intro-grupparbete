@@ -143,9 +143,6 @@ export function stopTotalTimer() {
 }
 
 export function showResults() {
-  console.log("showResults körs, results hidden:", document.querySelector('#results')?.hidden);
-  showSection('results');
-  console.log("efter showSection, results hidden:", document.querySelector('#results')?.hidden);
   //Hämta elementet från html
   const finalTimeDisplay = document.getElementById('final-time-display') as HTMLSpanElement;
 
