@@ -3,8 +3,7 @@
   display: none !important;
 }*/
 
-#game-over {
-  /* display: none; */ /* Kommenterat bort denna för nu eftersom jag vill kunna se sidan medan jag jobar på den */
+#results {
   background-color: pink;
   color: black;
   font-family: monospace;

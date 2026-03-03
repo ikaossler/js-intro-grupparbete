@@ -99,7 +99,7 @@
   margin-bottom: 0.5rem;
   color: #39ff14;
   text-shadow: 0 0 10px #39ff14;
-  animation: glitch 1s infinite; /* ← Lägg till denna */
+  animation: glitch 1s infinite;
 }
 
 #room4-timer {
@@ -163,13 +163,6 @@
   padding: 0.3rem 0;
   border-bottom: 1px solid #00ff4122;
   font-size: 0.85rem;
-}
-
-#requirements-list li {
-  color: #00ff41;
-  padding: 0.4rem 0;
-  border-bottom: 1px solid #00ff4122;
-  font-size: 0.8rem;
 }
 
 #requirements-list li:last-child {

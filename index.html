@@ -17,6 +17,7 @@
       <div id="total-time">Total Time: 0:00</div>
       <div id="timer"></div>
       <button id="about-btn" class="about-us-btn">About</button>
+      <div id="total-time">Time: 0:00</div>
     </header>
 
     <!---------- Log in ----------->
@@ -59,10 +60,12 @@
             beat the timers, and escape.
           </p>
           <button id="start-btn">Start Game</button>
-          <div class="high-score">
-            <h3>High Score</h3>
-            <p id="high-score-value">0</p>
-          </div>
+       <div class="high-score">
+  <h3>High Score Top 10</h3>
+  <ol id="highscore-top10-list">
+    <!-- Top 10 visas här dynamiskt via JS -->
+  </ol>
+</div>
         </div>
       </section>
 
@@ -155,7 +158,7 @@
 
       <!----------Ikas rum-------------->
 
-      <section class="room4">
+      <section id="room4" class="room4">
         <h2>Enter Your Password... Please</h2>
         <p class="room4-description">For your security, please create a strong password.</p>
         <div id="room4-timer">Time: 0:00</div>
@@ -177,21 +180,22 @@
         </div>
       </section>
 
-      <section id="game-over">
-        <div class="game-over-content">
+      <section id="results">
+        <div class="result-content">
           <h2>Congratulations!</h2>
           <p>You escaped Internet Hell!</p>
 
           <div id="final-time">
-            <p>Total Time: <span id="total-time-display">0:00</span></p>
+            <p>Final Time: <span id="final-time-display">0:00</span></p>
           </div>
 
-          <div id="highscore-display">
-            <h3>High Scores</h3>
-            <ol id="highscore-list">
+          <div class="highscore-top3-container">
+            <h3>Top 3</h3>
+            <ol class="highscore-top3-list" id="top3">
               <!-- Highscore läggs in här via JS senare -->
             </ol>
           </div>
+          <button id="reset-btn">Play Again</button>
         </div>
       </section>
 
@@ -214,6 +218,7 @@
               <p>github länk</p>
         </div>  
       </section>
+      
     </main>
 
     <script type="module" src="/src/main.ts"></script>
