@@ -3,6 +3,9 @@ import "./room2/room2.css";
 import "./rooms/room4";
 import { initRoom1 } from "./rooms/room1";
 import { renderCaptchaRoom } from "./room2/room2";
+import "./rooms/room3"
+import "./login"
+
 
 // OBS! Rummen initieras just nu på olika sätt.
 // room1 använder init-funktion, medan andra rum körs via side-effect import.
@@ -61,3 +64,23 @@ function initRooms(): void {
 }
 // Startar appen.
 initRooms();
+
+/********************************************/
+/**************** ABOUT US*******************/
+/********************************************/
+
+const aboutBtn = document.querySelector<HTMLButtonElement>("#about-btn");
+const aboutSection = document.querySelector<HTMLElement>("#about");
+const aboutCloseBtn = document.querySelector<HTMLButtonElement>("#about-close-btn");
+
+aboutBtn?.addEventListener("click", () => {
+  aboutSection?.classList.add("open");
+});
+
+aboutCloseBtn?.addEventListener("click", () => {
+  aboutSection?.classList.remove("open")
+});
+
+aboutSection?.addEventListener("click", (e) => {
+  if (e.target === aboutSection) aboutSection.classList.remove("open");
+});

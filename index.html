@@ -10,22 +10,48 @@
   <body>
     <header class="site-header">
       <h1>Error 404</h1>
-      <button id="login-btn" aria-label="Logga in"></button>
-      <div
-        class="progress-wrap"
-        role="progressbar"
-        aria-label="Spelprogress"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        aria-valuenow="0"
-      >
+      <button id="login-btn">Logg in!</button>
+      <div class="progress-wrap">
         <div id="progress-bar" class="progress-bar"></div>
       </div>
       <div id="total-time">Total Time: 0:00</div>
+      <div id="timer"></div>
+      <button id="about-btn" class="about-us-btn">About</button>
     </header>
 
+    <!---------- Log in ----------->
+    
+    <div id="auth-modal" class="modal-overlay">
+      <div class="modal-box">
+
+        <button id="modal-close-btn" class="modal-close">X</button>
+
+        <div class="modal-tabs">
+          <button class="modal-tab active" data-tab="login">Log in</button>
+          <button class="modal-tab" data-tab="register">Register</button>
+        </div>
+
+        <div id="modal-register" class="modal-form">
+          <label for="register-username">Choose a username</label>
+          <input type="text" id="register-username" placeholder="Write your username">
+          <button id="modal-register-btn">Register</button>
+          <p id="register-message" class="modal-message"></p>
+        </div>
+
+        <div id="modal-login" class="modal-form active">
+          <label for="login-username">Enter your username</label>
+          <input type="text" id="login-username" placeholder="Write your username">
+          <button id="modal-login-btn">Log in</button>
+          <p id="login-message" class="modal-message"></p>
+        </div>
+
+      </div>
+    </div>
+
+    <!----------------------------->
+
     <main>
-      <section id="start" visually-hidden="true">
+      <section id="start">
         <div class="start-content">
           <h2>Error 404</h2>
           <p>
@@ -94,35 +120,36 @@
 
       <!---------- Kickis rum ---------->
       <section id="room3">
-        <div id="gameContainerRoom3"></div>
-        <div id="room3-timer">Time: 20:00</div>
+        <div id="gameContainer"></div>
+        
 
         <button id="start-room3-btn" type="button">Start the game</button>
 
         <div id="background-art-room3" class="background-art-room3">
           <span>POPUP CHAMBER v2.0</span>
-          <span>>>>INITIALIZING CHAOS PROTOCOL <<<</span>
+          <span>INITIALIZING CHAOS PROTOCOL</span>
           <span>SOLVE THE REBUS PUZZLES</span>
           <span>█▓▒░ GOOD LUCK ░▒▓█</span>
           <span>ERROR 404</span>
         </div>
 
         <div id="hud" class="hud">
-          <div>⚠ POPUP-RUMMET</div>
-          <div class="rebus-score">REBUSAR LÖSTA: <span id="solved-count">0</span> / 10</div>
-          <div class="popup-count">STÄNGDA: <span id="closed-count">0</span></div>
+          <div>⚠ POPUP-CHAMBER</div>
+          <div id="room3-timer">10:00</div>
+          <div class="rebus-score">REBUS SOLVED: <span id="solved-count-room3">0</span> / 10</div>
+          <div class="popup-count-room3">CLOSED: <span id="closed-count-room3">0</span></div>
         </div>
 
-        <div id="progress-bar-wrap-room3" class="progress-bar-wrap">
+        <div id="progress-bar-wrap-room3" class="progress-bar-wrap-room3">
           <div id="progress-bar-room3" class="progress-bar-room3"></div>
         </div>
 
-        <div id="win-screen-room3">
-          <h2>DU KLARADE DET!</h2>
-          <p>Du har överlevt Internet Hell och besegrat alla rum!</p>
-          <div class="answer">10 / 10 KORREKTA</div>
-          <button id="restart-btn-room3" type="button">Spela Igen</button>
-          <button id="next-room-btn-room3" type="button">Nästa Rum</button>
+        <div id="win-screen-room3" class="win-screen-room3">
+          <h2>YOU DID IT!</h2>
+          <p>You escaped the popup chamber!</p>
+          <div class="answer">10 / 10 CORRECT</div>
+          <button id="restart-btn-room3" type="button">Play Again</button>
+          <button id="next-room-btn-room3" type="button">Next Room</button>
         </div>
       </section>
 
@@ -166,6 +193,26 @@
             </ol>
           </div>
         </div>
+      </section>
+
+      <!--- About us sektion --->
+      <section id="about" class="about-us">
+        <div class="about-us-content">
+          <button id="about-close-btn" class="modal-close">x</button>
+          <h2>About Error 404</h2>
+            <p>Error 404 is a game created by four frontend students at Medieinstitutet, united by a shard frustration - the internet’s most annoying phenomena. What happens if you gather everything that irritates you online and turn it into a game experience? That’s what we wanted to find out.
+              In the game, you make your way through four rooms, each inspired ba a classic internet problem. The first room tests your patience with a complicated verification code. The second room throws you into a CAPTHA nightmare. The third room overwhelms you with complete popup chaos. And in the fourth and final room, a password so complicated it should be illegal awaits you.
+              The game is built as a loving tribute to all the times the internet has made us want to throw our computer out the window - except this time, you’re supposed to have fun along the way.</p>
+          <h3>The team behind Error 404:</h3>
+            <h4>Chiara Jukkola</h4>
+              <p>github länk</p>
+            <h4>Ika Ossler</h4>
+              <p>github länk</p>
+            <h4>Maria Birath</h4>
+              <p>https://github.com/mariabhai</p>
+            <h4>Filip Brandt</h4>
+              <p>github länk</p>
+        </div>  
       </section>
     </main>
 
