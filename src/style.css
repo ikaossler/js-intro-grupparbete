@@ -1,7 +1,10 @@
-/*TEMPORÄRT - visa bara mitt rum*/
-#room3 {
+/*Blev tvungen att lägga in denna regeln för att resultat-sidan skulle vara gömd
+tills den ska poppa upp när rum 4 är avklarat. Fattar inte helt varför än. /Ika*/
+[hidden] {
   display: none !important;
 }
+
+/*STYLA OM RESULTS-SIDAN*/
 #results {
   background-color: pink;
   color: black;
@@ -26,6 +29,7 @@ body {
   background: #000000;
   color: #39ff14;
 }
+
 p {
   color: #00b32d;
 }

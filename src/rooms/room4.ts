@@ -1,5 +1,6 @@
 import "./room4.css";
 import { stopTotalTimer, showResults, addScore, getTotalTime } from '../main';
+import { getLoggedInUser } from '../login';
 
 const passwordInput = document.getElementById("password-input") as HTMLInputElement;
 const submitButton = document.getElementById("room4-submit") as HTMLButtonElement;
@@ -118,13 +119,12 @@ submitButton.addEventListener("click", () => {
     stopTotalTimer();
     messageElement.textContent = "✅ SUCCESS! Password accepted!";
     messageElement.style.color = "green";
-    //TODO: Gå vidare till nästa del/rum
 
-    //visa results efter 2 sekunder
-    setTimeout(() => {
-    addScore("TestPlayer", getTotalTime()); // TEMPORÄRT: Hårdkodat namn för test - koppla till login senare
-      showResults();
-    }, 2000);
+    //visa results efter 1 sekunder
+ setTimeout(() => {
+  addScore(getLoggedInUser(), getTotalTime());
+  showResults();
+}, 1000);
   } else {
     errorSound.play()
     messageElement.textContent = "❌ ERROR: Password does not meet all requirements";
