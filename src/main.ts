@@ -3,7 +3,6 @@ import { initRoom1 } from "./rooms/room1";
 import { renderCaptchaRoom } from "./room2/room2";
 import "./rooms/room3"
 import "./login"
-
 import "./room2/room2.css";
 import "./rooms/room4";
 
@@ -18,7 +17,7 @@ startButton?.addEventListener('click', () => {
   }
   gameStarted = true;
   startTotalTimer();
-  showSection('room1');
+  showSection('room1'); 
 });
 
 // OBS! Rummen initieras just nu på olika sätt.
@@ -98,6 +97,7 @@ aboutCloseBtn?.addEventListener("click", () => {
 aboutSection?.addEventListener("click", (e) => {
   if (e.target === aboutSection) aboutSection.classList.remove("open");
 });
+
 /*********************************************************
 ***************************TIMER**************************
 **********************************************************/
@@ -143,7 +143,9 @@ export function stopTotalTimer() {
 }
 
 export function showResults() {
+  console.log("showResults körs, results hidden:", document.querySelector('#results')?.hidden);
   showSection('results');
+  console.log("efter showSection, results hidden:", document.querySelector('#results')?.hidden);
   //Hämta elementet från html
   const finalTimeDisplay = document.getElementById('final-time-display') as HTMLSpanElement;
 
@@ -275,4 +277,23 @@ const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement;
 
 resetBtn?.addEventListener('click', () => {
   location.reload();
+});
+
+/*********************************************************
+**********************SHARE RESULTS***********************
+**********************************************************/
+
+const shareBtn = document.getElementById('share-btn') as HTMLButtonElement;
+const shareFeedback = document.getElementById('share-feedback') as HTMLParagraphElement;
+
+shareBtn?.addEventListener('click', () => {
+  const timeText = totalTimerElement.textContent?.replace('Time: ', '') || '0:00';
+  const shareText = `I completed Error 404 in ${timeText}! Can you beat my record? 👾 https://your-link-here`;
+  
+  navigator.clipboard.writeText(shareText).then(() => {
+    shareFeedback.textContent = '✅ Copied to clipboard!';
+    setTimeout(() => {
+      shareFeedback.textContent = '';
+    }, 3000);
+  });
 });
