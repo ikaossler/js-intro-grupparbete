@@ -1,3 +1,7 @@
+TEMPORÄRT - visa bara mitt rum
+#room3 {
+  display: none !important;
+}
 #results {
   background-color: pink;
   color: black;
