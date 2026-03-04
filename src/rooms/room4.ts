@@ -50,36 +50,37 @@ function startRoom4Timer() {
     if (remainingTime <= 0) {
       timerElement.textContent = 'Time: 0:00';
       stopRoom4Timer();
-      
       messageElement.textContent = "⏰ TIME'S UP! Starting over...";
       messageElement.style.color = 'red';
-      
       setTimeout(() => {
+        document.getElementById("ten-sec-note")?.remove();
+        timerElement.classList.remove("urgent");
         showSection('room1');
       }, 2000);
-      
       return;
     }
 
     if (remainingTime === 10) {
-  const note = document.createElement("div");
-  note.id = "ten-sec-note";
-  note.textContent = "I'll give you 10 more seconds... then I give up. 🙄";
-  document.body.appendChild(note);
-}
+      timerElement.classList.add("urgent");
+      const note = document.createElement("span");
+      note.id = "ten-sec-note";
+      note.textContent = I'I will give you 10 more seconds, then I am out";
+      timerElement.insertAdjacentElement("afterend", note);
+    }
 
     const minutes = Math.floor(remainingTime / 60);
     const seconds = remainingTime % 60;
     timerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, "0")}`;
   }, 1000);
-    document.getElementById("ten-sec-note")?.remove();
-}
+}  // ← stänger startRoom4Timer
 
 function stopRoom4Timer() {
   if (timerInterval !== null) {
     clearInterval(timerInterval);
     timerInterval = null;
   }
+  document.getElementById("ten-sec-note")?.remove();
+  timerElement.classList.remove("urgent");
 }
 
 // Funktion för att displaya kraven
@@ -140,12 +141,6 @@ submitButton.addEventListener("click", () => {
     failCount++;
     errorSound.play();
 
-
-    // Kolla om bara "please" saknas
-    const allExceptPlease = requirements
-      .filter(req => req.id !== 6)
-      .every(req => req.check(password));
-    
     if (failCount === 3 && !noobShown) {
   messageElement.textContent = "❌ ERROR: Password does not meet all requirements... noob 💀";
   noobShown = true;
@@ -167,42 +162,3 @@ messageElement.style.color = "red";
     }, 2000);
   }
 });
-
-/*let failCount = 0;
-let noobShown = false;
-
-submitButton.addEventListener("click", () => {
-  const password = passwordInput.value;
-  const allPassed = requirements.every((req) => req.check(password));
-
-  if (allPassed) {
-    stopRoom4Timer();
-    stopTotalTimer();
-    messageElement.textContent = "✅ SUCCESS! Password accepted!";
-    messageElement.style.color = "green";
-
-    setTimeout(() => {
-      addScore(getLoggedInUser(), getTotalTime());
-      showResults();
-    }, 1000);
-
-  } else {
-    failCount++;
-    errorSound.play();
-
-    if (failCount >= 3 && !noobShown) {
-      messageElement.textContent = "❌ ERROR: Password does not meet all requirements... noob 💀";
-      noobShown = true;
-    } else {
-      messageElement.textContent = "❌ ERROR: Password does not meet all requirements";
-    }
-    messageElement.style.color = "red";
-    passwordInput.value = "";
-
-    setTimeout(() => {
-      messageElement.textContent = "";
-      displayRequirements();
-    }, 3000);
-  }
-});
-*/
