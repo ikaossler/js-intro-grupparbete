@@ -2,7 +2,7 @@
   {
     "id": "room1",
     "name": "Verification Code",
-    "description": "A verification code has been sent. Click start to begin your room."
+    "description": "A verification code has been sent. Press Resend to get codes and verify the correct one to escape the room."
   },
   {
     "id": "room2",
