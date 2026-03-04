@@ -64,7 +64,7 @@ function startRoom4Timer() {
       timerElement.classList.add("urgent");
       const note = document.createElement("span");
       note.id = "ten-sec-note";
-      note.textContent = I'I will give you 10 more seconds, then I am out";
+      note.textContent = "I will give you 10 more seconds, then I am out";
       timerElement.insertAdjacentElement("afterend", note);
     }
 
@@ -132,10 +132,12 @@ submitButton.addEventListener("click", () => {
     messageElement.textContent = "✅ SUCCESS! Password accepted!";
     messageElement.style.color = "green";
 
-    setTimeout(() => {
-      addScore(getLoggedInUser(), getTotalTime());
-      showResults();
-    }, 1000);
+ setTimeout(() => {
+  const user = getLoggedInUser();
+  const username = user ? user.username : "Anonymous";
+  addScore(username, getTotalTime());
+  showResults();
+}, 1000);
 
   } else {
     failCount++;
