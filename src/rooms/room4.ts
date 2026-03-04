@@ -9,6 +9,7 @@ const requirementsList = document.getElementById("requirements-list") as HTMLULi
 const messageElement = document.getElementById("room4-message") as HTMLParagraphElement;
 const timerElement = document.getElementById("room4-timer") as HTMLDivElement;
 const errorSound = new Audio('src/sounds/error.mp3');
+const resultSound = new Audio('src/sounds/resultsound.mp3');
 
 // Dagens datum
 const todaysDate = new Date().getDate();
@@ -137,6 +138,7 @@ submitButton.addEventListener("click", () => {
   const username = user ? user.username : "Anonymous";
   addScore(username, getTotalTime());
   showResults();
+   resultSound.play();
 }, 1000);
 
   } else {

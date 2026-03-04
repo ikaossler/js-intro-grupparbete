@@ -249,6 +249,7 @@ function handleRegister(): void {
         showMessage(registerMessage, "Registration was successful! You are now logged in.", "success");
         setTimeout(() => {
             closeModal();
+            updateUserDisplay(); //Ika
         }, 2000);
     } else {
         showMessage(registerMessage, result.error || "An error occurred during registration.", "error");
@@ -270,6 +271,7 @@ function handleLogin(): void {
         showMessage(loginMessage, "Login successful! Welcome back, " + result.user.username + ".", "success");
         setTimeout(() => {
             closeModal();
+              updateUserDisplay()
         }, 2000);
     } else {
         showMessage(loginMessage, result.error || "An error occurred during login.", "error");
@@ -286,6 +288,20 @@ function handleEnterKey(e: KeyboardEvent): void {
     if (activeForm !== null && activeForm.id === "modal-login") modalLoginBtn.click();
 }
 
+
+/*****************************************************/
+/******* FÖR ATT NAMNET SKA SYNAS EFTER LOG IN *******/
+/*****************************************************/
+
+//Uppdaterar headern med inloggat användarnamn.
+//Används på tre ställen: vid login, registrering och när sidan laddas.
+export function updateUserDisplay(): void {
+  const display = document.querySelector("#logged-in-user") as HTMLSpanElement;
+  if (!display) return;
+  
+  const user = getLoggedInUser(); // Hämtar inloggad användare från localStorage
+  display.textContent = user ? `👤 ${user.username}` : ""; // Visar namn eller ingenting
+}
 
 
 /*****************************************************/
