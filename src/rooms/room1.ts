@@ -24,6 +24,8 @@ type Room1State = {
   failedAttempts: number;
   hasUnlockedNextRoom: boolean;
   phase: VerificationPhase;
+  secondsLeft: number;
+  timerId: number | null;
 };
 
 // Hint-texter i ordning vid fel i första verifieringsfasen.
@@ -39,6 +41,9 @@ const SECONDARY_VERIFICATION_PROMPT =
   "Security update: Two-step verification required.\nEnter the first valid code again.";
 const SECONDARY_FAILURE_MESSAGE =
   "Second step failed. Hint: Same rule applies here.\nThe first valid code wins.";
+const ROOM1_TIME_LIMIT_SECONDS = 3 * 60;
+const ROOM1_TIMEOUT_MESSAGE = "Time is up. The room is restarting.";
+const FLASH_PLACEHOLDER = "------";
 
 // Hämtar alla element som room1 behöver för att fungera.
 function getRoom1Elements(room: HTMLElement): Room1Elements | null {
@@ -81,19 +86,6 @@ function formatRoomTime(totalSeconds: number): string {
   return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
 }
 
-// Startar room1-timer och returnerar interval-id så timern kan stoppas senare.
-function startRoomTimer(timerElement: HTMLElement): number {
-  const startTime = Date.now();
-
-  function updateRoomTimer(): void {
-    const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
-    timerElement.textContent = `Time: ${formatRoomTime(elapsedSeconds)}`;
-  }
-
-  updateRoomTimer();
-  return window.setInterval(updateRoomTimer, 1000);
-}
-
 // Skapar en 6-siffrig kod.
 function generateCode(): string {
   return Math.floor(100000 + Math.random() * 900000).toString();
@@ -107,29 +99,123 @@ function getPrimaryFailureMessage(failedAttempts: number): string {
 // Entry point för room1:
 // kopplar element, startar timer och registrerar alla event handlers.
 export function initRoom1(room: HTMLElement, onComplete: () => void): void {
+  // Hämta allt room1 behöver från DOM.
   const elements = getRoom1Elements(room);
   if (!elements) {
     return;
   }
   const room1Elements = elements;
 
-  const timerId = startRoomTimer(room1Elements.timer);
+  // Delay-id för att kunna städa bort väntande timeouts.
+  let hideCodeTimeoutId: number | null = null;
+  let secondaryPromptTimeoutId: number | null = null;
+
+  // Samlat state för hela room1.
   const state: Room1State = {
     latestCode: "",
     previousCode: "",
     failedAttempts: 0,
     hasUnlockedNextRoom: false,
     phase: "primaryCode",
+    secondsLeft: ROOM1_TIME_LIMIT_SECONDS,
+    timerId: null,
   };
 
-  // Döljer den flashade koden efter kort tid.
+  // Ritar timern i UI.
+  function renderRoomTimer(): void {
+    room1Elements.timer.textContent = `Time: ${formatRoomTime(state.secondsLeft)}`;
+  }
+
+  // Stoppar timern om den körs.
+  function stopRoomTimer(): void {
+    if (state.timerId === null) {
+      return;
+    }
+    window.clearInterval(state.timerId);
+    state.timerId = null;
+  }
+
+  // Rensar väntande timeouts i room1.
+  function clearPendingTimeouts(mode: "hide" | "secondary" | "all" = "all"): void {
+    if ((mode === "hide" || mode === "all") && hideCodeTimeoutId !== null) {
+      window.clearTimeout(hideCodeTimeoutId);
+      hideCodeTimeoutId = null;
+    }
+    if ((mode === "secondary" || mode === "all") && secondaryPromptTimeoutId !== null) {
+      window.clearTimeout(secondaryPromptTimeoutId);
+      secondaryPromptTimeoutId = null;
+    }
+  }
+
+  // Döljer den flashade koden.
   function hideFlashedCode(): void {
-    room1Elements.flashCode.textContent = "------";
+    room1Elements.flashCode.textContent = FLASH_PLACEHOLDER;
+  }
+
+  // Planerar när flash-koden ska döljas.
+  function scheduleHideFlashedCode(): void {
+    clearPendingTimeouts("hide");
+    hideCodeTimeoutId = window.setTimeout(() => {
+      hideCodeTimeoutId = null;
+      hideFlashedCode();
+    }, 500);
+  }
+
+  // Planerar texten för verifieringssteg 2.
+  function scheduleSecondaryPrompt(): void {
+    clearPendingTimeouts("secondary");
+    secondaryPromptTimeoutId = window.setTimeout(() => {
+      secondaryPromptTimeoutId = null;
+      showSecondaryVerificationPrompt();
+    }, 900);
   }
 
   // Visar meddelandet för andra verifieringssteget.
   function showSecondaryVerificationPrompt(): void {
     room1Elements.message.textContent = SECONDARY_VERIFICATION_PROMPT;
+  }
+
+  // Återställer room1 till startläge efter timeout.
+  function resetRoomAfterTimeout(): void {
+    state.latestCode = "";
+    state.previousCode = "";
+    state.failedAttempts = 0;
+    state.hasUnlockedNextRoom = false;
+    state.phase = "primaryCode";
+    state.secondsLeft = ROOM1_TIME_LIMIT_SECONDS;
+
+    room1Elements.codeInput.value = "";
+    room1Elements.flashCode.textContent = FLASH_PLACEHOLDER;
+    room1Elements.continueButton.hidden = true;
+    room1Elements.message.textContent = ROOM1_TIMEOUT_MESSAGE;
+    renderRoomTimer();
+  }
+
+  // Körs när tiden tar slut.
+  function handleRoomTimeout(): void {
+    stopRoomTimer();
+    clearPendingTimeouts();
+    resetRoomAfterTimeout();
+    startRoomTimer();
+  }
+
+  // Tickar ner timern en sekund.
+  function tickRoomTimer(): void {
+    state.secondsLeft -= 1;
+    renderRoomTimer();
+
+    if (state.secondsLeft > 0) {
+      return;
+    }
+    handleRoomTimeout();
+  }
+
+  // Startar en ny 3-minuters nedräkning.
+  function startRoomTimer(): void {
+    stopRoomTimer();
+    state.secondsLeft = ROOM1_TIME_LIMIT_SECONDS;
+    renderRoomTimer();
+    state.timerId = window.setInterval(tickRoomTimer, 1000);
   }
 
   // Körs när spelaren klickar på "Resend".
@@ -142,13 +228,14 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
     // Visa den nya koden kort i UI.
     room1Elements.flashCode.textContent = state.latestCode;
     // Dölj den visade koden efter 500 ms.
-    window.setTimeout(hideFlashedCode, 500);
+    scheduleHideFlashedCode();
   }
 
   // Körs när spelaren klickar på "Continue to room 2".
   // Stoppar room1-timer och skickar kontroll tillbaka till main-flödet.
   function handleContinueClick(): void {
-    window.clearInterval(timerId);
+    stopRoomTimer();
+    clearPendingTimeouts();
     onComplete();
   }
 
@@ -161,6 +248,8 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
 
     state.hasUnlockedNextRoom = true;
     room1Elements.continueButton.hidden = false;
+    stopRoomTimer();
+    clearPendingTimeouts();
   }
 
   // Hanterar kontroll i första steget (primaryCode).
@@ -176,7 +265,7 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
       // Töm inputfältet innan användaren skriver i steg 2.
       room1Elements.codeInput.value = "";
       // Visa instruktionen för steg 2 efter en kort paus.
-      window.setTimeout(showSecondaryVerificationPrompt, 900);
+      scheduleSecondaryPrompt();
       return;
     }
 
@@ -220,4 +309,7 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
   room1Elements.resendButton.addEventListener("click", handleResendClick);
   room1Elements.checkButton.addEventListener("click", handleCheckClick);
   room1Elements.continueButton.addEventListener("click", handleContinueClick);
+
+  // Starta room1 med en nedräkning från 03:00.
+  startRoomTimer();
 }
