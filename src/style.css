@@ -4,20 +4,6 @@ tills den ska poppa upp när rum 4 är avklarat. Fattar inte helt varför än. /
   display: none !important;
 }
 
-/*STYLA OM RESULTS-SIDAN*/
-#results {
-  background-color: pink;
-  color: black;
-  font-family: monospace;
-  padding: 2rem;
-  text-align: center;
-}
-
-#game-over h2 {
-  color: black;
-  font-size: 2rem;
-}
-
 body {
   font-family: monospace, sans-serif;
   font-weight: 400px;
@@ -160,10 +146,26 @@ p {
   box-shadow: 0 0 8px #00b32d;
 }
 
-.logo {
+/*.logo {
   opacity: 0.1;
   display: flex;
   justify-content: center;
+}*/
+ 
+
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.start-content {
+  position: relative;
+  z-index: 1;
 }
 
 h1 {
@@ -173,4 +175,67 @@ h1 {
 
 .total-timer {
   padding-top: 30px;
+}
+
+
+/*RESULTAT-SIDAN*/
+#results {
+  background: #000;
+  color: #39ff14;
+  font-family: monospace;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+#results h2 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px #39ff14;
+  margin-bottom: 1.5rem;
+}
+
+#results p {
+  color: #00b32d;
+}
+
+.result-content {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #1a4d1a;
+  background: #060f06;
+  box-shadow: inset 0 0 50px #39ff1422;
+}
+
+.highscore-top3-container {
+  margin-top: 2rem;
+}
+
+.highscore-top3-list {
+  list-style: decimal;
+  padding-left: 0;
+}
+
+.highscore-top3-list li {
+  margin: 0.5rem 0;
+  font-weight: bold;
+}
+
+#reset-btn,
+#share-btn {
+  margin-top: 1.5rem;
+  margin-right: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: #39ff14;
+  color: #000;
+  border: none;
+  font-weight: bold;
+  font-family: monospace;
+  cursor: pointer;
+}
+
+#reset-btn:hover,
+#share-btn:hover {
+  background: #00b32d;
+  box-shadow: 0 0 8px #00b32d;
 }
