@@ -17,7 +17,7 @@ startButton?.addEventListener('click', () => {
   }
   gameStarted = true;
   startTotalTimer();
-  showSection('room1'); 
+  showSection('room4'); 
 });
 
 // OBS! Rummen initieras just nu på olika sätt.
@@ -143,6 +143,7 @@ export function stopTotalTimer() {
 }
 
 export function showResults() {
+  showSection('results'); // ← lägg till denna
   //Hämta elementet från html
   const finalTimeDisplay = document.getElementById('final-time-display') as HTMLSpanElement;
 

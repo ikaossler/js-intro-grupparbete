@@ -1,5 +1,5 @@
 import "./room4.css";
-import { stopTotalTimer, showResults, addScore, getTotalTime } from '../main';
+import { stopTotalTimer, showResults, addScore, getTotalTime, showSection} from '../main';
 import { getLoggedInUser } from '../login';
 
 const passwordInput = document.getElementById("password-input") as HTMLInputElement;
@@ -54,18 +54,25 @@ function startRoom4Timer() {
       messageElement.textContent = "⏰ TIME'S UP! Starting over...";
       messageElement.style.color = 'red';
       
-      // Ladda om sidan (tillbaka till start) efter 2 sekunder
       setTimeout(() => {
-        location.reload();
+        showSection('room1');
       }, 2000);
       
       return;
     }
-    
+
+    if (remainingTime === 10) {
+  const note = document.createElement("div");
+  note.id = "ten-sec-note";
+  note.textContent = "I'll give you 10 more seconds... then I give up. 🙄";
+  document.body.appendChild(note);
+}
+
     const minutes = Math.floor(remainingTime / 60);
     const seconds = remainingTime % 60;
     timerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, "0")}`;
   }, 1000);
+    document.getElementById("ten-sec-note")?.remove();
 }
 
 function stopRoom4Timer() {
@@ -90,12 +97,13 @@ function displayRequirements() {
   // göm kraven efter 5 sec
   setTimeout(() => {
     requirementsList.style.display = "none";
-  }, 5000);
+  }, 3000);
 }
 
 showRequirementsBtn.addEventListener("click", () => {
   displayRequirements();
   startRoom4Timer();
+  
 
   //Visa input-rutan och Submit-knappen efter att man klickat på show requrements-knappen
   passwordInput.style.display = "block";
@@ -108,10 +116,13 @@ showRequirementsBtn.addEventListener("click", () => {
 passwordInput.addEventListener("input", () => {
   const value = passwordInput.value;
 });
+
+let failCount = 0;
+let noobShown = false;
+let omgShown = false;
+
 submitButton.addEventListener("click", () => {
   const password = passwordInput.value;
-
-  //checka alla krav
   const allPassed = requirements.every((req) => req.check(password));
 
   if (allPassed) {
@@ -120,16 +131,72 @@ submitButton.addEventListener("click", () => {
     messageElement.textContent = "✅ SUCCESS! Password accepted!";
     messageElement.style.color = "green";
 
-    //visa results efter 1 sekunder
- setTimeout(() => {
-  addScore(getLoggedInUser(), getTotalTime()); //Fixa detta med Kicki 
-  showResults();
-}, 1000);
-  } else {
-    errorSound.play()
-    messageElement.textContent = "❌ ERROR: Password does not meet all requirements";
-    messageElement.style.color = "red";
+    setTimeout(() => {
+      addScore(getLoggedInUser(), getTotalTime());
+      showResults();
+    }, 1000);
 
+  } else {
+    failCount++;
+    errorSound.play();
+
+
+    // Kolla om bara "please" saknas
+    const allExceptPlease = requirements
+      .filter(req => req.id !== 6)
+      .every(req => req.check(password));
+    
+    if (failCount === 3 && !noobShown) {
+  messageElement.textContent = "❌ ERROR: Password does not meet all requirements... noob 💀";
+  noobShown = true;
+} else if (failCount === 6 && !omgShown) {
+  messageElement.textContent = "❌ Seriously, how hard can it be? You're wasting my time 😤";
+  omgShown = true;
+} else if (failCount === 9) {
+  messageElement.textContent = "❌ ERROR: So close... have you tried asking nicely? 🙏";
+} else {
+  messageElement.textContent = "❌ ERROR: Password does not meet all requirements";
+}
+messageElement.style.color = "red";
+
+    passwordInput.value = "";
+
+    setTimeout(() => {
+      messageElement.textContent = "";
+      displayRequirements();
+    }, 2000);
+  }
+});
+
+/*let failCount = 0;
+let noobShown = false;
+
+submitButton.addEventListener("click", () => {
+  const password = passwordInput.value;
+  const allPassed = requirements.every((req) => req.check(password));
+
+  if (allPassed) {
+    stopRoom4Timer();
+    stopTotalTimer();
+    messageElement.textContent = "✅ SUCCESS! Password accepted!";
+    messageElement.style.color = "green";
+
+    setTimeout(() => {
+      addScore(getLoggedInUser(), getTotalTime());
+      showResults();
+    }, 1000);
+
+  } else {
+    failCount++;
+    errorSound.play();
+
+    if (failCount >= 3 && !noobShown) {
+      messageElement.textContent = "❌ ERROR: Password does not meet all requirements... noob 💀";
+      noobShown = true;
+    } else {
+      messageElement.textContent = "❌ ERROR: Password does not meet all requirements";
+    }
+    messageElement.style.color = "red";
     passwordInput.value = "";
 
     setTimeout(() => {
@@ -138,3 +205,4 @@ submitButton.addEventListener("click", () => {
     }, 3000);
   }
 });
+*/
