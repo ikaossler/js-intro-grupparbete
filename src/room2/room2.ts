@@ -96,13 +96,23 @@ function stopRoomTimer(): void {
     }
 }
 
+const ROOM_TIME_LIMIT_SECONDS = 1 * 60; 
+
 function updateTimerDisplay(): void {
     const timerElement = document.querySelector<HTMLElement>("#captcha-timer");
     if (!timerElement) return;
+
     const elapsedSeconds = Math.floor((Date.now() - roomStartTime) / 1000);
-    const minutes = Math.floor(elapsedSeconds / 60);
-    const seconds = elapsedSeconds % 60;
-    
+    const remainingSeconds = ROOM_TIME_LIMIT_SECONDS - elapsedSeconds;
+
+    if (remainingSeconds <= 0) {
+        timerElement.textContent = "0:00";
+        stopRoomTimer();
+        return;
+    }
+
+    const minutes = Math.floor(remainingSeconds / 60);
+    const seconds = remainingSeconds % 60;
     const formattedTime = `${minutes}:${seconds.toString().padStart(2, "0")}`;
     timerElement.textContent = formattedTime;
 }
