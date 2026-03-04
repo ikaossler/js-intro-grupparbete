@@ -17,14 +17,12 @@ startButton?.addEventListener('click', () => {
   }
   gameStarted = true;
   startTotalTimer();
-  showSection('room4'); 
+  showSection('room4'); //ÄNDRA TILL RUM 1 INNAN PR!! 
 });
 
 // OBS! Rummen initieras just nu på olika sätt.
 // room1 använder init-funktion, medan andra rum körs via side-effect import.
 // Kommer antagligen ändra detta senare för att få en mer enhetlig struktur /maria
-
-
 
 // Lista med alla sektioner i spelet i den ordning de finns i HTML.
 const sectionOrder = ["start", "room1", "room2", "room3", "room4", "results"] as const;

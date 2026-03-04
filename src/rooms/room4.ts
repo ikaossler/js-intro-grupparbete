@@ -65,7 +65,7 @@ function startRoom4Timer() {
       timerElement.classList.add("urgent");
       const note = document.createElement("span");
       note.id = "ten-sec-note";
-      note.textContent = "I will give you 10 more seconds, then I am out";
+      note.textContent = "Tick tock tick tock... ";
       timerElement.insertAdjacentElement("afterend", note);
     }
 
