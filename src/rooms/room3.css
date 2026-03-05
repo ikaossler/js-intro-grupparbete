@@ -1,4 +1,9 @@
-:root {
+/* TEMPORÄRT - visa bara mitt rum 
+#room1, #room2, #about, #room3, #room4 {
+  display: none !important;
+}*/
+
+.popup {
   --green: #00ff41;
   --red: #ff0040;
   --yellow: #ffe600;
@@ -7,13 +12,13 @@
   --panel: #111;
 }
 
-* {
+#room3 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body {
+#room3 {
   background: var(--bg);
   font-family: "VT323", monospace;
   color: var(--green);
@@ -25,7 +30,7 @@ body {
 }
 
 /* Scanlines effect */
-body::before {
+#room3::before {
   content: "";
   position: fixed;
   inset: 0;
@@ -38,6 +43,13 @@ body::before {
   );
   pointer-events: none;
   z-index: 9999;
+}
+
+#room3 ~ * ,
+#room3:has(#room3.active) {
+  overflow: hidden;
+  height: 100vh;
+  display: block;
 }
 
 .background-art-room3 {
@@ -54,25 +66,6 @@ body::before {
 }
 .background-art-room3 span {
   font-family: 'Press Start 2P', monospace;
-  font-size: clamp(10px, 3vw, 28px);
-  color: var(--green);
-  white-space: nowrap;
-}
-
-#background-art {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 12px;
-  opacity: 0.08;
-  pointer-events: none;
-  z-index: 0;
-}
-#background-art span {
-  font-family: "Press Start 2P", monospace;
   font-size: clamp(10px, 3vw, 28px);
   color: var(--green);
   white-space: nowrap;
@@ -100,29 +93,6 @@ body::before {
   color: var(--cyan);
 }
 
-#hud {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 16px;
-  background: rgba(0, 255, 65, 0.07);
-  border-bottom: 2px solid var(--green);
-  z-index: 1000;
-  font-family: "Press Start 2P", monospace;
-  font-size: 12px;
-  color: var(--green);
-}
-#hud .rebus-score {
-  color: var(--yellow);
-}
-#hud .popup-count {
-  color: var(--cyan);
-}
-
 /* Progress bar */
 .progress-bar-wrap-room3 {
   position: fixed;
@@ -132,23 +102,6 @@ body::before {
   z-index: 1000;
 }
 .progress-bar-room3 {
-  height: 100%;
-  background: linear-gradient(90deg, var(--green), var(--cyan));
-  width: 0%;
-  transition: width 0.3s;
-  box-shadow: 0 0 8px var(--green);
-}
-
-#progress-bar-wrap {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  z-index: 1000;
-}
-#progress-bar {
   height: 100%;
   background: linear-gradient(90deg, var(--green), var(--cyan));
   width: 0%;
@@ -188,55 +141,6 @@ body::before {
 }
 .win-screen-room3 .restart-btn-room3:hover { background: var(--green); color: #000; box-shadow: 0 0 20px var(--green); }
 
-#win-screen {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.95);
-  z-index: 99999;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 20px;
-  font-family: "Press Start 2P", monospace;
-  text-align: center;
-  padding: 30px;
-}
-#win-screen.show {
-  display: flex;
-}
-#win-screen h1 {
-  font-size: clamp(16px, 4vw, 36px);
-  color: var(--yellow);
-  text-shadow: 0 0 20px var(--yellow);
-  animation: blink 0.6s infinite;
-}
-#win-screen p {
-  font-size: clamp(8px, 1.5vw, 14px);
-  color: var(--green);
-  line-height: 2;
-}
-#win-screen .answer {
-  color: var(--cyan);
-  font-size: clamp(10px, 2vw, 18px);
-  margin-top: 10px;
-}
-#restart-btn {
-  margin-top: 20px;
-  padding: 12px 24px;
-  background: transparent;
-  border: 3px solid var(--green);
-  color: var(--green);
-  font-family: "Press Start 2P", monospace;
-  font-size: 11px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-#restart-btn:hover {
-  background: var(--green);
-  color: #000;
-  box-shadow: 0 0 20px var(--green);
-}
 
 /* POPUP */
 .popup {
