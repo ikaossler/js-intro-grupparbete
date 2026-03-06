@@ -62,16 +62,16 @@ function saveAllUsers(users: Record<string, IUser>): void {
 // Kontrollerar att användarnamnet uppfyller kraven
 function validateUsername(username: string): string {
     if (username.trim().length < 2) {
-        return "Användarnamnet måste vara minst 2 tecken.";
+        return "Username need's to be at least 2 caracters.";
     }
 
     if (username.trim().length > 20) {
-        return "Användarnamnet får inte vara längre än 20 tecken.";
+        return "Username can´t be longer then 20 caracters.";
     }
 
     const allowedChars = /^[a-zA-Z0-9_-]+$/;
     if (allowedChars.test(username) === false) {
-        return "Användarnamnet får endast innehålla bokstäver, siffror, bindestreck och understreck.";
+        return "Username can only contain letters, numbers, hyphens and underscore.";
     }
 
     return "";
@@ -132,7 +132,7 @@ function register(username: string): IResult {
         const inputName = username.toLowerCase();
 
         if (takenName === inputName) {
-            return { success: false, error: "Användarnamnet är redan taget." };
+            return { success: false, error: "The username is aldredy taken." };
         }
     }
 
@@ -167,7 +167,7 @@ function login(username: string): IResult {
         }
     }
 
-    return { success: false, error: "Användarnamnet finns inte. Vänligen registrera dig först." };
+    return { success: false, error: "Username not found. Please register first." };
 }
 
 // Loggar ut en befintlig användare
