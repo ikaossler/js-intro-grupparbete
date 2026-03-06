@@ -185,7 +185,7 @@ const modal = document.querySelector("#auth-modal") as HTMLDivElement;
 
 loginBtn.addEventListener("click", openModal);
 
-function openModal(): void {
+export function openModal(): void {
     modal.classList.add("open");
 }
 

@@ -19,91 +19,91 @@ interface IRebus {
 const REBUSES: IRebus[] = [
     {
         text: "🏠 + 🦁 = ?",
-        hint: "ett ord",
+        hint: "One word",
         answer: "PET",
         altAnswers: ["PET", "PETS"]
     },
     {
         text: "🐍 + 📱 = ?",
-        hint: "Spel",
+        hint: "A game",
         answer: "SNAKE",
         altAnswers: ["SNAKE", "SNAKE GAME", "SNAKE SPEL"]
     },
     {
         text: "👁️ + 🥶 + 🐻",
-        hint: "Ett djur",
-        answer: "ISBEAR",
-        altAnswers: ["ISBEAR", "IS BEAR"]
+        hint: "A animale",
+        answer: "ICEBEAR",
+        altAnswers: ["ICEBEAR", "ICE BEAR"]
     },
     {
         text: "🔥 + ❤️ + 🧊 + ⛓️",
-        hint: "Ett ord",
+        hint: "One word",
         answer: "COLDHEARTED",
         altAnswers: ["COLDHEARTED", "COLD HEARTED"]
     },
     {
         text: "❤️ + 💔 + 🌧️",
-        hint: "Ett ord",
+        hint: "One word",
         answer: "HEARTBREAK",
         altAnswers: ["HEARTBREAK", "HEART BREAK"]
     },
     {
         text: "☀️ + 👓 + 🧴",
-        hint: "Ett ord",
+        hint: "One Word",
         answer: "SUNSCREEN",
         altAnswers: ["SUNSCREEN", "SUN SCREEN"]
     },
     {
         text: "❄️ + 🏃 + 👟",
-        hint: "Ett ord",
+        hint: "One word",
         answer: "SNOWSHOES",
         altAnswers: ["SNOWSHOES", "SNOW SHOES"]
     },
     {
         text: "☀️ + 🌸 + 🌱",
-        hint: "Ett ord",
+        hint: "Two words",
         answer: "SUMMER MEADOW",
         altAnswers: ["SUMMER MEADOW", "SUMMER MEADOW"]
     },
     {
         text: "👁️ + 🌊 + 🍵 + 🗝️",
-        hint: "Ett ord",
+        hint: "One Word",
         answer: "IDENTITY",
         altAnswers: ["IDENTITY", "IDENTITY", "IDENTITY"]
     },
     {
         text: "⏰ + 🪟 + 🤔 + 💡",
-        hint: "Ett ord",
+        hint: "One word",
         answer: "INSIGHT",
         altAnswers: ["INSIGHT", "INSIGHT", "INSIGHT"]
     },
     {
         text: "🔥 + 🦊 + ❄️ + 🎭",
-        hint: "Ett ord",
+        hint: "Two words",
         answer: "FOX PLAY",
         altAnswers: ["FOX PLAY", "FOX GAME", "FOX GAME"]
     },
     {
         text: "🧠 + 🗝️ + 🚪 + 🌑",
-        hint: "Ett ord",
+        hint: "One word",
         answer: "SECRET",
         altAnswers: ["SECRET", "SECRET", "SECRET"]
     },
     {
         text: "🧠 + 🚂 + 👟",
-        hint: "Ett ord",
+        hint: "Two words",
         answer: "THOUGHT TRAIN",
         altAnswers: ["THOUGHT TRAIN", "THOUGHT TRAIN", "THOUGHT TRAIN"]
     },
     {
         text: "❤️ + ➡️ + 🎯",
-        hint: "Ett ord",
+        hint: "Two words",
         answer: "TARGET ORIENTED",
         altAnswers: ["TARGET ORIENTED", "TARGET ORIENTED", "TARGET ORIENTED"]
     },
     {
         text: "📖 + 🌙 + ⏰",
-        hint: "Ett ord",
+        hint: "Two words",
         answer: "GOODNIGHT STORY",
         altAnswers: ["GOODNIGHT STORY", "GOOD NIGHT STORY", "GOOD NIGHT STORY"]
     }
@@ -174,6 +174,8 @@ const WINDOW_TITLE_JUNK: string[] = [
 /************** START BUTTON ***************/
 /*******************************************/
 let intervalsStarted: boolean = false;
+let spawnInterval1: number | null = null;
+let spawnInterval2: number | null = null;
 
 document.querySelector("#start-room3-btn")?.addEventListener("click", () => {
     const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
@@ -188,13 +190,13 @@ function startRoom3(): void {
   if (!intervalsStarted) {
     intervalsStarted = true;
 
-    setInterval(() => {
+    spawnInterval1 = setInterval(() => {
       if (activePopups < MAX_POPUPS && solvedRebuses.size < REBUSES.length) {
         spawnPopup();
       }
     }, 1200);
 
-    setInterval(() => {
+    spawnInterval2 = setInterval(() => {
       if (activePopups < MAX_POPUPS - 2 && solvedRebuses.size < REBUSES.length) {
         spawnPopup();
         setTimeout(spawnPopup, 300);
@@ -232,6 +234,7 @@ function stopTimer(): void {
 /*******************************************/
 
 document.querySelector("#next-room-btn-room3")?.addEventListener("click", () => {
+  cleanupRoom3();
   showSection("room4");
 });
 
@@ -240,7 +243,8 @@ document.querySelector("#next-room-btn-room3")?.addEventListener("click", () => 
 /*******************************************/
 
 document.querySelector("#restart-btn-room3")?.addEventListener("click", () => {
-  restartGame();
+  cleanupRoom3();
+  showSection('room1');
 });
 
 /*******************************************/
@@ -468,6 +472,7 @@ function checkWin(): void {
 }
 
 function restartGame(): void {
+  cleanupRoom3();
   solvedRebuses.clear();
   closedCount = 0;
   activePopups = 0;
@@ -564,3 +569,17 @@ function initialSpawn(): void {
 (window as any).checkRebus = checkRebus;
 (window as any).fakeSubmit = fakeSubmit;
 (window as any).restartGame = restartGame;
+
+/*******************************************/
+/***************** CLEANUP *****************/
+/*******************************************/
+
+function cleanupRoom3(): void {
+  stopTimer();
+  if (spawnInterval1 !== null) { clearInterval(spawnInterval1); spawnInterval1 = null; }
+  if (spawnInterval2 !== null) { clearInterval(spawnInterval2); spawnInterval2 = null; }
+  intervalsStarted = false;
+
+  document.querySelectorAll<HTMLElement>('.popup').forEach(p => p.remove());
+  activePopups = 0;
+}

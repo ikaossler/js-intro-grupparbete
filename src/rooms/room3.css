@@ -10,6 +10,7 @@
   --cyan: #00f0ff;
   --bg: #0a0a0a;
   --panel: #111;
+  --green: #00ff00;
 }
 
 #room3 * {
@@ -19,6 +20,9 @@
 }
 
 #room3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: var(--bg);
   font-family: "VT323", monospace;
   color: var(--green);
@@ -218,6 +222,60 @@
 .close-btn:hover {
   background: var(--green);
   color: #000;
+}
+
+.start-room3-btn {
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  border: 1px solid lime;
+  color: var(--green);
+  font-family: "Press start 2P", monospace;
+  padding: 5px !important;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.start-room3-btn:hover {
+  background: #00ff41;
+  color: #000;
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
+}
+
+.restart-btn-room3 {
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  border: 1px solid #00ff00 !important;
+  color: var(--green);
+  font-family: "Press start 2P", monospace;
+  padding: 10px !important;
+  cursor: pointer;
+  font-size: 15px !important;
+}
+
+#restart-btn-room3:hover {
+  background: #00ff41;
+  color: #000;
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
+}
+
+.next-room-btn-room3 {
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  border: 1px solid lime;
+  color: var(--green);
+  font-family: "Press start 2P", monospace;
+  padding: 5px !important;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.next-room-btn-room3:hover {
+  background: #00ff41;
+  color: #000;
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
 }
 
 .popup-body {

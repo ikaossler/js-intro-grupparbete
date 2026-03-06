@@ -5,6 +5,7 @@ import "./rooms/room3"
 import "./login"
 import "./room2/room2.css";
 import "./rooms/room4";
+import { isLoggedIn } from "./login";
 
 const startButton = document.getElementById('start-btn') as HTMLButtonElement;
 
@@ -12,12 +13,17 @@ const startButton = document.getElementById('start-btn') as HTMLButtonElement;
 let gameStarted = false;
 
 startButton?.addEventListener('click', () => {
+  if (!isLoggedIn()) {
+    alert("You must be logged in to play");
+    return;
+  }
+
   if (gameStarted) {
     return;
   }
   gameStarted = true;
   startTotalTimer();
-  showSection('room4'); //ÄNDRA TILL RUM 1 INNAN PR!! 
+  showSection('room3'); //ÄNDRA TILL RUM 1 INNAN PR!! 
 });
 
 // OBS! Rummen initieras just nu på olika sätt.

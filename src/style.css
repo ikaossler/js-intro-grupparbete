@@ -101,6 +101,11 @@ p {
   font-family: 'Press Start 2P', monospace;
 }
 
+.login-btn:hover {
+  background: #00b32d;
+  box-shadow: 0 0 8px #00b32d;
+}
+
 @keyframes slideDown {
   0% {
     opacity: 0;
@@ -162,9 +167,31 @@ p {
   z-index: 1;
 }
 
-#start {
+#start h2, p, h3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  min-height: 100vh;
+}
+
+#start-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 830px;
+  margin-top: 0px;
+  min-height: 2rem;
+  background-color: transparent;
+  color: #39ff14;
+  border: 1px solid #00ff00;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#start-btn:hover {
+  color: #000;
+  background-color: #00ff00;
 }
 
 h1 {
