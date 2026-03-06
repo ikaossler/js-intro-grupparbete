@@ -31,7 +31,7 @@ startButton?.addEventListener('click', () => {
 // Kommer antagligen ändra detta senare för att få en mer enhetlig struktur /maria
 
 // Lista med alla sektioner i spelet i den ordning de finns i HTML.
-const sectionOrder = ["start", "room1", "room2", "room3", "room4", "results"] as const;
+const sectionOrder = ["start", "room1", "room2", "room3", "room3-timeout", "room4", "results"] as const;
 
 // Skapar en typ av alla tillåtna sektionsnamn.
 // Exempel: "start" | "room1" | "room2" | "room3" | "room4".

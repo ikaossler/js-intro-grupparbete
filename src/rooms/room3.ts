@@ -219,6 +219,11 @@ function startTimer(): void {
     const min = String(Math.floor(timerSeconds / 60)).padStart(2, "0");
     const sec = String(timerSeconds % 60).padStart(2, "0");
     (document.querySelector("#room3-timer") as HTMLElement).textContent = `${min}:${sec}`;
+
+    if (timerSeconds <= 0) {
+      stopTimer();
+      handleTimeout();
+    }
   }, 1000);
 }
 
@@ -227,6 +232,11 @@ function stopTimer(): void {
     clearInterval(timerInterval);
     timerInterval = null;
   }
+}
+
+function handleTimeout(): void {
+  cleanupRoom3();
+  showSection("room3-timeout");
 }
 
 /*******************************************/
@@ -245,6 +255,25 @@ document.querySelector("#next-room-btn-room3")?.addEventListener("click", () => 
 document.querySelector("#restart-btn-room3")?.addEventListener("click", () => {
   cleanupRoom3();
   showSection('room1');
+});
+
+/*******************************************/
+/*************** START OVER ****************/
+/*******************************************/
+
+document.querySelector("#timeout-startover-btn")?.addEventListener("click", () => {
+  solvedRebuses.clear();
+  closedCount = 0;
+
+  (document.querySelector("#solved-count-room3") as HTMLElement).textContent = "0";
+  (document.querySelector("#closed-count-room3") as HTMLElement).textContent = "0";
+  (document.querySelector("#progress-bar-room3") as HTMLElement).style.width = "0%";
+  (document.querySelector("#room3-timer") as HTMLElement).textContent = "10:00";
+
+  const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
+  btn.style.display = "";
+
+  showSection("room1");
 });
 
 /*******************************************/
