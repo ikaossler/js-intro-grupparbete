@@ -26,6 +26,24 @@ startButton?.addEventListener('click', () => {
   showSection('room4'); //ÄNDRA TILL RUM 1 INNAN PR!! 
 });
 
+/********************************************/
+/*****************BG MUSIC*******************/
+/********************************************/
+
+const bgMusic = new Audio('src/sounds/background-music-startpage.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.2;
+
+document.addEventListener('click', () => {
+  bgMusic.play();
+}, { once: true });
+
+startButton?.addEventListener('click', () => {
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
+});
+
+
 // OBS! Rummen initieras just nu på olika sätt.
 // room1 använder init-funktion, medan andra rum körs via side-effect import.
 // Kommer antagligen ändra detta senare för att få en mer enhetlig struktur /maria

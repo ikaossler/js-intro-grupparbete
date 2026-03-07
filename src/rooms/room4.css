@@ -105,7 +105,7 @@
   font-family: monospace;
 }
 
-/* Knappen som startar spelet */
+/* Show req-knapp */
 .room4 .show-requirements-btn {
   padding: 0.75rem 2rem;
   background: transparent;
