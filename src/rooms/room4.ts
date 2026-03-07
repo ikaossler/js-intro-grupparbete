@@ -2,6 +2,7 @@ import "./room4.css";
 import { stopTotalTimer, showResults, addScore, getTotalTime, showSection} from '../main';
 import { getLoggedInUser } from '../login';
 
+
 const passwordInput = document.getElementById("password-input") as HTMLInputElement;
 const submitButton = document.getElementById("room4-submit") as HTMLButtonElement;
 const showRequirementsBtn = document.querySelector(".room4 .show-requirements-btn") as HTMLButtonElement;
@@ -111,7 +112,11 @@ showRequirementsBtn.addEventListener("click", () => {
   passwordInput.style.display = "block";
   submitButton.style.display = "block";
 
-  //Dölj show requirements-knappen
+  /*******************************************
+  *******Dölj show requirements-knappen*******
+  ********************************************/
+
+
   showRequirementsBtn.style.display = "none";
 });
 
@@ -166,3 +171,4 @@ messageElement.style.color = "red";
     }, 2000);
   }
 });
+

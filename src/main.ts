@@ -23,7 +23,7 @@ startButton?.addEventListener('click', () => {
   }
   gameStarted = true;
   startTotalTimer();
-  showSection('room3'); //ÄNDRA TILL RUM 1 INNAN PR!! 
+  showSection('room4'); //ÄNDRA TILL RUM 1 INNAN PR!! 
 });
 
 // OBS! Rummen initieras just nu på olika sätt.
