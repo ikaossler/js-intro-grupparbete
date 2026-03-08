@@ -17,6 +17,7 @@ function handleStartButtonClick(): void {
   gameStarted = true;
   // Startar en ny spelomgång i sparad progress.
   setStartedProgress();
+  clearSavedTotalSeconds();
   updateProgressFromStorage();
   startTotalTimer();
   showSection("room1");
@@ -43,6 +44,8 @@ type RoomId = "room1" | "room2" | "room3" | "room4";
 
 // Nyckeln i localStorage för spelprogress.
 const PROGRESS_KEY = "game-progress-v1";
+// Nyckeln i localStorage för totaltid (sekunder).
+const TOTAL_TIMER_KEY = "error404-total-seconds";
 
 // Sparad progress: var spelaren är och vilka rum som är klara.
 type GameProgress = {
@@ -205,10 +208,6 @@ function initRooms(): void {
     showSection("room2");
   });
 }
-// Startar appen.
-registerRoomCompletionListeners();
-initRooms();
-
 /********************************************/
 /**************** ABOUT US*******************/
 /********************************************/
@@ -238,8 +237,37 @@ const totalTimerElement = document.getElementById("total-time") as HTMLDivElemen
 let totalStartTime = 0;
 let totalTimerInterval: number | null = null;
 
+// Läser sparad totaltid i sekunder.
+function getSavedTotalSeconds(): number {
+  const raw = localStorage.getItem(TOTAL_TIMER_KEY);
+  if (!raw) {
+    return 0;
+  }
+  return Number(raw) || 0;
+}
+
+// Sparar totaltid i sekunder.
+function saveTotalSeconds(totalSeconds: number): void {
+  localStorage.setItem(TOTAL_TIMER_KEY, String(totalSeconds));
+}
+
+// Tar bort sparad totaltid.
+function clearSavedTotalSeconds(): void {
+  localStorage.removeItem(TOTAL_TIMER_KEY);
+}
+// Startar total-timern, som räknar uppåt från 0 eller från sparad tid.
 function startTotalTimer() {
-  totalStartTime = Date.now();
+  // Stoppar eventuell gammal interval innan ny start.
+  stopTotalTimer();
+
+  // Fortsätter från sparad tid om den finns.
+  const savedSeconds = getSavedTotalSeconds();
+  totalStartTime = Date.now() - savedSeconds * 1000;
+
+  // Visar sparad tid direkt när timern startar.
+  const startMinutes = Math.floor(savedSeconds / 60);
+  const startSeconds = savedSeconds % 60;
+  totalTimerElement.textContent = `Time: ${startMinutes}:${startSeconds.toString().padStart(2, "0")}`;
 
   //Skapa ett intervall som körs varje sekund
   totalTimerInterval = setInterval(() => {
@@ -247,6 +275,9 @@ function startTotalTimer() {
     //Date.now() minus starttid ger millisekunder, dela med 1000 för sekunder
     //Math.floor avrundar nedåt till hela sekunder
     const elapsedTime = Math.floor((Date.now() - totalStartTime) / 1000);
+
+    // Spara uppdaterad totaltid.
+    saveTotalSeconds(elapsedTime);
 
     //Räkna ut antal hela minuter genom att dela sekunder med 60
     //Math.floor avrundar nedåt till hela minuter
@@ -262,15 +293,14 @@ function startTotalTimer() {
     totalTimerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, "0")}`;
   }, 1000);
 }
-
+ // Stoppar total-timern. Tar bort intervallet och sparar inte längre tid.
 export function stopTotalTimer() {
   if (totalTimerInterval !== null) {
     clearInterval(totalTimerInterval);
     totalTimerInterval = null;
-  } else {
-  }
+  } 
 }
-
+//visar resultat-sektionen och uppdaterar total-tiden därifrån. Kallas när spelet är klart.
 export function showResults() {
   showSection("results"); // ← lägg till denna
   //Hämta elementet från html
@@ -293,7 +323,7 @@ export function showResults() {
  ********************HIGHSCORE TOP 10**********************
  **********************************************************/
 
-//Denna funktion röäknar ut hur många sek som gått sen start
+//Denna funktion räknar ut hur många sek som gått sen start
 //Returnerar ett nummer (tex 245 för 4min o 5 sek)
 export function getTotalTime(): number {
   const elapsedTime = Math.floor((Date.now() - totalStartTime) / 1000);
@@ -404,6 +434,7 @@ const resetBtn = document.getElementById("reset-btn") as HTMLButtonElement;
 function handleResetClick(): void {
   // Rensar bara spelprogress, men behåller highscore/login.
   localStorage.removeItem(PROGRESS_KEY);
+  clearSavedTotalSeconds();
   location.reload();
 }
 
@@ -432,3 +463,7 @@ shareBtn?.addEventListener("click", () => {
     }, 3000);
   });
 });
+
+// Startar appen sist, efter att alla variabler/funktioner är initierade.
+registerRoomCompletionListeners();
+initRooms();
