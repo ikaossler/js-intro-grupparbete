@@ -4,7 +4,7 @@
   height: 26rem;
   overflow-y: hidden;
   width: min(42rem, 92vw);
-  margin: 0 auto;
+  margin: 10rem auto 0;
 }
 
 .room1-title {
