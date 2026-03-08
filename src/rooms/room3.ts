@@ -1,5 +1,7 @@
 import "./room3.css";
-import { showSection, SectionId } from "../main";
+/* /borttagen kod för att main.ts ska lyssna på event istället för knappen direkt /maria
+import { showSection, SectionId } from "../main"; */
+
 
 /*******************************************/
 /***************** TYPES *******************/
@@ -231,9 +233,27 @@ function stopTimer(): void {
 /********** NEXT ROOM BUTTON ***************/
 /*******************************************/
 
+
+/*
+BORTTAGEN KOD för att den inte behövs längre när vi skickar event till main.ts istället för att main.ts ska lyssna på knappen direkt. /maria
 document.querySelector("#next-room-btn-room3")?.addEventListener("click", () => {
   showSection("room4");
-});
+});*/
+
+// Skickar event till main.ts att room3 är klart.
+function notifyRoom3Completed(): void {
+  document.dispatchEvent(new Event("room3:completed"));
+}
+
+// Körs när spelaren klickar på "Next room" i room3.
+function handleNextRoomButtonClick(): void {
+  notifyRoom3Completed();
+}
+
+const nextRoomButton = document.querySelector<HTMLButtonElement>("#next-room-btn-room3");
+if (nextRoomButton) {
+  nextRoomButton.addEventListener("click", handleNextRoomButtonClick);
+}
 
 /*******************************************/
 /*************** RESTART *******************/

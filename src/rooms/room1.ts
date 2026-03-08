@@ -121,7 +121,7 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
     timerId: null,
   };
 
-  // Ritar timern i UI.
+  // Visar kvarvarande tid i room1-timern.
   function renderRoomTimer(): void {
     room1Elements.timer.textContent = `Time: ${formatRoomTime(state.secondsLeft)}`;
   }
@@ -135,7 +135,7 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
     state.timerId = null;
   }
 
-  // Rensar väntande timeouts i room1.
+  // Stoppar gamla timeouts så timern och meddelanden inte hamnar i fel läge.
   function clearPendingTimeouts(mode: "hide" | "secondary" | "all" = "all"): void {
     if ((mode === "hide" || mode === "all") && hideCodeTimeoutId !== null) {
       window.clearTimeout(hideCodeTimeoutId);
@@ -152,22 +152,28 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
     room1Elements.flashCode.textContent = FLASH_PLACEHOLDER;
   }
 
+  // Körs när timeouten för att dölja flash-koden går ut.
+  function handleHideCodeTimeout(): void {
+    hideCodeTimeoutId = null;
+    hideFlashedCode();
+  }
+
+  // Körs när timeouten för att visa steg 2-prompten går ut.
+  function handleSecondaryPromptTimeout(): void {
+    secondaryPromptTimeoutId = null;
+    showSecondaryVerificationPrompt();
+  }
+
   // Planerar när flash-koden ska döljas.
   function scheduleHideFlashedCode(): void {
     clearPendingTimeouts("hide");
-    hideCodeTimeoutId = window.setTimeout(() => {
-      hideCodeTimeoutId = null;
-      hideFlashedCode();
-    }, 500);
+    hideCodeTimeoutId = window.setTimeout(handleHideCodeTimeout, 500);
   }
 
   // Planerar texten för verifieringssteg 2.
   function scheduleSecondaryPrompt(): void {
     clearPendingTimeouts("secondary");
-    secondaryPromptTimeoutId = window.setTimeout(() => {
-      secondaryPromptTimeoutId = null;
-      showSecondaryVerificationPrompt();
-    }, 900);
+    secondaryPromptTimeoutId = window.setTimeout(handleSecondaryPromptTimeout, 900);
   }
 
   // Visar meddelandet för andra verifieringssteget.

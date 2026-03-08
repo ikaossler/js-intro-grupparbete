@@ -11,6 +11,11 @@ const timerElement = document.getElementById("room4-timer") as HTMLDivElement;
 const errorSound = new Audio('src/sounds/error.mp3');
 const resultSound = new Audio('src/sounds/resultsound.mp3');
 
+// Skickar event till main.ts att room4 är klart. för localstorage och att visa resultsidan /maria
+function notifyRoom4Completed(): void {
+  document.dispatchEvent(new Event("room4:completed"));
+}
+
 // Dagens datum
 const todaysDate = new Date().getDate();
 
@@ -137,6 +142,7 @@ submitButton.addEventListener("click", () => {
   const user = getLoggedInUser();
   const username = user ? user.username : "Anonymous";
   addScore(username, getTotalTime());
+  notifyRoom4Completed(); //tillagger att main.ts får veta att rummet är klart så den kan visa resultsidan /maria
   showResults();
    resultSound.play();
 }, 1000);
