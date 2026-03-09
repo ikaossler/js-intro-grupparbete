@@ -67,20 +67,15 @@ p {
   display: none;
   position: fixed;
   inset: 0;
-  /*background: rgba(0, 0, 0, 0.85);*/
   z-index: 1001;
   align-items: center;
   justify-content: center;
-  /*backdrop-filter: blur(4px);*/
 }
 
 .about-us.open {
   display: flex;
 }
 
-.about-us.open .about-us-content {
-  animation: slideDown 3s ease forwards, glitch 0.8s steps(1) forwards;
-}
 .about-us-content {
   width: min(42rem, 92vw);
   padding: 2rem;
@@ -88,8 +83,9 @@ p {
   border: 1px solid #1a4d1a;
   overflow-y: auto;
   max-height: 85vh;
-  opacity: 0;
-  transform: translateY(-40px);
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 1002;
 }
 
 .login-btn {
@@ -151,6 +147,15 @@ p {
   box-shadow: 0 0 8px #00b32d;
 }
 
+.about-us-content a {
+  color: #39ff14;
+  text-decoration: none;
+}
+
+.about-us-content a:hover {
+  text-decoration: underline;
+  text-shadow: 0 0 8px #39ff14;
+}
 
 .logo {
   position: absolute;

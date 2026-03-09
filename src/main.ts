@@ -109,15 +109,20 @@ const aboutSection = document.querySelector<HTMLElement>("#about");
 const aboutCloseBtn = document.querySelector<HTMLButtonElement>("#about-close-btn");
 
 aboutBtn?.addEventListener("click", () => {
+  aboutSection?.removeAttribute("hidden");
   aboutSection?.classList.add("open");
 });
 
 aboutCloseBtn?.addEventListener("click", () => {
-  aboutSection?.classList.remove("open")
+  aboutSection?.classList.remove("open");
+  aboutSection?.setAttribute("hidden", "");
 });
 
 aboutSection?.addEventListener("click", (e) => {
-  if (e.target === aboutSection) aboutSection.classList.remove("open");
+  if (e.target === aboutSection) {
+    aboutSection.classList.remove("open");
+    aboutSection.setAttribute("hidden", "");
+  }
 });
 
 /*********************************************************
