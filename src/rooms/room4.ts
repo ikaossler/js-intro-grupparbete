@@ -23,7 +23,7 @@ const requirements = [
   { id: 3, text: "Must contain at least one number", check: (pw: string) => /[0-9]/.test(pw) },
   {
     id: 4,
-    text: "Must contain today's date",
+    text: "Must contain current day value",
     check: (pw: string) => pw.includes(String(todaysDate)),
   },
   {
@@ -43,7 +43,7 @@ let startTime = 0;
 let timerInterval: number | null = null;
 
 function startRoom4Timer() {
-  const TOTAL_SECONDS = 60;
+  const TOTAL_SECONDS = 600;
   startTime = Date.now();
 
   timerInterval = setInterval(() => {
