@@ -25,9 +25,6 @@ function handleStartButtonClick(): void {
 
 startButton?.addEventListener("click", handleStartButtonClick);
 
-// OBS! Rummen initieras just nu på olika sätt.
-// room1 använder init-funktion, medan andra rum körs via side-effect import.
-// Kommer antagligen ändra detta senare för att få en mer enhetlig struktur /maria
 
 // Lista med alla sektioner i spelet i den ordning de finns i HTML.
 const sectionOrder = ["start", "room1", "room2", "room3", "room4", "results"] as const;
@@ -81,8 +78,8 @@ function getProgress(): GameProgress {
   if (!saved) {
     return getDefaultProgress();
   }
-   //försöker göra string till objekt, och kolla att det är i rätt format. 
-   // Om något går fel (tex om datan är korrupt) så fångas det av catch och default progress returneras.
+  //försöker göra string till objekt, och kolla att det är i rätt format.
+  // Om något går fel (tex om datan är korrupt) så fångas det av catch och default progress returneras.
   try {
     const parsed = JSON.parse(saved) as Partial<GameProgress>;
     const currentRoom: SectionId = isSectionId(parsed.currentRoom) ? parsed.currentRoom : "start";
@@ -92,7 +89,8 @@ function getProgress(): GameProgress {
       : [];
 
     return { currentRoom, completedRooms };
-  } catch { //om json.pasrse kastar error så fångas det här och default progress returneras istället för att hela appen kraschar.
+  } catch {
+    //om json.pasrse kastar error så fångas det här och default progress returneras istället för att hela appen kraschar.
     return getDefaultProgress();
   }
 }
@@ -118,7 +116,7 @@ function completeRoom(roomId: RoomId): void {
   if (roomId === "room1") progress.currentRoom = "room2";
   if (roomId === "room2") progress.currentRoom = "room3";
   if (roomId === "room3") progress.currentRoom = "room4";
-  if (roomId === "room4") progress.currentRoom = "room4";
+  if (roomId === "room4") progress.currentRoom = "results";
 
   saveProgress(progress);
 }
@@ -132,17 +130,25 @@ function completeRoom(roomId: RoomId): void {
 export function showSection(activeId: SectionId): void {
   sectionOrder.forEach((id) => {
     const section = document.querySelector<HTMLElement>(`#${id}`);
-    if (!section) return;
+    if (!section) {
+      return;
+    }
     section.hidden = id !== activeId;
   });
 }
 
 // Referens till progressbar-elementet i DOM.
+const progressWrap = document.querySelector<HTMLElement>(".progress-wrap");
 const progressBar = document.querySelector<HTMLElement>("#progress-bar");
 // Uppdaterar progressbaren utifrån vilket rum spelaren är i.
 function updateProgress(roomNumber: number): void {
-  if (!progressBar) return;
+  if (!progressBar) {
+    return;
+  }
   progressBar.style.width = `${(roomNumber / 4) * 100}%`;
+  if (progressWrap) {
+    progressWrap.setAttribute("aria-valuenow", String(roomNumber));
+  }
 }
 
 // Läser sparad progress och uppdaterar progressbaren.
@@ -187,7 +193,9 @@ function initRooms(): void {
   const room1Section = document.querySelector<HTMLElement>("#room1");
   const room2Section = document.querySelector<HTMLElement>("#room2");
   // Om room1 eller room2 inte finns i HTML kan vi inte starta spelet.
-  if (!room1Section || !room2Section) return;
+  if (!room1Section || !room2Section) {
+    return;
+  }
   // Ladda eventuell sparad progress.
   syncUiFromSavedProgress();
   const captchaRoom = renderCaptchaRoom(() => {
@@ -293,12 +301,12 @@ function startTotalTimer() {
     totalTimerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, "0")}`;
   }, 1000);
 }
- // Stoppar total-timern. Tar bort intervallet och sparar inte längre tid.
+// Stoppar total-timern. Tar bort intervallet och sparar inte längre tid.
 export function stopTotalTimer() {
   if (totalTimerInterval !== null) {
     clearInterval(totalTimerInterval);
     totalTimerInterval = null;
-  } 
+  }
 }
 //visar resultat-sektionen och uppdaterar total-tiden därifrån. Kallas när spelet är klart.
 export function showResults() {
@@ -430,6 +438,7 @@ loadHighscores();
  **********************************************************/
 
 const resetBtn = document.getElementById("reset-btn") as HTMLButtonElement;
+const tempResetBtn = document.getElementById("temp-reset-btn") as HTMLButtonElement;
 
 function handleResetClick(): void {
   // Rensar bara spelprogress, men behåller highscore/login.
@@ -444,6 +453,14 @@ function handleResetClick(): void {
 // });
 
 resetBtn?.addEventListener("click", handleResetClick);
+
+/*
+  TEMP START:
+  Tillfällig knapp i headern för att nollställa spelet och gå tillbaka till startsidan.
+  Ska tas bort sen
+*/
+tempResetBtn?.addEventListener("click", handleResetClick);
+/* TEMP END */
 
 /*********************************************************
  **********************SHARE RESULTS***********************
