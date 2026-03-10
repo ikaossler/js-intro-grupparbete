@@ -1,8 +1,8 @@
 import "./style.css";
+import "./login";
 import { initRoom1 } from "./rooms/room1";
 import { renderCaptchaRoom } from "./rooms/room2";
 import "./rooms/room3";
-import "./login";
 import "./rooms/room4";
 import { updateUserDisplay } from "./login";
 
