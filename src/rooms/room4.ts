@@ -71,7 +71,7 @@ function startRoom4Timer() {
     }
 
     const minutes = Math.floor(remainingTime / 60);
-    const seconds = remainingTime % 600;
+    const seconds = remainingTime % 60;
     timerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, "0")}`;
   }, 1000);
 }  // ← stänger startRoom4Timer
@@ -97,10 +97,10 @@ function displayRequirements() {
     requirementsList.appendChild(li);
   });
 
-  // göm kraven efter 5 sec
+  // göm kraven efter 10 sec
   setTimeout(() => {
     requirementsList.style.display = "none";
-  }, 3000);
+  }, 10000);
 }
 
 showRequirementsBtn.addEventListener("click", () => {
