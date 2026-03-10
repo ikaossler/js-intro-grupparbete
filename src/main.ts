@@ -1,9 +1,9 @@
 import "./style.css";
+import "./login";
 import { initRoom1 } from "./rooms/room1";
 import { renderCaptchaRoom } from "./room2/room2";
-import "./rooms/room3";
-import "./login";
 import "./room2/room2.css";
+import "./rooms/room3";
 import "./rooms/room4";
 
 const startButton = document.getElementById("start-btn") as HTMLButtonElement;
