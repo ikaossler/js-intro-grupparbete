@@ -90,6 +90,7 @@ p {
 
 .login-btn {
   background-color:#39ff14;
+  font-size: 12px;
   margin: 20px;
   padding: 10px;
   border: none;
@@ -172,7 +173,7 @@ p {
   z-index: 1;
 }
 
-#start h2, p, h3 {
+#start h2, p, h3, #highscore-top10-list {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -184,8 +185,8 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 830px;
-  margin-top: 0px;
+  margin-left: 600px;
+  margin-top: 7.5rem;
   min-height: 2rem;
   font-family: monospace;
   background-color: transparent;
@@ -193,6 +194,14 @@ p {
   border: 1px solid #00ff00;
   cursor: pointer;
   font-size: 20px;
+}
+
+h3 {
+  margin-top: 10rem;
+}
+
+#highscore-top10-list {
+  line-height: 1.5rem;
 }
 
 #start-btn:hover {
