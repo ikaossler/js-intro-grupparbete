@@ -89,13 +89,13 @@ p {
 }
 
 .login-btn {
-  background-color:#39ff14;
+  background-color: #39ff14;
   font-size: 12px;
   margin: 20px;
   padding: 10px;
   border: none;
   font-weight: bold;
-  font-family: 'Press Start 2P', monospace;
+  font-family: "Press Start 2P", monospace;
 }
 
 .login-btn:hover {
@@ -119,17 +119,61 @@ p {
 }
 
 @keyframes glitch {
-  0%   { clip-path: inset(0 0 100% 0); color: #39ff14; transform: translateX(0); }
-  10%  { clip-path: inset(10% 0 60% 0); color: #ff003c; transform: translateX(-4px); }
-  20%  { clip-path: inset(30% 0 40% 0); color: #00eaff; transform: translateX(4px); }
-  30%  { clip-path: inset(0 0 80% 0);   color: #39ff14; transform: translateX(-2px); }
-  40%  { clip-path: inset(50% 0 20% 0); color: #ff003c; transform: translateX(2px); }
-  50%  { clip-path: inset(20% 0 50% 0); color: #fff;    transform: translateX(0); }
-  60%  { clip-path: inset(0 0 30% 0);   color: #00eaff; transform: translateX(-3px); }
-  70%  { clip-path: inset(70% 0 10% 0); color: #39ff14; transform: translateX(3px); }
-  80%  { clip-path: inset(0 0 10% 0);   color: #ff003c; transform: translateX(-1px); }
-  90%  { clip-path: inset(0 0 5% 0);    color: #fff;    transform: translateX(1px); }
-  100% { clip-path: inset(0 0 0 0);     color: inherit; transform: translateX(0); }
+  0% {
+    clip-path: inset(0 0 100% 0);
+    color: #39ff14;
+    transform: translateX(0);
+  }
+  10% {
+    clip-path: inset(10% 0 60% 0);
+    color: #ff003c;
+    transform: translateX(-4px);
+  }
+  20% {
+    clip-path: inset(30% 0 40% 0);
+    color: #00eaff;
+    transform: translateX(4px);
+  }
+  30% {
+    clip-path: inset(0 0 80% 0);
+    color: #39ff14;
+    transform: translateX(-2px);
+  }
+  40% {
+    clip-path: inset(50% 0 20% 0);
+    color: #ff003c;
+    transform: translateX(2px);
+  }
+  50% {
+    clip-path: inset(20% 0 50% 0);
+    color: #fff;
+    transform: translateX(0);
+  }
+  60% {
+    clip-path: inset(0 0 30% 0);
+    color: #00eaff;
+    transform: translateX(-3px);
+  }
+  70% {
+    clip-path: inset(70% 0 10% 0);
+    color: #39ff14;
+    transform: translateX(3px);
+  }
+  80% {
+    clip-path: inset(0 0 10% 0);
+    color: #ff003c;
+    transform: translateX(-1px);
+  }
+  90% {
+    clip-path: inset(0 0 5% 0);
+    color: #fff;
+    transform: translateX(1px);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    color: inherit;
+    transform: translateX(0);
+  }
 }
 
 .about-us-btn {
@@ -137,7 +181,7 @@ p {
   color: #000;
   border: none;
   padding: 0.5rem 1rem;
-  font-family: 'Press Start 2P', monospace;
+  font-family: "Press Start 2P", monospace;
   font-size: 12px;
   cursor: pointer;
   font-weight: bold;
@@ -173,7 +217,10 @@ p {
   z-index: 1;
 }
 
-#start h2, p, h3, #highscore-top10-list {
+#start h2,
+p,
+h3,
+#highscore-top10-list {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -218,31 +265,72 @@ h1 {
   padding-top: 30px;
 }
 
-
 /*RESULTAT-SIDAN*/
 @keyframes resultsReveal {
-  0%   { opacity: 0; transform: scale(0.85) translateY(30px); filter: brightness(3); }
-  40%  { opacity: 1; transform: scale(1.03) translateY(0); filter: brightness(1.5); }
-  100% { transform: scale(1); filter: brightness(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(30px);
+    filter: brightness(3);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.03) translateY(0);
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
 }
 
 @keyframes titleFlicker {
-  0%, 100% { opacity: 1; text-shadow: 0 0 20px #39ff14, 0 0 40px #39ff1466; }
-  10%  { opacity: 0.8; }
-  12%  { opacity: 1; }
-  60%  { opacity: 1; text-shadow: 0 0 40px #39ff14, 0 0 80px #39ff14; }
-  61%  { opacity: 0.6; }
-  62%  { opacity: 1; }
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 20px #39ff14,
+      0 0 40px #39ff1466;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  12% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+    text-shadow:
+      0 0 40px #39ff14,
+      0 0 80px #39ff14;
+  }
+  61% {
+    opacity: 0.6;
+  }
+  62% {
+    opacity: 1;
+  }
 }
 
 @keyframes countUp {
-  from { opacity: 0; letter-spacing: 0.3em; }
-  to   { opacity: 1; letter-spacing: 0.1em; }
+  from {
+    opacity: 0;
+    letter-spacing: 0.3em;
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.1em;
+  }
 }
 
 @keyframes slideInItem {
-  from { opacity: 0; transform: translateX(-20px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /*RESULTAT-SIDAN*/

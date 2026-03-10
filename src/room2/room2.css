@@ -1,69 +1,75 @@
 .captcha-room-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 600px;
-    width: 90vw;
-    margin: 0 auto;
-    gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 600px;
+  width: 90vw;
+  margin: 0 auto;
+  gap: 8px;
 }
 
 .captcha-item {
-    padding: 0;
-    border: 3px solid #00b32d;
-    background: none;
-    cursor: pointer;
-    overflow: hidden;
-    position: relative;
+  padding: 0;
+  border: 3px solid #00b32d;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
 }
 
 .captcha-item.selected {
-    border-color: white;
-    box-shadow: 0 0 30px white;
-    transform: scale(1.02);
+  border-color: white;
+  box-shadow: 0 0 30px white;
+  transform: scale(1.02);
 }
 
 .captcha-item img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
 .captcha-item-label {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 0.25rem;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    text-align: center;
-    font-size: 0.85rem;
-    pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.25rem;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  font-size: 0.85rem;
+  pointer-events: none;
 }
 
-.captcha-room-title, .captcha-room-timer-wrapper, .captcha-room-prompt, .captcha-success-message, .captcha-success-title {
-    text-align: center;
-    margin-bottom: 20px;
+.captcha-room-title,
+.captcha-room-timer-wrapper,
+.captcha-room-prompt,
+.captcha-success-message,
+.captcha-success-title {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.captcha-room-verify-btn, .captcha-success-continue-btn {
-  display: block; 
+.captcha-room-verify-btn,
+.captcha-success-continue-btn {
+  display: block;
   max-width: 600px;
   margin: 10px auto;
   width: 100%;
-  padding: 0.70rem;          
+  padding: 0.7rem;
   background-color: #00b32d;
   color: black;
-  font-size: 1rem;         
+  font-size: 1rem;
   font-weight: bold;
   border: 2px solid #39ff14;
-  transition: all 0.3s;  
+  transition: all 0.3s;
   box-sizing: border-box;
   cursor: pointer;
 }
 
-.captcha-room-verify-btn:hover, .captcha-success-continue-btn:hover {
+.captcha-room-verify-btn:hover,
+.captcha-success-continue-btn:hover {
   background-color: #00ff88;
   box-shadow: 0 0 20px #39ff14;
   transform: scale(1.02);

@@ -1,18 +1,17 @@
 import "./style.css";
 import { initRoom1 } from "./rooms/room1";
 import { renderCaptchaRoom } from "./room2/room2";
-import "./rooms/room3"
-import "./login"
+import "./rooms/room3";
+import "./login";
 import "./room2/room2.css";
 import "./rooms/room4";
 import { isLoggedIn } from "./login";
 
-const startButton = document.getElementById('start-btn') as HTMLButtonElement;
-
+const startButton = document.getElementById("start-btn") as HTMLButtonElement;
 
 let gameStarted = false;
 
-startButton?.addEventListener('click', () => {
+startButton?.addEventListener("click", () => {
   if (!isLoggedIn()) {
     alert("You must be logged in to play");
     return;
@@ -25,28 +24,39 @@ startButton?.addEventListener('click', () => {
   startTotalTimer();
   bgMusic.pause();
   bgMusic.currentTime = 0;
-  showSection('room4'); //ÄNDRA TILL RUM 1 INNAN PR!! 
+  showSection("room4"); //ÄNDRA TILL RUM 1 INNAN PR!!
 });
 
 /********************************************/
 /*****************BG MUSIC*******************/
 /********************************************/
 
-const bgMusic = new Audio('src/sounds/background-music-startpage.mp3');
+const bgMusic = new Audio(import.meta.env.BASE_URL + "src/sounds/background-music-startpage.mp3");
 bgMusic.loop = true;
 bgMusic.volume = 0.2;
 
-document.addEventListener('click', () => {
-  bgMusic.play();
-}, { once: true });
-
+document.addEventListener(
+  "click",
+  () => {
+    bgMusic.play();
+  },
+  { once: true }
+);
 
 // OBS! Rummen initieras just nu på olika sätt.
 // room1 använder init-funktion, medan andra rum körs via side-effect import.
 // Kommer antagligen ändra detta senare för att få en mer enhetlig struktur /maria
 
 // Lista med alla sektioner i spelet i den ordning de finns i HTML.
-const sectionOrder = ["start", "room1", "room2", "room3", "room3-timeout", "room4", "results"] as const;
+const sectionOrder = [
+  "start",
+  "room1",
+  "room2",
+  "room3",
+  "room3-timeout",
+  "room4",
+  "results",
+] as const;
 
 // Skapar en typ av alla tillåtna sektionsnamn.
 // Exempel: "start" | "room1" | "room2" | "room3" | "room4".
@@ -55,7 +65,6 @@ export type SectionId = (typeof sectionOrder)[number];
 // Visar den valda sektionen.
 // Gömmer alla andra sektioner.
 export function showSection(activeId: SectionId): void {
-  
   loadRoomDescription(activeId);
 
   sectionOrder.forEach((id) => {
@@ -126,20 +135,19 @@ aboutSection?.addEventListener("click", (e) => {
 });
 
 /*********************************************************
-***************************TIMER**************************
-**********************************************************/
+ ***************************TIMER**************************
+ **********************************************************/
 
-const totalTimerElement = document.getElementById('total-time') as HTMLDivElement;
+const totalTimerElement = document.getElementById("total-time") as HTMLDivElement;
 
 let totalStartTime = 0;
 let totalTimerInterval: number | null = null;
 
 function startTotalTimer() {
   totalStartTime = Date.now();
-  
+
   //Skapa ett intervall som körs varje sekund
   totalTimerInterval = setInterval(() => {
-
     //Räkna ut hur många sekunder som gått sedan start
     //Date.now() minus starttid ger millisekunder, dela med 1000 för sekunder
     //Math.floor avrundar nedåt till hela sekunder
@@ -152,13 +160,12 @@ function startTotalTimer() {
     //Räkna ut resterande sekunder efter att minuter räknats bort
     //Modulo (%) ger resten efter division
     const seconds = elapsedTime % 60;
-    
 
     //Uppdatera timer-elementets text
     //toString() gör om nummer till text
     //padStart(2, '0') lägger till nolla framför ensiffriga tal
-    totalTimerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, '0')}`;
-  }, 1000); 
+    totalTimerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, "0")}`;
+  }, 1000);
 }
 
 export function stopTotalTimer() {
@@ -170,28 +177,28 @@ export function stopTotalTimer() {
 }
 
 export function showResults() {
-  showSection('results'); // ← lägg till denna
+  showSection("results"); // ← lägg till denna
   //Hämta elementet från html
-  const finalTimeDisplay = document.getElementById('final-time-display') as HTMLSpanElement;
+  const finalTimeDisplay = document.getElementById("final-time-display") as HTMLSpanElement;
 
   //Hämta texten från totalTimerElement
-  const timeText = totalTimerElement.textContent || '0:00';
+  const timeText = totalTimerElement.textContent || "0:00";
 
   //Ta bort order "time:"
-  const timeOnly = timeText.replace('Time: ', '');
-  
-  if (finalTimeDisplay) { 
-  finalTimeDisplay.textContent = timeOnly;
+  const timeOnly = timeText.replace("Time: ", "");
+
+  if (finalTimeDisplay) {
+    finalTimeDisplay.textContent = timeOnly;
   } else {
   }
-   displayTop3();
+  displayTop3();
 }
 
 /*********************************************************
-********************HIGHSCORE TOP 10**********************
-**********************************************************/
+ ********************HIGHSCORE TOP 10**********************
+ **********************************************************/
 
-//Denna funktion röäknar ut hur många sek som gått sen start 
+//Denna funktion röäknar ut hur många sek som gått sen start
 //Returnerar ett nummer (tex 245 för 4min o 5 sek)
 export function getTotalTime(): number {
   const elapsedTime = Math.floor((Date.now() - totalStartTime) / 1000);
@@ -203,7 +210,7 @@ let highscore: { name: string; time: number }[] = [];
 
 // LADDA highscores från localStorage när sidan startar
 function loadHighscores() {
-  const saved = localStorage.getItem('highscores');
+  const saved = localStorage.getItem("highscores");
   if (saved) {
     highscore = JSON.parse(saved);
     displayHighscores();
@@ -212,18 +219,20 @@ function loadHighscores() {
 
 export function addScore(name: string, time: number) {
   //Kolla om spelaren redan finns i listan
-  const existingIndex = highscore.findIndex(score => score.name === name);
+  const existingIndex = highscore.findIndex((score) => score.name === name);
 
   if (existingIndex !== -1) {
     //Spelaren finns redan
-    if (time < highscore[existingIndex].time) {  // ← Saknades {
+    if (time < highscore[existingIndex].time) {
+      // ← Saknades {
       //Nytt resultat är bättre -> uppdatera tiden
       highscore[existingIndex].time = time;
     } else {
       //Nytt resultat är sämre -> gör ingenting, funktionen avslutas
       return;
     }
-  } else {  // ← Ta bort duplicerad else här
+  } else {
+    // ← Ta bort duplicerad else här
     //Ny spelare -> lägg till i arrayen
     highscore.push({ name: name, time: time });
   }
@@ -235,55 +244,55 @@ export function addScore(name: string, time: number) {
   highscore = highscore.slice(0, 10);
 
   //Spara i LS
-  localStorage.setItem('highscores', JSON.stringify(highscore));
+  localStorage.setItem("highscores", JSON.stringify(highscore));
 
   //Visa på sidan
   displayHighscores();
 }
 
 function displayHighscores() {
-  const highscoreList = document.getElementById('highscore-top10-list') as HTMLOListElement;
+  const highscoreList = document.getElementById("highscore-top10-list") as HTMLOListElement;
   //Tömmer listan ifall där redan finns innehåll
-  highscoreList.innerHTML = '';
+  highscoreList.innerHTML = "";
   //Loopa ala highscore
   highscore.forEach((score) => {
     //skapa <li>-element
-    const li = document.createElement('li');
+    const li = document.createElement("li");
 
-  //formetera tiden från sek till M:SS
-  const minutes = Math.floor(score.time / 60);
-  const seconds = score.time % 60;
-  const timeFormatted = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    //formetera tiden från sek till M:SS
+    const minutes = Math.floor(score.time / 60);
+    const seconds = score.time % 60;
+    const timeFormatted = `${minutes}:${seconds.toString().padStart(2, "0")}`;
 
-  //Sätt texten: "namn - tid"
-  li.textContent = `${score.name} - ${timeFormatted}`;
-  //läg till <li> i <ol>
-  highscoreList.appendChild(li);
-});
+    //Sätt texten: "namn - tid"
+    li.textContent = `${score.name} - ${timeFormatted}`;
+    //läg till <li> i <ol>
+    highscoreList.appendChild(li);
+  });
 }
 
 /*********************************************************
-********************HIGHSCORE TOP 3***********************
-**********************************************************/
+ ********************HIGHSCORE TOP 3***********************
+ **********************************************************/
 
 function displayTop3() {
-  const top3List = document.getElementById('top3') as HTMLOListElement;
-  
+  const top3List = document.getElementById("top3") as HTMLOListElement;
+
   //Töm listan
-  top3List.innerHTML = '';
-  
+  top3List.innerHTML = "";
+
   //Tar bara de 3 första från highscore arrayen
   const top3 = highscore.slice(0, 3);
-  
-  //Loopa och skapa <li> 
+
+  //Loopa och skapa <li>
   top3.forEach((score) => {
-    const li = document.createElement('li');
-    
+    const li = document.createElement("li");
+
     // Formatera tiden
     const minutes = Math.floor(score.time / 60);
     const seconds = score.time % 60;
-    const timeFormatted = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    
+    const timeFormatted = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+
     li.textContent = `${score.name} - ${timeFormatted}`;
     top3List.appendChild(li);
   });
@@ -291,34 +300,31 @@ function displayTop3() {
 
 loadHighscores();
 
-
-
 /*********************************************************
-**************************RESET***************************
-**********************************************************/
+ **************************RESET***************************
+ **********************************************************/
 
-const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement;
+const resetBtn = document.getElementById("reset-btn") as HTMLButtonElement;
 
-
-resetBtn?.addEventListener('click', () => {
+resetBtn?.addEventListener("click", () => {
   location.reload();
 });
 
 /*********************************************************
-**********************SHARE RESULTS***********************
-**********************************************************/
+ **********************SHARE RESULTS***********************
+ **********************************************************/
 
-const shareBtn = document.getElementById('share-btn') as HTMLButtonElement;
-const shareFeedback = document.getElementById('share-feedback') as HTMLParagraphElement;
+const shareBtn = document.getElementById("share-btn") as HTMLButtonElement;
+const shareFeedback = document.getElementById("share-feedback") as HTMLParagraphElement;
 
-shareBtn?.addEventListener('click', () => {
-  const timeText = totalTimerElement.textContent?.replace('Time: ', '') || '0:00';
+shareBtn?.addEventListener("click", () => {
+  const timeText = totalTimerElement.textContent?.replace("Time: ", "") || "0:00";
   const shareText = `I completed Error 404 in ${timeText}! Can you beat my record? 👾 https://medieinstitutet.github.io/fed25d-js-intro-grupparbete-the-natural-stunner-squad/`;
-  
+
   navigator.clipboard.writeText(shareText).then(() => {
-    shareFeedback.textContent = '✅ Copied to clipboard!';
+    shareFeedback.textContent = "✅ Copied to clipboard!";
     setTimeout(() => {
-      shareFeedback.textContent = '';
+      shareFeedback.textContent = "";
     }, 3000);
   });
 });
@@ -334,16 +340,16 @@ function loadRoomDescription(roomId: string): void {
   loadedDescriptions.add(roomId);
 
   fetch(`${import.meta.env.BASE_URL}rooms.json`)
-    .then(res => res.json())
-    .then(rooms => {
-      const roomData = rooms.find((room: {id: string}) => room.id === roomId);
+    .then((res) => res.json())
+    .then((rooms) => {
+      const roomData = rooms.find((room: { id: string }) => room.id === roomId);
       if (!roomData) return;
 
-      const descriptionEl = document.createElement('p');
+      const descriptionEl = document.createElement("p");
       descriptionEl.textContent = roomData.description;
-      descriptionEl.classList.add('room-description');
+      descriptionEl.classList.add("room-description");
 
       const section = document.querySelector(`#${roomId}`);
-      section?.insertAdjacentElement('afterbegin', descriptionEl);
+      section?.insertAdjacentElement("afterbegin", descriptionEl);
     });
 }

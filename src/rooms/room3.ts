@@ -6,10 +6,10 @@ import { showSection, SectionId } from "../main";
 /*******************************************/
 
 interface IRebus {
-    text: string;
-    hint: string;
-    answer: string;
-    altAnswers?: string[];
+  text: string;
+  hint: string;
+  answer: string;
+  altAnswers?: string[];
 }
 
 /*******************************************/
@@ -17,96 +17,96 @@ interface IRebus {
 /*******************************************/
 
 const REBUSES: IRebus[] = [
-    {
-        text: "🏠 + 🦁 = ?",
-        hint: "One word",
-        answer: "PET",
-        altAnswers: ["PET", "PETS"]
-    },
-    {
-        text: "🐍 + 📱 = ?",
-        hint: "A game",
-        answer: "SNAKE",
-        altAnswers: ["SNAKE", "SNAKE GAME", "SNAKE SPEL"]
-    },
-    {
-        text: "👁️ + 🥶 + 🐻",
-        hint: "A animale",
-        answer: "ICEBEAR",
-        altAnswers: ["ICEBEAR", "ICE BEAR"]
-    },
-    {
-        text: "🔥 + ❤️ + 🧊 + ⛓️",
-        hint: "One word",
-        answer: "COLDHEARTED",
-        altAnswers: ["COLDHEARTED", "COLD HEARTED"]
-    },
-    {
-        text: "❤️ + 💔 + 🌧️",
-        hint: "One word",
-        answer: "HEARTBREAK",
-        altAnswers: ["HEARTBREAK", "HEART BREAK"]
-    },
-    {
-        text: "☀️ + 👓 + 🧴",
-        hint: "One Word",
-        answer: "SUNSCREEN",
-        altAnswers: ["SUNSCREEN", "SUN SCREEN"]
-    },
-    {
-        text: "❄️ + 🏃 + 👟",
-        hint: "One word",
-        answer: "SNOWSHOES",
-        altAnswers: ["SNOWSHOES", "SNOW SHOES"]
-    },
-    {
-        text: "☀️ + 🌸 + 🌱",
-        hint: "Two words",
-        answer: "SUMMER MEADOW",
-        altAnswers: ["SUMMER MEADOW", "SUMMER MEADOW"]
-    },
-    {
-        text: "👁️ + 🌊 + 🍵 + 🗝️",
-        hint: "One Word",
-        answer: "IDENTITY",
-        altAnswers: ["IDENTITY", "IDENTITY", "IDENTITY"]
-    },
-    {
-        text: "⏰ + 🪟 + 🤔 + 💡",
-        hint: "One word",
-        answer: "INSIGHT",
-        altAnswers: ["INSIGHT", "INSIGHT", "INSIGHT"]
-    },
-    {
-        text: "🔥 + 🦊 + ❄️ + 🎭",
-        hint: "Two words",
-        answer: "FOX PLAY",
-        altAnswers: ["FOX PLAY", "FOX GAME", "FOX GAME"]
-    },
-    {
-        text: "🧠 + 🗝️ + 🚪 + 🌑",
-        hint: "One word",
-        answer: "SECRET",
-        altAnswers: ["SECRET", "SECRET", "SECRET"]
-    },
-    {
-        text: "🧠 + 🚂 + 👟",
-        hint: "Two words",
-        answer: "THOUGHT TRAIN",
-        altAnswers: ["THOUGHT TRAIN", "THOUGHT TRAIN", "THOUGHT TRAIN"]
-    },
-    {
-        text: "❤️ + ➡️ + 🎯",
-        hint: "Two words",
-        answer: "TARGET ORIENTED",
-        altAnswers: ["TARGET ORIENTED", "TARGET ORIENTED", "TARGET ORIENTED"]
-    },
-    {
-        text: "📖 + 🌙 + ⏰",
-        hint: "Two words",
-        answer: "GOODNIGHT STORY",
-        altAnswers: ["GOODNIGHT STORY", "GOOD NIGHT STORY", "GOOD NIGHT STORY"]
-    }
+  {
+    text: "🏠 + 🦁 = ?",
+    hint: "One word",
+    answer: "PET",
+    altAnswers: ["PET", "PETS"],
+  },
+  {
+    text: "🐍 + 📱 = ?",
+    hint: "A game",
+    answer: "SNAKE",
+    altAnswers: ["SNAKE", "SNAKE GAME", "SNAKE SPEL"],
+  },
+  {
+    text: "👁️ + 🥶 + 🐻",
+    hint: "A animale",
+    answer: "ICEBEAR",
+    altAnswers: ["ICEBEAR", "ICE BEAR"],
+  },
+  {
+    text: "🔥 + ❤️ + 🧊 + ⛓️",
+    hint: "One word",
+    answer: "COLDHEARTED",
+    altAnswers: ["COLDHEARTED", "COLD HEARTED"],
+  },
+  {
+    text: "❤️ + 💔 + 🌧️",
+    hint: "One word",
+    answer: "HEARTBREAK",
+    altAnswers: ["HEARTBREAK", "HEART BREAK"],
+  },
+  {
+    text: "☀️ + 👓 + 🧴",
+    hint: "One Word",
+    answer: "SUNSCREEN",
+    altAnswers: ["SUNSCREEN", "SUN SCREEN"],
+  },
+  {
+    text: "❄️ + 🏃 + 👟",
+    hint: "One word",
+    answer: "SNOWSHOES",
+    altAnswers: ["SNOWSHOES", "SNOW SHOES"],
+  },
+  {
+    text: "☀️ + 🌸 + 🌱",
+    hint: "Two words",
+    answer: "SUMMER MEADOW",
+    altAnswers: ["SUMMER MEADOW", "SUMMER MEADOW"],
+  },
+  {
+    text: "👁️ + 🌊 + 🍵 + 🗝️",
+    hint: "One Word",
+    answer: "IDENTITY",
+    altAnswers: ["IDENTITY", "IDENTITY", "IDENTITY"],
+  },
+  {
+    text: "⏰ + 🪟 + 🤔 + 💡",
+    hint: "One word",
+    answer: "INSIGHT",
+    altAnswers: ["INSIGHT", "INSIGHT", "INSIGHT"],
+  },
+  {
+    text: "🔥 + 🦊 + ❄️ + 🎭",
+    hint: "Two words",
+    answer: "FOX PLAY",
+    altAnswers: ["FOX PLAY", "FOX GAME", "FOX GAME"],
+  },
+  {
+    text: "🧠 + 🗝️ + 🚪 + 🌑",
+    hint: "One word",
+    answer: "SECRET",
+    altAnswers: ["SECRET", "SECRET", "SECRET"],
+  },
+  {
+    text: "🧠 + 🚂 + 👟",
+    hint: "Two words",
+    answer: "THOUGHT TRAIN",
+    altAnswers: ["THOUGHT TRAIN", "THOUGHT TRAIN", "THOUGHT TRAIN"],
+  },
+  {
+    text: "❤️ + ➡️ + 🎯",
+    hint: "Two words",
+    answer: "TARGET ORIENTED",
+    altAnswers: ["TARGET ORIENTED", "TARGET ORIENTED", "TARGET ORIENTED"],
+  },
+  {
+    text: "📖 + 🌙 + ⏰",
+    hint: "Two words",
+    answer: "GOODNIGHT STORY",
+    altAnswers: ["GOODNIGHT STORY", "GOOD NIGHT STORY", "GOOD NIGHT STORY"],
+  },
 ];
 
 const JUNK_TEXTS: string[] = [
@@ -178,9 +178,9 @@ let spawnInterval1: number | null = null;
 let spawnInterval2: number | null = null;
 
 document.querySelector("#start-room3-btn")?.addEventListener("click", () => {
-    const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
-    btn.style.display = "none";
-    startRoom3();
+  const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
+  btn.style.display = "none";
+  startRoom3();
 });
 
 function startRoom3(): void {
@@ -254,7 +254,7 @@ document.querySelector("#next-room-btn-room3")?.addEventListener("click", () => 
 
 document.querySelector("#restart-btn-room3")?.addEventListener("click", () => {
   cleanupRoom3();
-  showSection('room1');
+  showSection("room1");
 });
 
 /*******************************************/
@@ -298,8 +298,9 @@ function normalise(s: string): string {
 }
 
 function updateProgressRoom3(): void {
-    const pct: number = (solvedRebuses.size / REBUSES.length) * 100;
-    (document.querySelector("#progress-bar-room3") as HTMLElement).style.width = Math.min(pct, 100) + "%";
+  const pct: number = (solvedRebuses.size / REBUSES.length) * 100;
+  (document.querySelector("#progress-bar-room3") as HTMLElement).style.width =
+    Math.min(pct, 100) + "%";
 }
 
 /*******************************************/
@@ -307,16 +308,16 @@ function updateProgressRoom3(): void {
 /*******************************************/
 
 interface IPopupOption {
-    x: number;
-    y: number;
+  x: number;
+  y: number;
 }
 
-function randomPos(w:number = 320, h:number = 240): IPopupOption {
-    const hudH = 36;
-    const barH = 8;
-    const x: number = Math.random() * (window.innerWidth - w - 20) + 10;
-    const y: number = Math.random() * (window.innerHeight - h - hudH - barH - 20) + hudH + barH + 10;
-    return { x, y };
+function randomPos(w: number = 320, h: number = 240): IPopupOption {
+  const hudH = 36;
+  const barH = 8;
+  const x: number = Math.random() * (window.innerWidth - w - 20) + 10;
+  const y: number = Math.random() * (window.innerHeight - h - hudH - barH - 20) + hudH + barH + 10;
+  return { x, y };
 }
 
 function spawnPopup(): void {
@@ -411,7 +412,8 @@ function closePopup(btn: HTMLButtonElement): void {
     popup.remove();
     activePopups--;
     closedCount++;
-    (document.querySelector("#closed-count-room3") as HTMLElement).textContent = String(closedCount);
+    (document.querySelector("#closed-count-room3") as HTMLElement).textContent =
+      String(closedCount);
     spawnPopup();
   }, 120);
 }
@@ -515,7 +517,7 @@ function restartGame(): void {
   (document.querySelector("#room3-timer") as HTMLElement).textContent = "10:00";
 
   document.querySelectorAll<HTMLElement>(".popup").forEach((p) => p.remove());
-  
+
   const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
   btn.style.display = "";
 }
@@ -605,10 +607,16 @@ function initialSpawn(): void {
 
 function cleanupRoom3(): void {
   stopTimer();
-  if (spawnInterval1 !== null) { clearInterval(spawnInterval1); spawnInterval1 = null; }
-  if (spawnInterval2 !== null) { clearInterval(spawnInterval2); spawnInterval2 = null; }
+  if (spawnInterval1 !== null) {
+    clearInterval(spawnInterval1);
+    spawnInterval1 = null;
+  }
+  if (spawnInterval2 !== null) {
+    clearInterval(spawnInterval2);
+    spawnInterval2 = null;
+  }
   intervalsStarted = false;
 
-  document.querySelectorAll<HTMLElement>('.popup').forEach(p => p.remove());
+  document.querySelectorAll<HTMLElement>(".popup").forEach((p) => p.remove());
   activePopups = 0;
 }
