@@ -23,7 +23,9 @@ startButton?.addEventListener('click', () => {
   }
   gameStarted = true;
   startTotalTimer();
-  showSection('room4'); //ÄNDRA TILL RUM 1 INNAN PR!! 
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
+  showSection('room3'); //ÄNDRA TILL RUM 1 INNAN PR!! 
 });
 
 /********************************************/
@@ -37,11 +39,6 @@ bgMusic.volume = 0.2;
 document.addEventListener('click', () => {
   bgMusic.play();
 }, { once: true });
-
-startButton?.addEventListener('click', () => {
-  bgMusic.pause();
-  bgMusic.currentTime = 0;
-});
 
 
 // OBS! Rummen initieras just nu på olika sätt.
@@ -58,6 +55,9 @@ export type SectionId = (typeof sectionOrder)[number];
 // Visar den valda sektionen.
 // Gömmer alla andra sektioner.
 export function showSection(activeId: SectionId): void {
+  
+  loadRoomDescription(activeId);
+
   sectionOrder.forEach((id) => {
     const section = document.querySelector<HTMLElement>(`#${id}`);
     if (!section) return;
@@ -109,15 +109,20 @@ const aboutSection = document.querySelector<HTMLElement>("#about");
 const aboutCloseBtn = document.querySelector<HTMLButtonElement>("#about-close-btn");
 
 aboutBtn?.addEventListener("click", () => {
+  aboutSection?.removeAttribute("hidden");
   aboutSection?.classList.add("open");
 });
 
 aboutCloseBtn?.addEventListener("click", () => {
-  aboutSection?.classList.remove("open")
+  aboutSection?.classList.remove("open");
+  aboutSection?.setAttribute("hidden", "");
 });
 
 aboutSection?.addEventListener("click", (e) => {
-  if (e.target === aboutSection) aboutSection.classList.remove("open");
+  if (e.target === aboutSection) {
+    aboutSection.classList.remove("open");
+    aboutSection.setAttribute("hidden", "");
+  }
 });
 
 /*********************************************************
@@ -317,3 +322,28 @@ shareBtn?.addEventListener('click', () => {
     }, 3000);
   });
 });
+
+/********************************************/
+/******* FUNCTION FOR ROOM DESCRIPTION ******/
+/********************************************/
+
+const loadedDescriptions = new Set<string>();
+
+function loadRoomDescription(roomId: string): void {
+  if (loadedDescriptions.has(roomId)) return;
+  loadedDescriptions.add(roomId);
+
+  fetch(`${import.meta.env.BASE_URL}rooms.json`)
+    .then(res => res.json())
+    .then(rooms => {
+      const roomData = rooms.find((room: {id: string}) => room.id === roomId);
+      if (!roomData) return;
+
+      const descriptionEl = document.createElement('p');
+      descriptionEl.textContent = roomData.description;
+      descriptionEl.classList.add('room-description');
+
+      const section = document.querySelector(`#${roomId}`);
+      section?.insertAdjacentElement('afterbegin', descriptionEl);
+    });
+}
