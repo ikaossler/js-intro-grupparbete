@@ -1,10 +1,10 @@
 import "./style.css";
 import "./login";
 import { initRoom1 } from "./rooms/room1";
-import { renderCaptchaRoom } from "./room2/room2";
-import "./room2/room2.css";
+import { renderCaptchaRoom } from "./rooms/room2";
 import "./rooms/room3";
 import "./rooms/room4";
+import { updateUserDisplay } from "./login";
 
 const startButton = document.getElementById("start-btn") as HTMLButtonElement;
 
@@ -202,7 +202,12 @@ function initRooms(): void {
     completeRoom("room2");
     updateProgressFromStorage();
     showSection("room3");
+  }, () => {
+    saveProgress({ currentRoom: "room1", completedRooms: [] });
+    clearSavedTotalSeconds();
+    location.reload();
   });
+  
   const captchaHost = room2Section.querySelector<HTMLElement>("#captcha-room");
   if (captchaHost) {
     captchaHost.replaceWith(captchaRoom);
@@ -484,3 +489,4 @@ shareBtn?.addEventListener("click", () => {
 // Startar appen sist, efter att alla variabler/funktioner är initierade.
 registerRoomCompletionListeners();
 initRooms();
+updateUserDisplay();
