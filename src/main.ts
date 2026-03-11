@@ -66,7 +66,7 @@ function handleStartButtonClick(): void {
   startTotalTimer();
   bgMusic.pause();
   bgMusic.currentTime = 0;
-  showSection("room3"); //ÄNDRA TILL RUM 1 INNAN PR!!
+  showSection("room1");
 }
 
 /*********************************************************
@@ -149,10 +149,18 @@ function completeRoom(roomId: RoomId): void {
     progress.completedRooms.push(roomId);
   }
 
-  if (roomId === "room1") progress.currentRoom = "room2";
-  if (roomId === "room2") progress.currentRoom = "room3";
-  if (roomId === "room3") progress.currentRoom = "room4";
-  if (roomId === "room4") progress.currentRoom = "results";
+  if (roomId === "room1") {
+    progress.currentRoom = "room2";
+  }
+  if (roomId === "room2") {
+    progress.currentRoom = "room3";
+  }
+  if (roomId === "room3") {
+    progress.currentRoom = "room4";
+  }
+  if (roomId === "room4") {
+    progress.currentRoom = "results";
+  }
 
   saveProgress(progress);
 }
@@ -175,18 +183,18 @@ export function showSection(activeId: SectionId): void {
   });
 }
 
-// Referens till progressbar-elementet i DOM.
-const progressWrap = document.querySelector<HTMLElement>(".progress-wrap");
-const progressBar = document.querySelector<HTMLElement>("#progress-bar");
-// Uppdaterar progressbaren utifrån vilket rum spelaren är i.
+// Referens till textbaserad loading-bar i headern.
+const loadingBar = document.getElementById("loadingBar") as HTMLSpanElement;
+// Uppdaterar loading-baren utifrån vilket rum spelaren är i.
 function updateProgress(roomNumber: number): void {
-  if (!progressBar) {
+  if (!loadingBar) {
     return;
   }
-  progressBar.style.width = `${(roomNumber / 4) * 100}%`;
-  if (progressWrap) {
-    progressWrap.setAttribute("aria-valuenow", String(roomNumber));
-  }
+
+  const totalBlocks = 10;
+  const filledBlocks = Math.round((roomNumber / 4) * totalBlocks);
+  const bar = "ESCAPE STATUS: " + "█".repeat(filledBlocks) + "░".repeat(totalBlocks - filledBlocks);
+  loadingBar.textContent = bar;
 }
 
 // Läser sparad progress och uppdaterar progressbaren.
@@ -252,12 +260,13 @@ function initRooms(): void {
   } else {
     room2Section.appendChild(captchaRoom);
   }
-  // När room1 är klart: uppdatera progress och visa room2.
-  initRoom1(room1Section, () => {
+  function handleRoom1Completed(): void {
     completeRoom("room1");
     updateProgressFromStorage();
     showSection("room2");
-  });
+  }
+  // När room1 är klart: uppdatera progress och visa room2.
+  initRoom1(room1Section, handleRoom1Completed);
 }
 /********************************************/
 /**************** ABOUT US*******************/
@@ -538,21 +547,34 @@ shareBtn?.addEventListener("click", () => {
 const loadedDescriptions = new Set<string>();
 
 function loadRoomDescription(roomId: string): void {
-  if (loadedDescriptions.has(roomId)) return;
+  if (loadedDescriptions.has(roomId)) {
+    return;
+  }
   loadedDescriptions.add(roomId);
 
   fetch(`${import.meta.env.BASE_URL}rooms.json`)
     .then((res) => res.json())
     .then((rooms) => {
       const roomData = rooms.find((room: { id: string }) => room.id === roomId);
-      if (!roomData) return;
+      if (!roomData) {
+        return;
+      }
+
+      const section = document.querySelector<HTMLElement>(`#${roomId}`);
+      if (!section) {
+        return;
+      }
+
+      // Skydd: lägg inte in texten igen om den redan finns i DOM.
+      const existingDescription = section.querySelector(".room-description");
+      if (existingDescription) {
+        return;
+      }
 
       const descriptionEl = document.createElement("p");
       descriptionEl.textContent = roomData.description;
       descriptionEl.classList.add("room-description");
-
-      const section = document.querySelector(`#${roomId}`);
-      section?.insertAdjacentElement("afterbegin", descriptionEl);
+      section.insertAdjacentElement("afterbegin", descriptionEl);
     });
 }
 // Startar appen sist, efter att alla variabler/funktioner är initierade.
