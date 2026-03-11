@@ -24,7 +24,7 @@ startButton?.addEventListener("click", () => {
   startTotalTimer();
   bgMusic.pause();
   bgMusic.currentTime = 0;
-  showSection("room4"); //ÄNDRA TILL RUM 1 INNAN PR!!
+  showSection("room1"); //ÄNDRA TILL RUM 1 INNAN PR!!
 });
 
 /********************************************/
