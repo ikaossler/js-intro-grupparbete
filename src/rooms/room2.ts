@@ -249,11 +249,10 @@ function injectRoundHtml(onComplete: () => void): void {
         </button>
     `;
 
-  updateTimerDisplay();
-
-  attachItemClickListeners(onComplete);
-  attachVerifyButtonListener(onComplete);
-  updateFocusedItemVisual();
+    updateTimerDisplay();
+    attachItemClickListeners(onComplete);
+    attachVerifyButtonListener(onComplete);
+    updateFocusedItemVisual();
 }
 
 function buildAllItemsHtml(items: ICaptchaItem[]): string {
@@ -278,13 +277,18 @@ function buildSingleItemHtml(item: ICaptchaItem, index: number): string {
 }
 
 function attachItemClickListeners(onComplete: () => void): void {
-  const itemButtons = roomContainer.querySelectorAll<HTMLButtonElement>(".captcha-item");
-  itemButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const index = parseInt(button.dataset.index!);
-      toggleItemSelection(index, onComplete);
+    const itemButtons = roomContainer.querySelectorAll<HTMLButtonElement>(".captcha-item");
+    itemButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const index = parseInt(button.dataset.index!);
+            toggleItemSelection(index, onComplete);
+        });
+        button.addEventListener("focus", () => {
+            const index = parseInt(button.dataset.index!);
+            focusedItemIndex = index;
+            updateFocusedItemVisual();
+        });
     });
-  });
 }
 
 function toggleItemSelection(itemIndex: number, onComplete: () => void): void {

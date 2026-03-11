@@ -66,7 +66,7 @@ function handleStartButtonClick(): void {
   startTotalTimer();
   bgMusic.pause();
   bgMusic.currentTime = 0;
-  showSection("room3"); //ÄNDRA TILL RUM 1 INNAN PR!!
+  showSection("room1"); //ÄNDRA TILL RUM 1 INNAN PR!!
 }
 
 /*********************************************************
@@ -547,12 +547,24 @@ function loadRoomDescription(roomId: string): void {
       const roomData = rooms.find((room: { id: string }) => room.id === roomId);
       if (!roomData) return;
 
+      const section = document.querySelector(`#${roomId}`);
+      if (!section) return;
+
+      const existingDescription = section.querySelector<HTMLElement>(
+        `.room-description[data-room-description-for="${roomId}"]`
+      );
+
+      if (existingDescription) {
+        existingDescription.textContent = roomData.description;
+        return;
+      }
+
       const descriptionEl = document.createElement("p");
       descriptionEl.textContent = roomData.description;
       descriptionEl.classList.add("room-description");
+      descriptionEl.dataset.roomDescriptionFor = roomId;
 
-      const section = document.querySelector(`#${roomId}`);
-      section?.insertAdjacentElement("afterbegin", descriptionEl);
+      section.insertAdjacentElement("afterbegin", descriptionEl);
     });
 }
 // Startar appen sist, efter att alla variabler/funktioner är initierade.
