@@ -46,6 +46,9 @@ const SECONDARY_FAILURE_MESSAGE =
 const ROOM1_TIME_LIMIT_SECONDS = 3 * 60;
 const ROOM1_TIMEOUT_MESSAGE = "Time is up. The room is restarting.";
 const FLASH_PLACEHOLDER = "------";
+const MATRIX_CHARS = "01<>[]{}$#@/\\|=+-*ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const MATRIX_FONT_SIZE = 16;
+const MATRIX_INTERVAL_MS = 65;
 
 // Hämtar alla element som room1 behöver för att fungera.
 function getRoom1Elements(room: HTMLElement): Room1Elements | null {
@@ -114,6 +117,80 @@ function getPrimaryFailureMessage(failedAttempts: number): string {
   return PRIMARY_FAILURE_HINTS[failedAttempts - 1] ?? PRIMARY_FAILURE_FALLBACK;
 }
 
+// Startar matrix-bakgrunden i room1.
+// Returnerar en cleanup-funktion som stoppar effekt + event listener.
+function startRoom1Matrix(room: HTMLElement): (() => void) | null {
+  const canvas = room.querySelector<HTMLCanvasElement>("#room1-matrix");
+  if (!canvas) {
+    return null;
+  }
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    return null;
+  }
+
+  // Alias utan null så TypeScript förstår att de är säkra i nested funktioner.
+  const matrixCanvas = canvas;
+  const matrixCtx = ctx;
+
+  let drops: number[] = [];
+
+  // Sätter canvas-storlek och bygger nya startpositioner.
+  function setupMatrix(): void {
+    matrixCanvas.width = window.innerWidth;
+    matrixCanvas.height = window.innerHeight;
+
+    const columnCount = Math.max(1, Math.floor(matrixCanvas.width / MATRIX_FONT_SIZE));
+    const maxRows = Math.max(1, Math.floor(matrixCanvas.height / MATRIX_FONT_SIZE));
+
+    // Ojämn start så vi slipper en rak startlinje.
+    drops = Array.from(
+      { length: columnCount },
+      () => Math.floor(Math.random() * maxRows) - maxRows
+    );
+  }
+
+  // Ritar ett steg i matrix-animationen.
+  function drawMatrix(): void {
+    matrixCtx.fillStyle = "rgba(0, 0, 0, 0.10)";
+    matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+
+    matrixCtx.fillStyle = "#00ff66";
+    matrixCtx.font = `${MATRIX_FONT_SIZE}px monospace`;
+
+    for (let index = 0; index < drops.length; index += 1) {
+      const dropValue = drops[index] ?? 0;
+      const randomChar = MATRIX_CHARS.charAt(Math.floor(Math.random() * MATRIX_CHARS.length));
+
+      matrixCtx.fillText(randomChar, index * MATRIX_FONT_SIZE, dropValue * MATRIX_FONT_SIZE);
+
+      if (dropValue * MATRIX_FONT_SIZE > matrixCanvas.height && Math.random() > 0.975) {
+        drops[index] = 0;
+        continue;
+      }
+
+      drops[index] = dropValue + 1;
+    }
+  }
+
+  // gör att matrix bakgrunden anpassar sig när fönstret ändras storlek.
+  function handleMatrixResize(): void {
+    setupMatrix();
+  }
+
+  setupMatrix();
+
+  const matrixIntervalId = window.setInterval(drawMatrix, MATRIX_INTERVAL_MS);
+  window.addEventListener("resize", handleMatrixResize);
+  
+  // Returnera en funktion som städar upp när vi lämnar room1.
+  return () => {
+    window.clearInterval(matrixIntervalId);
+    window.removeEventListener("resize", handleMatrixResize);
+  };
+}
+
 // Entry point för room1:
 // kopplar element, startar timer och registrerar alla event handlers.
 export function initRoom1(room: HTMLElement, onComplete: () => void): void {
@@ -123,6 +200,7 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
     return;
   }
   const room1Elements = elements;
+  const stopMatrixEffect = startRoom1Matrix(room);
 
   // Delay-id för att kunna städa bort väntande timeouts.
   let hideCodeTimeoutId: number | null = null;
@@ -277,6 +355,8 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
   function handleContinueClick(): void {
     stopRoomTimer();
     clearPendingTimeouts();
+    // Stoppa matrix-effekten när vi lämnar room1.
+    stopMatrixEffect?.();
     onComplete();
   }
 
