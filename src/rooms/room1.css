@@ -1,93 +1,306 @@
 .room1 {
-  border: 1px solid #39ff14;
-  padding: 1rem;
-  height: 26rem;
-  overflow-y: hidden;
-  width: min(42rem, 92vw);
-  margin: 10rem auto 0;
+  /* Room1 är en egen scen med bakgrundseffekter */
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Matrix-canvas i bakgrunden */
+.room1-matrix {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+/* Mörkar ner bakgrunden lite så texten blir tydlig */
+.room1-matrix-dim {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+/* Svag vignette för CRT-känsla */
+.room1::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.35) 100%);
+}
+
+/* Scanlines över hela room1 */
+.room1::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 255, 102, 0.04) 0px,
+    rgba(0, 255, 102, 0.04) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+/* Wrapper centrerar terminal-rutan */
+.room1-wrap {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.room1-terminal {
+  width: 100%;
+  max-width: 520px;
+  background: rgba(0, 0, 0, 0.88);
+  border: 1px solid #00ff66;
+  padding: 34px;
+  box-shadow:
+    0 0 10px rgba(0, 255, 102, 0.25),
+    0 0 25px rgba(0, 255, 102, 0.12),
+    inset 0 0 12px rgba(0, 255, 102, 0.05);
+  color: #00ff66;
+  text-shadow: 0 0 4px #00ff66;
 }
 
 .room1-title {
-  margin-top: 0;
-  color: #39ff14;
+  margin: 0 0 16px;
+  font-size: 28px;
+  letter-spacing: 2px;
+  font-weight: 400;
+  color: #00ff66;
 }
 
 .room1-text,
 .room1-label {
-  color: #00b32d;
+  color: #00ff66;
+  opacity: 0.95;
+}
+
+.room1-label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 8px;
+}
+
+.room1-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.room1-text {
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.room1-intro-text {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: typing 3s steps(30) forwards;
+}
+
+.room1-intro-text + .room1-intro-text {
+  animation-delay: 3.1s;
+  margin-bottom: 44px;
 }
 
 .room1-code {
-  color: #39ff14;
+  color: #00ff66;
   font-weight: 700;
+  text-shadow: none;
 }
 
 .room1-timer {
-  margin: 0.5rem 0 1rem;
-  color: #39ff14;
+  margin: 0;
+  margin-left: auto;
+  color: #00ff66;
+}
+
+.room1-input-row {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: 16px;
 }
 
 .room1-input {
-  width: 100%;
-  max-width: 16rem;
-  margin: 0.5rem 0 1rem;
-  padding: 0.5rem 0.75rem;
+  width: 72%;
+  max-width: 13rem;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10.8px 12.6px;
   background: #000;
-  color: #39ff14;
-  border: 1px solid #39ff14;
+  color: #00ff66;
+  border: 1px solid #00ff66;
+  font: inherit;
+  outline: none;
+  box-shadow: inset 0 0 8px rgba(0, 255, 102, 0.06);
+}
+
+.room1-input::placeholder {
+  color: rgba(0, 255, 102, 0.45);
 }
 
 .room1-button {
-  margin-right: 0.5rem;
-  margin-top: 0.5rem;
-  padding: 0.45rem 0.75rem;
+  margin: 0;
+  padding: 9px 16.2px;
   background: #000;
-  color: #39ff14;
-  border: 1px solid #39ff14;
+  color: #00ff66;
+  border: 1px solid #00ff66;
+  font: inherit;
   cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.12);
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .room1-button:hover {
-  background: #051205;
+  background: rgba(0, 255, 102, 0.08);
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.25);
+}
+
+.room1-button:active {
+  transform: translateY(1px);
+}
+
+.room1-button-primary {
+  background: #00b32d;
+  color: #000;
+  font-weight: 700;
+  border: 2px solid #39ff14;
+}
+
+.room1-button-primary:hover {
+  background: #00ff88;
+}
+
+.room1-secondary-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.room1-secondary-text {
+  color: #00ff66;
+  opacity: 0.85;
+  font-size: 14px;
+}
+
+.room1-button-secondary {
+  background: transparent;
+  color: #00ff66;
+  border: 1px solid #00ff66;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  padding: 6.8px 11.9px;
+  font-size: 0.85em;
+}
+
+.room1-hidden-code-line {
+  display: block;
+  margin: 0 0 12px;
+  font-size: 14px;
+  opacity: 0.9;
+  text-shadow: none;
 }
 
 .room1-message {
-  min-height: 1.5rem;
-  margin-top: 0.75rem;
-  color: #39ff14;
+  min-height: 0.5rem;
+  margin-top: 28px;
+  color: #00ff66;
   white-space: pre-line;
 }
 
 .room1-success-title {
-  margin-top: 14px;
+  margin-top: 40px;
   margin-bottom: 6px;
   font-size: 1.4rem;
   text-align: center;
+  color: #00ff66;
 }
 
 .room1-success-text {
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   text-align: center;
+  overflow: visible;
+  white-space: normal;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  animation: none;
 }
 
 .room1-continue-button {
   display: block;
-  max-width: 600px;
-  margin: 10px auto;
   width: 100%;
-  padding: 0.7rem;
+  margin: 0 auto;
+  box-sizing: border-box;
   background-color: #00b32d;
   color: #000;
-  font-size: 1rem;
   font-weight: 700;
   border: 2px solid #39ff14;
-  transition: all 0.3s;
-  box-sizing: border-box;
 }
 
 .room1-continue-button:hover {
   background-color: #00ff88;
   box-shadow: 0 0 20px #39ff14;
-  transform: scale(1.02);
+}
+
+.cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .room1-terminal {
+    padding: 22px;
+  }
+
+  .room1-title {
+    font-size: 22px;
+  }
+
+  .room1-text,
+  .room1-success-text {
+    font-size: 15px;
+  }
 }
