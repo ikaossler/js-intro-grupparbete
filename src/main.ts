@@ -4,13 +4,57 @@ import { initRoom1 } from "./rooms/room1";
 import { renderCaptchaRoom } from "./rooms/room2";
 import "./rooms/room3";
 import "./rooms/room4";
-import { updateUserDisplay } from "./login";
+import { updateUserDisplay, isLoggedIn } from "./login";
 
 const startButton = document.getElementById("start-btn") as HTMLButtonElement;
 
 let gameStarted = false;
 
+/********************************************/
+/*****************BG MUSIC*******************/
+/********************************************/
+
+const bgMusic = new Audio(import.meta.env.BASE_URL + "src/sounds/background-music-startpage.mp3");
+bgMusic.loop = true;
+bgMusic.volume = 0.2;
+
+document.addEventListener(
+  "click",
+  () => {
+    bgMusic.play();
+  },
+  { once: true }
+);
+
+// OBS! Rummen initieras just nu på olika sätt.
+// room1 använder init-funktion, medan andra rum körs via side-effect import.
+// Kommer antagligen ändra detta senare för att få en mer enhetlig struktur /maria
+
+
+
+// Lista med alla sektioner i spelet i den ordning de finns i HTML.
+const sectionOrder = [
+  "start",
+  "room1",
+  "room2",
+  "room3",
+  "room3-timeout",
+  "room4",
+  "results",
+] as const;
+
+// Skapar en typ av alla tillåtna sektionsnamn.
+// Exempel: "start" | "room1" | "room2" | "room3" | "room4".
+export type SectionId = (typeof sectionOrder)[number];
+
+
+
+startButton?.addEventListener("click", handleStartButtonClick);
 function handleStartButtonClick(): void {
+  if (!isLoggedIn()) {
+    alert("You must be logged in to play");
+    return;
+  }
   if (gameStarted) {
     return;
   }
@@ -20,18 +64,10 @@ function handleStartButtonClick(): void {
   clearSavedTotalSeconds();
   updateProgressFromStorage();
   startTotalTimer();
-  showSection("room1");
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
+  showSection("room3"); //ÄNDRA TILL RUM 1 INNAN PR!!
 }
-
-startButton?.addEventListener("click", handleStartButtonClick);
-
-
-// Lista med alla sektioner i spelet i den ordning de finns i HTML.
-const sectionOrder = ["start", "room1", "room2", "room3", "room4", "results"] as const;
-
-// Skapar en typ av alla tillåtna sektionsnamn.
-// Exempel: "start" | "room1" | "room2" | "room3" | "room4".
-export type SectionId = (typeof sectionOrder)[number];
 
 /*********************************************************
  **************** SPELPROGRESS (LOCAL STORAGE) ************
@@ -128,6 +164,8 @@ function completeRoom(roomId: RoomId): void {
 // Visar den valda sektionen.
 // Gömmer alla andra sektioner.
 export function showSection(activeId: SectionId): void {
+  loadRoomDescription(activeId);
+
   sectionOrder.forEach((id) => {
     const section = document.querySelector<HTMLElement>(`#${id}`);
     if (!section) {
@@ -199,14 +237,14 @@ function initRooms(): void {
   // Ladda eventuell sparad progress.
   syncUiFromSavedProgress();
   const captchaRoom = renderCaptchaRoom(() => {
-    completeRoom("room2");
-    updateProgressFromStorage();
-    showSection("room3");
-  }, () => {
-    saveProgress({ currentRoom: "room1", completedRooms: [] });
-    clearSavedTotalSeconds();
-    location.reload();
-  });
+  completeRoom("room2");
+  updateProgressFromStorage();
+  showSection("room3");
+}, () => {
+  saveProgress({ currentRoom: "room1", completedRooms: [] });
+  clearSavedTotalSeconds();
+  location.reload();
+});
   
   const captchaHost = room2Section.querySelector<HTMLElement>("#captcha-room");
   if (captchaHost) {
@@ -230,15 +268,20 @@ const aboutSection = document.querySelector<HTMLElement>("#about");
 const aboutCloseBtn = document.querySelector<HTMLButtonElement>("#about-close-btn");
 
 aboutBtn?.addEventListener("click", () => {
+  aboutSection?.removeAttribute("hidden");
   aboutSection?.classList.add("open");
 });
 
 aboutCloseBtn?.addEventListener("click", () => {
   aboutSection?.classList.remove("open");
+  aboutSection?.setAttribute("hidden", "");
 });
 
 aboutSection?.addEventListener("click", (e) => {
-  if (e.target === aboutSection) aboutSection.classList.remove("open");
+  if (e.target === aboutSection) {
+    aboutSection.classList.remove("open");
+    aboutSection.setAttribute("hidden", "");
+  }
 });
 
 /*********************************************************
@@ -270,6 +313,7 @@ function clearSavedTotalSeconds(): void {
 }
 // Startar total-timern, som räknar uppåt från 0 eller från sparad tid.
 function startTotalTimer() {
+  totalStartTime = Date.now();
   // Stoppar eventuell gammal interval innan ny start.
   stopTotalTimer();
 
@@ -327,8 +371,7 @@ export function showResults() {
 
   if (finalTimeDisplay) {
     finalTimeDisplay.textContent = timeOnly;
-  } else {
-  }
+  } 
   displayTop3();
 }
 
@@ -445,6 +488,8 @@ loadHighscores();
 const resetBtn = document.getElementById("reset-btn") as HTMLButtonElement;
 const tempResetBtn = document.getElementById("temp-reset-btn") as HTMLButtonElement;
 
+
+
 function handleResetClick(): void {
   // Rensar bara spelprogress, men behåller highscore/login.
   localStorage.removeItem(PROGRESS_KEY);
@@ -476,7 +521,7 @@ const shareFeedback = document.getElementById("share-feedback") as HTMLParagraph
 
 shareBtn?.addEventListener("click", () => {
   const timeText = totalTimerElement.textContent?.replace("Time: ", "") || "0:00";
-  const shareText = `I completed Error 404 in ${timeText}! Can you beat my record? 👾 https://länka-repot-här`;
+  const shareText = `I completed Error 404 in ${timeText}! Can you beat my record? 👾 https://medieinstitutet.github.io/fed25d-js-intro-grupparbete-the-natural-stunner-squad/`;
 
   navigator.clipboard.writeText(shareText).then(() => {
     shareFeedback.textContent = "✅ Copied to clipboard!";
@@ -486,6 +531,30 @@ shareBtn?.addEventListener("click", () => {
   });
 });
 
+/********************************************/
+/******* FUNCTION FOR ROOM DESCRIPTION ******/
+/********************************************/
+
+const loadedDescriptions = new Set<string>();
+
+function loadRoomDescription(roomId: string): void {
+  if (loadedDescriptions.has(roomId)) return;
+  loadedDescriptions.add(roomId);
+
+  fetch(`${import.meta.env.BASE_URL}rooms.json`)
+    .then((res) => res.json())
+    .then((rooms) => {
+      const roomData = rooms.find((room: { id: string }) => room.id === roomId);
+      if (!roomData) return;
+
+      const descriptionEl = document.createElement("p");
+      descriptionEl.textContent = roomData.description;
+      descriptionEl.classList.add("room-description");
+
+      const section = document.querySelector(`#${roomId}`);
+      section?.insertAdjacentElement("afterbegin", descriptionEl);
+    });
+}
 // Startar appen sist, efter att alla variabler/funktioner är initierade.
 registerRoomCompletionListeners();
 initRooms();

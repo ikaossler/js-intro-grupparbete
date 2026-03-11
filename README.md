@@ -1,11 +1,13 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/PLwZQtiP)
 
-# ERROR 404
+# 🎮 ERROR 404
 
-### Uppgiftsbeskrivning:
+### 📝 Uppgiftsbeskrivning:
+
 Vi har fått i uppgift att göra ett digital Escape room. Vi fick själva komma fram till temat och hur spelet skulle se ut och fungera. Vi ska göra allt i en index.html men göra olika rum utifrån antalet gruppmedlemar.
 
-## Kravspecifikation:
+## 🖊 Kravspecifikation:
+
 • Så många rum/problem som ni är gruppmedlemmar.
 
 • Sammanhängande "storytelling"/spelflöde och design. Samarbete & kommunikation.
@@ -41,7 +43,8 @@ sektioner döljas med CSS? Eller en kombination av båda?
 
 • Det ska finnas en game over-sidan, som visar lyckat resultat eller misslyckat resultat.
 
-## Gruppen bakom projektet:
+## 🫆 Gruppen bakom projektet:
+
 Chiara Jukkola
 
 Filip Brandt
@@ -50,7 +53,8 @@ Ika Ossler
 
 Maria Birath
 
-## Om spelet
+## 🤬 Om spelet
+
 Error 404 is a game created by four frontend students at Medieinstitutet, united by a shard frustration - the internet’s most annoying phenomena. What happens if you gather everything that irritates you online and turn it into a game experience? That’s what we wanted to find out.
 
 In the game, you make your way through four rooms, each inspired ba a classic internet problem. The first room tests your patience with a complicated verification code. The second room throws you into a CAPTHA nightmare. The third room overwhelms you with complete popup chaos. And in the fourth and final room, a password so complicated it should be illegal awaits you.
@@ -58,15 +62,33 @@ In the game, you make your way through four rooms, each inspired ba a classic in
 The game is built as a loving tribute to all the times the internet has made us want to throw our computer out the window - except this time, you’re supposed to have fun along the way.
 
 ### Rum 1
-Lägg in bild och om text
+
+I detta rum ska du lösa en omöjlig verifieringskod.
+
 ### Rum 2
-Lägg in bild och om text
+
+I rum 2 får du en captha att lösa.
+
 ### Rum 3
-Lägg in bild och om text
+
+Här kommer du mötas av ett pop-up kaos.
+
 ### Rum 4
-Lägg in bild och om text
+
+I fjärde och sista rummet ska du uppfylla kraven för ett godkänt lösenord.
+
 ## Beskrivning av processen
+
 Vi använt oss av HTML, CSS och TypeScript. Alla har jobbat i egna branches som vi sen mergat till main. Vi har haft Daily standups, retrospektiv, sprint plannings.
 
+![](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+
 ### Tillgänglighet:
+
 Lägg in screen shots
+
+![](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
+![](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
+![](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)

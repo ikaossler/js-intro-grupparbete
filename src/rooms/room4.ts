@@ -1,15 +1,17 @@
 import "./room4.css";
-import { stopTotalTimer, showResults, addScore, getTotalTime, showSection} from '../main';
-import { getLoggedInUser } from '../login';
+import { stopTotalTimer, showResults, addScore, getTotalTime, showSection } from "../main";
+import { getLoggedInUser } from "../login";
 
 const passwordInput = document.getElementById("password-input") as HTMLInputElement;
 const submitButton = document.getElementById("room4-submit") as HTMLButtonElement;
-const showRequirementsBtn = document.querySelector(".room4 .show-requirements-btn") as HTMLButtonElement;
+const showRequirementsBtn = document.querySelector(
+  ".room4 .show-requirements-btn"
+) as HTMLButtonElement;
 const requirementsList = document.getElementById("requirements-list") as HTMLUListElement;
 const messageElement = document.getElementById("room4-message") as HTMLParagraphElement;
 const timerElement = document.getElementById("room4-timer") as HTMLDivElement;
-const errorSound = new Audio('src/sounds/error.mp3');
-const resultSound = new Audio('src/sounds/resultsound.mp3');
+const errorSound = new Audio(import.meta.env.BASE_URL + "src/sounds/error.mp3");
+const resultSound = new Audio(import.meta.env.BASE_URL + "src/sounds/resultsound.mp3");
 
 // Skickar event till main.ts att room4 är klart. för localstorage och att visa resultsidan /maria
 function notifyRoom4Completed(): void {
@@ -26,7 +28,7 @@ const requirements = [
   { id: 3, text: "Must contain at least one number", check: (pw: string) => /[0-9]/.test(pw) },
   {
     id: 4,
-    text: "Must contain today's date",
+    text: "Must contain current day value",
     check: (pw: string) => pw.includes(String(todaysDate)),
   },
   {
@@ -46,22 +48,22 @@ let startTime = 0;
 let timerInterval: number | null = null;
 
 function startRoom4Timer() {
-  const TOTAL_SECONDS = 60; 
+  const TOTAL_SECONDS = 600;
   startTime = Date.now();
 
   timerInterval = setInterval(() => {
     const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
     const remainingTime = TOTAL_SECONDS - elapsedTime;
-  
+
     if (remainingTime <= 0) {
-      timerElement.textContent = 'Time: 0:00';
+      timerElement.textContent = "Time: 0:00";
       stopRoom4Timer();
       messageElement.textContent = "⏰ TIME'S UP! Starting over...";
-      messageElement.style.color = 'red';
+      messageElement.style.color = "red";
       setTimeout(() => {
         document.getElementById("ten-sec-note")?.remove();
         timerElement.classList.remove("urgent");
-        showSection('room1');
+        showSection("room1");
       }, 2000);
       return;
     }
@@ -78,7 +80,7 @@ function startRoom4Timer() {
     const seconds = remainingTime % 60;
     timerElement.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, "0")}`;
   }, 1000);
-}  // ← stänger startRoom4Timer
+} // ← stänger startRoom4Timer
 
 function stopRoom4Timer() {
   if (timerInterval !== null) {
@@ -101,22 +103,24 @@ function displayRequirements() {
     requirementsList.appendChild(li);
   });
 
-  // göm kraven efter 5 sec
+  // göm kraven efter 10 sec
   setTimeout(() => {
     requirementsList.style.display = "none";
-  }, 3000);
+  }, 10000);
 }
 
 showRequirementsBtn.addEventListener("click", () => {
   displayRequirements();
   startRoom4Timer();
-  
 
   //Visa input-rutan och Submit-knappen efter att man klickat på show requrements-knappen
   passwordInput.style.display = "block";
   submitButton.style.display = "block";
 
-  //Dölj show requirements-knappen
+  /*******************************************
+   *******Dölj show requirements-knappen*******
+   ********************************************/
+
   showRequirementsBtn.style.display = "none";
 });
 
@@ -152,17 +156,17 @@ submitButton.addEventListener("click", () => {
     errorSound.play();
 
     if (failCount === 3 && !noobShown) {
-  messageElement.textContent = "❌ ERROR: Password does not meet all requirements... noob 💀";
-  noobShown = true;
-} else if (failCount === 6 && !omgShown) {
-  messageElement.textContent = "❌ Seriously, how hard can it be? You're wasting my time 😤";
-  omgShown = true;
-} else if (failCount === 9) {
-  messageElement.textContent = "❌ ERROR: So close... have you tried asking nicely? 🙏";
-} else {
-  messageElement.textContent = "❌ ERROR: Password does not meet all requirements";
-}
-messageElement.style.color = "red";
+      messageElement.textContent = "❌ ERROR: Password does not meet all requirements... noob 💀";
+      noobShown = true;
+    } else if (failCount === 6 && !omgShown) {
+      messageElement.textContent = "❌ Seriously, how hard can it be? You're wasting my time 😤";
+      omgShown = true;
+    } else if (failCount === 9) {
+      messageElement.textContent = "❌ ERROR: So close... have you tried asking nicely? 🙏";
+    } else {
+      messageElement.textContent = "❌ ERROR: Password does not meet all requirements";
+    }
+    messageElement.style.color = "red";
 
     passwordInput.value = "";
 

@@ -59,9 +59,9 @@
     <!----------------------------->
 
     <main>
-      <section id="start">
+      <section id="start" class="start-section">
         <div class="logo">
-          <img src="/src/assets/Error404.png" alt="" />
+          <img src="/src/assets/Error404.png" alt="" width="1023" height="682">
         </div>
         <div class="start-content">
           <h2>Error 404</h2>
@@ -143,7 +143,7 @@
       <section id="room3" class="room3" hidden>
         <div id="gameContainer"></div>
 
-        <button id="start-room3-btn" type="button">Start the game</button>
+        <button id="start-room3-btn" class="start-room3-btn" type="button">Start the game</button>
 
         <div id="background-art-room3" class="background-art-room3">
           <span>POPUP CHAMBER v2.0</span>
@@ -168,8 +168,18 @@
           <h2>YOU DID IT!</h2>
           <p>You escaped the popup chamber!</p>
           <div class="answer">10 / 10 CORRECT</div>
-          <button id="restart-btn-room3" type="button">Play Again</button>
-          <button id="next-room-btn-room3" type="button">Next Room</button>
+          <button id="restart-btn-room3" class="restart-btn-room3" type="button">Play Again</button>
+          <button id="next-room-btn-room3" class="next-room-btn-room3" type="button">
+            Next Room
+          </button>
+        </div>
+      </section>
+
+      <section id="room3-timeout" hidden>
+        <div class="timeout-content">
+          <h2>TIME'S UP!</h2>
+          <p>You couldn't escape the popup chamber in time.</p>
+          <button id="timeout-startover-btn">Start Over!</button>
         </div>
       </section>
 
@@ -225,11 +235,11 @@
           <h2>About Error 404</h2>
           <p>
             Error 404 is a game created by four frontend students at Medieinstitutet, united by a
-            shard frustration - the internet’s most annoying phenomena. What happens if you gather
+            shared frustration - the internet’s most annoying phenomena. What happens if you gather
             everything that irritates you online and turn it into a game experience? That’s what we
-            wanted to find out. In the game, you make your way through four rooms, each inspired ba
+            wanted to find out. In the game, you make your way through four rooms, each inspired by
             a classic internet problem. The first room tests your patience with a complicated
-            verification code. The second room throws you into a CAPTHA nightmare. The third room
+            verification code. The second room throws you into a CAPTCHA nightmare. The third room
             overwhelms you with complete popup chaos. And in the fourth and final room, a password
             so complicated it should be illegal awaits you. The game is built as a loving tribute to
             all the times the internet has made us want to throw our computer out the window -
@@ -237,13 +247,15 @@
           </p>
           <h3>The team behind Error 404:</h3>
           <h4>Chiara Jukkola</h4>
-          <p>github länk</p>
+          <a href="https://github.com/kickzon" target="_blank">https://github.com/kickzon</a>
           <h4>Ika Ossler</h4>
-          <p>github länk</p>
+          <a href="https://github.com/ikaossler" target="_blank">https://github.com/ikaossler</a>
           <h4>Maria Birath</h4>
-          <p>https://github.com/mariabhai</p>
+          <a href="https://github.com/mariabhai" target="_blank">https://github.com/mariabhai</a>
           <h4>Filip Brandt</h4>
-          <p>github länk</p>
+          <a href="https://github.com/filip-brandt" target="_blank"
+            >https://github.com/filip-brandt</a
+          >
         </div>
       </section>
     </main>

@@ -2,31 +2,65 @@
 *****************ANIMATIONER******************
 **********************************************/
 
-
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-12px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes scanline {
-  0%   { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
 }
 
 @keyframes glitchBorder {
-  0%, 90%, 100% { border-color: #39ff14; box-shadow: 0 0 16px #39ff1466; }
-  92% { border-color: #ff0000; box-shadow: 0 0 16px #ff000066; }
-  94% { border-color: #00fffc; box-shadow: 0 0 16px #00fffc66; }
+  0%,
+  90%,
+  100% {
+    border-color: #39ff14;
+    box-shadow: 0 0 16px #39ff1466;
+  }
+  92% {
+    border-color: #ff0000;
+    box-shadow: 0 0 16px #ff000066;
+  }
+  94% {
+    border-color: #00fffc;
+    box-shadow: 0 0 16px #00fffc66;
+  }
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.2; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
 }
 
 @keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 10px #39ff1444, inset 0 0 10px #00ff4111; }
-  50%       { box-shadow: 0 0 24px #39ff1488, inset 0 0 20px #00ff4133; }
+  0%,
+  100% {
+    box-shadow:
+      0 0 10px #39ff1444,
+      inset 0 0 10px #00ff4111;
+  }
+  50% {
+    box-shadow:
+      0 0 24px #39ff1488,
+      inset 0 0 20px #00ff4133;
+  }
 }
 
 /***************************************
@@ -49,9 +83,11 @@
 #room4::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 60px;
-  background: linear-gradient(transparent, rgba(0,255,65,0.04), transparent);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(transparent, rgba(0, 255, 65, 0.04), transparent);
   animation: scanline 4s linear infinite;
   pointer-events: none;
   z-index: 0;
@@ -70,7 +106,6 @@
   text-shadow: 0 0 8px #39ff1466;
   letter-spacing: 0.08em;
 }
-
 
 .room4-description {
   font-size: 0.85rem;
@@ -105,7 +140,7 @@
   font-family: monospace;
 }
 
-/* Knappen som startar spelet */
+/* Show req-knapp */
 .room4 .show-requirements-btn {
   padding: 0.75rem 2rem;
   background: transparent;
@@ -136,8 +171,8 @@
   background: #000d00;
   border: 1px solid #39ff14;
   box-sizing: border-box;
-  
-  /* Placering – fast på höger sida */
+
+  /* Placering på höger sida */
   position: fixed;
   top: 50%;
   right: 15%;
@@ -182,7 +217,9 @@
   margin-bottom: 0.75rem;
   box-sizing: border-box;
   letter-spacing: 0.05em;
-  transition: box-shadow 0.2s, border-color 0.2s;
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s;
 }
 
 #password-input:focus {

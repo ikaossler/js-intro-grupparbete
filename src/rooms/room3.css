@@ -10,6 +10,7 @@
   --cyan: #00f0ff;
   --bg: #0a0a0a;
   --panel: #111;
+  --green: #00ff00;
 }
 
 #room3 * {
@@ -19,6 +20,9 @@
 }
 
 #room3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: var(--bg);
   font-family: "VT323", monospace;
   color: var(--green);
@@ -45,7 +49,7 @@
   z-index: 9999;
 }
 
-#room3 ~ * ,
+#room3 ~ *,
 #room3:has(#room3.active) {
   overflow: hidden;
   height: 100vh;
@@ -65,7 +69,7 @@
   z-index: 0;
 }
 .background-art-room3 span {
-  font-family: 'Press Start 2P', monospace;
+  font-family: "Press Start 2P", monospace;
   font-size: clamp(10px, 3vw, 28px);
   color: var(--green);
   white-space: nowrap;
@@ -74,15 +78,17 @@
 /* HUD */
 .hud {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 6px 16px;
-  background: rgba(0,255,65,0.07);
+  background: rgba(0, 255, 65, 0.07);
   border-bottom: 2px solid var(--green);
   z-index: 1000;
-  font-family: 'Press Start 2P', monospace;
+  font-family: "Press Start 2P", monospace;
   font-size: 12px;
   color: var(--green);
 }
@@ -96,9 +102,11 @@
 /* Progress bar */
 .progress-bar-wrap-room3 {
   position: fixed;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 8px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   z-index: 1000;
 }
 .progress-bar-room3 {
@@ -114,33 +122,51 @@
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.95);
+  background: rgba(0, 0, 0, 0.95);
   z-index: 99999;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 20px;
-  font-family: 'Press Start 2P', monospace;
+  font-family: "Press Start 2P", monospace;
   text-align: center;
   padding: 30px;
 }
-.win-screen-room3.show { display: flex; }
-.win-screen-room3 h1 { font-size: clamp(16px, 4vw, 36px); color: var(--yellow); text-shadow: 0 0 20px var(--yellow); animation: blink 0.6s infinite; }
-.win-screen-room3 p { font-size: clamp(8px, 1.5vw, 14px); color: var(--green); line-height: 2; }
-.win-screen-room3 .answer { color: var(--cyan); font-size: clamp(10px, 2vw, 18px); margin-top: 10px; }
+.win-screen-room3.show {
+  display: flex;
+}
+.win-screen-room3 h1 {
+  font-size: clamp(16px, 4vw, 36px);
+  color: var(--yellow);
+  text-shadow: 0 0 20px var(--yellow);
+  animation: blink 0.6s infinite;
+}
+.win-screen-room3 p {
+  font-size: clamp(8px, 1.5vw, 14px);
+  color: var(--green);
+  line-height: 2;
+}
+.win-screen-room3 .answer {
+  color: var(--cyan);
+  font-size: clamp(10px, 2vw, 18px);
+  margin-top: 10px;
+}
 .win-screen-room3 .restart-btn-room3 {
   margin-top: 20px;
   padding: 12px 24px;
   background: transparent;
   border: 3px solid var(--green);
   color: var(--green);
-  font-family: 'Press Start 2P', monospace;
+  font-family: "Press Start 2P", monospace;
   font-size: 11px;
   cursor: pointer;
   transition: all 0.2s;
 }
-.win-screen-room3 .restart-btn-room3:hover { background: var(--green); color: #000; box-shadow: 0 0 20px var(--green); }
-
+.win-screen-room3 .restart-btn-room3:hover {
+  background: var(--green);
+  color: #000;
+  box-shadow: 0 0 20px var(--green);
+}
 
 /* POPUP */
 .popup {
@@ -195,9 +221,15 @@
 .popup-titlebar:active {
   cursor: grabbing;
 }
-.popup.rebus-popup .popup-titlebar { color: var(--green); }
-.popup.junk-popup .popup-titlebar { color: var(--green); }
-.popup.info-popup .popup-titlebar { color: var(--green); }
+.popup.rebus-popup .popup-titlebar {
+  color: var(--green);
+}
+.popup.junk-popup .popup-titlebar {
+  color: var(--green);
+}
+.popup.info-popup .popup-titlebar {
+  color: var(--green);
+}
 
 .popup-titlebar .title-text {
   font-family: "Press Start 2P", monospace;
@@ -218,6 +250,60 @@
 .close-btn:hover {
   background: var(--green);
   color: #000;
+}
+
+.start-room3-btn {
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  border: 1px solid lime;
+  color: var(--green);
+  font-family: "Press start 2P", monospace;
+  padding: 5px !important;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.start-room3-btn:hover {
+  background: #00ff41;
+  color: #000;
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
+}
+
+.restart-btn-room3 {
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  border: 1px solid #00ff00 !important;
+  color: var(--green);
+  font-family: "Press start 2P", monospace;
+  padding: 10px !important;
+  cursor: pointer;
+  font-size: 15px !important;
+}
+
+#restart-btn-room3:hover {
+  background: #00ff41;
+  color: #000;
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
+}
+
+.next-room-btn-room3 {
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  border: 1px solid lime;
+  color: var(--green);
+  font-family: "Press start 2P", monospace;
+  padding: 5px !important;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.next-room-btn-room3:hover {
+  background: #00ff41;
+  color: #000;
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
 }
 
 .popup-body {
@@ -280,22 +366,54 @@
 
 /* Animations */
 @keyframes popIn {
-  from { transform: scale(0.5) rotate(-5deg); opacity: 0; }
-  to { transform: scale(1) rotate(0deg); opacity: 1; }
+  from {
+    transform: scale(0.5) rotate(-5deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-6px); }
-  75% { transform: translateX(6px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
 }
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 @keyframes glitch {
-  0% { clip-path: inset(0 0 95% 0); transform: skewX(0deg); }
-  10% { clip-path: inset(40% 0 50% 0); transform: skewX(-4deg); }
-  20% { clip-path: inset(80% 0 10% 0); transform: skewX(3deg); }
-  30% { clip-path: inset(10% 0 80% 0); transform: skewX(0deg); }
-  100% { clip-path: inset(0 0 95% 0); }
+  0% {
+    clip-path: inset(0 0 95% 0);
+    transform: skewX(0deg);
+  }
+  10% {
+    clip-path: inset(40% 0 50% 0);
+    transform: skewX(-4deg);
+  }
+  20% {
+    clip-path: inset(80% 0 10% 0);
+    transform: skewX(3deg);
+  }
+  30% {
+    clip-path: inset(10% 0 80% 0);
+    transform: skewX(0deg);
+  }
+  100% {
+    clip-path: inset(0 0 95% 0);
+  }
 }

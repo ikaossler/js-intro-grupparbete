@@ -1,6 +1,6 @@
 import "./room3.css";
-/* /borttagen kod för att main.ts ska lyssna på event istället för knappen direkt /maria
-import { showSection, SectionId } from "../main"; */
+/* /borttagen kod för att main.ts ska lyssna på event istället för knappen direkt /maria*/
+import { showSection, SectionId } from "../main"; 
 
 
 /*******************************************/
@@ -8,10 +8,10 @@ import { showSection, SectionId } from "../main"; */
 /*******************************************/
 
 interface IRebus {
-    text: string;
-    hint: string;
-    answer: string;
-    altAnswers?: string[];
+  text: string;
+  hint: string;
+  answer: string;
+  altAnswers?: string[];
 }
 
 /*******************************************/
@@ -19,96 +19,96 @@ interface IRebus {
 /*******************************************/
 
 const REBUSES: IRebus[] = [
-    {
-        text: "🏠 + 🦁 = ?",
-        hint: "ett ord",
-        answer: "PET",
-        altAnswers: ["PET", "PETS"]
-    },
-    {
-        text: "🐍 + 📱 = ?",
-        hint: "Spel",
-        answer: "SNAKE",
-        altAnswers: ["SNAKE", "SNAKE GAME", "SNAKE SPEL"]
-    },
-    {
-        text: "👁️ + 🥶 + 🐻",
-        hint: "Ett djur",
-        answer: "ISBEAR",
-        altAnswers: ["ISBEAR", "IS BEAR"]
-    },
-    {
-        text: "🔥 + ❤️ + 🧊 + ⛓️",
-        hint: "Ett ord",
-        answer: "COLDHEARTED",
-        altAnswers: ["COLDHEARTED", "COLD HEARTED"]
-    },
-    {
-        text: "❤️ + 💔 + 🌧️",
-        hint: "Ett ord",
-        answer: "HEARTBREAK",
-        altAnswers: ["HEARTBREAK", "HEART BREAK"]
-    },
-    {
-        text: "☀️ + 👓 + 🧴",
-        hint: "Ett ord",
-        answer: "SUNSCREEN",
-        altAnswers: ["SUNSCREEN", "SUN SCREEN"]
-    },
-    {
-        text: "❄️ + 🏃 + 👟",
-        hint: "Ett ord",
-        answer: "SNOWSHOES",
-        altAnswers: ["SNOWSHOES", "SNOW SHOES"]
-    },
-    {
-        text: "☀️ + 🌸 + 🌱",
-        hint: "Ett ord",
-        answer: "SUMMER MEADOW",
-        altAnswers: ["SUMMER MEADOW", "SUMMER MEADOW"]
-    },
-    {
-        text: "👁️ + 🌊 + 🍵 + 🗝️",
-        hint: "Ett ord",
-        answer: "IDENTITY",
-        altAnswers: ["IDENTITY", "IDENTITY", "IDENTITY"]
-    },
-    {
-        text: "⏰ + 🪟 + 🤔 + 💡",
-        hint: "Ett ord",
-        answer: "INSIGHT",
-        altAnswers: ["INSIGHT", "INSIGHT", "INSIGHT"]
-    },
-    {
-        text: "🔥 + 🦊 + ❄️ + 🎭",
-        hint: "Ett ord",
-        answer: "FOX PLAY",
-        altAnswers: ["FOX PLAY", "FOX GAME", "FOX GAME"]
-    },
-    {
-        text: "🧠 + 🗝️ + 🚪 + 🌑",
-        hint: "Ett ord",
-        answer: "SECRET",
-        altAnswers: ["SECRET", "SECRET", "SECRET"]
-    },
-    {
-        text: "🧠 + 🚂 + 👟",
-        hint: "Ett ord",
-        answer: "THOUGHT TRAIN",
-        altAnswers: ["THOUGHT TRAIN", "THOUGHT TRAIN", "THOUGHT TRAIN"]
-    },
-    {
-        text: "❤️ + ➡️ + 🎯",
-        hint: "Ett ord",
-        answer: "TARGET ORIENTED",
-        altAnswers: ["TARGET ORIENTED", "TARGET ORIENTED", "TARGET ORIENTED"]
-    },
-    {
-        text: "📖 + 🌙 + ⏰",
-        hint: "Ett ord",
-        answer: "GOODNIGHT STORY",
-        altAnswers: ["GOODNIGHT STORY", "GOOD NIGHT STORY", "GOOD NIGHT STORY"]
-    }
+  {
+    text: "🏠 + 🦁 = ?",
+    hint: "One word",
+    answer: "PET",
+    altAnswers: ["PET", "PETS"],
+  },
+  {
+    text: "🐍 + 📱 = ?",
+    hint: "A game",
+    answer: "SNAKE",
+    altAnswers: ["SNAKE", "SNAKE GAME", "SNAKE SPEL"],
+  },
+  {
+    text: "👁️ + 🥶 + 🐻",
+    hint: "A animale",
+    answer: "ICEBEAR",
+    altAnswers: ["ICEBEAR", "ICE BEAR"],
+  },
+  {
+    text: "🔥 + ❤️ + 🧊 + ⛓️",
+    hint: "One word",
+    answer: "COLDHEARTED",
+    altAnswers: ["COLDHEARTED", "COLD HEARTED"],
+  },
+  {
+    text: "❤️ + 💔 + 🌧️",
+    hint: "One word",
+    answer: "HEARTBREAK",
+    altAnswers: ["HEARTBREAK", "HEART BREAK"],
+  },
+  {
+    text: "☀️ + 👓 + 🧴",
+    hint: "One Word",
+    answer: "SUNSCREEN",
+    altAnswers: ["SUNSCREEN", "SUN SCREEN"],
+  },
+  {
+    text: "❄️ + 🏃 + 👟",
+    hint: "One word",
+    answer: "SNOWSHOES",
+    altAnswers: ["SNOWSHOES", "SNOW SHOES"],
+  },
+  {
+    text: "☀️ + 🌸 + 🌱",
+    hint: "Two words",
+    answer: "SUMMER MEADOW",
+    altAnswers: ["SUMMER MEADOW", "SUMMER MEADOW"],
+  },
+  {
+    text: "👁️ + 🌊 + 🍵 + 🗝️",
+    hint: "One Word",
+    answer: "IDENTITY",
+    altAnswers: ["IDENTITY", "IDENTITY", "IDENTITY"],
+  },
+  {
+    text: "⏰ + 🪟 + 🤔 + 💡",
+    hint: "One word",
+    answer: "INSIGHT",
+    altAnswers: ["INSIGHT", "INSIGHT", "INSIGHT"],
+  },
+  {
+    text: "🔥 + 🦊 + ❄️ + 🎭",
+    hint: "Two words",
+    answer: "FOX PLAY",
+    altAnswers: ["FOX PLAY", "FOX GAME", "FOX GAME"],
+  },
+  {
+    text: "🧠 + 🗝️ + 🚪 + 🌑",
+    hint: "One word",
+    answer: "SECRET",
+    altAnswers: ["SECRET", "SECRET", "SECRET"],
+  },
+  {
+    text: "🧠 + 🚂 + 👟",
+    hint: "Two words",
+    answer: "THOUGHT TRAIN",
+    altAnswers: ["THOUGHT TRAIN", "THOUGHT TRAIN", "THOUGHT TRAIN"],
+  },
+  {
+    text: "❤️ + ➡️ + 🎯",
+    hint: "Two words",
+    answer: "TARGET ORIENTED",
+    altAnswers: ["TARGET ORIENTED", "TARGET ORIENTED", "TARGET ORIENTED"],
+  },
+  {
+    text: "📖 + 🌙 + ⏰",
+    hint: "Two words",
+    answer: "GOODNIGHT STORY",
+    altAnswers: ["GOODNIGHT STORY", "GOOD NIGHT STORY", "GOOD NIGHT STORY"],
+  },
 ];
 
 const JUNK_TEXTS: string[] = [
@@ -176,11 +176,13 @@ const WINDOW_TITLE_JUNK: string[] = [
 /************** START BUTTON ***************/
 /*******************************************/
 let intervalsStarted: boolean = false;
+let spawnInterval1: number | null = null;
+let spawnInterval2: number | null = null;
 
 document.querySelector("#start-room3-btn")?.addEventListener("click", () => {
-    const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
-    btn.style.display = "none";
-    startRoom3();
+  const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
+  btn.style.display = "none";
+  startRoom3();
 });
 
 function startRoom3(): void {
@@ -190,13 +192,13 @@ function startRoom3(): void {
   if (!intervalsStarted) {
     intervalsStarted = true;
 
-    setInterval(() => {
+    spawnInterval1 = setInterval(() => {
       if (activePopups < MAX_POPUPS && solvedRebuses.size < REBUSES.length) {
         spawnPopup();
       }
     }, 1200);
 
-    setInterval(() => {
+    spawnInterval2 = setInterval(() => {
       if (activePopups < MAX_POPUPS - 2 && solvedRebuses.size < REBUSES.length) {
         spawnPopup();
         setTimeout(spawnPopup, 300);
@@ -219,6 +221,11 @@ function startTimer(): void {
     const min = String(Math.floor(timerSeconds / 60)).padStart(2, "0");
     const sec = String(timerSeconds % 60).padStart(2, "0");
     (document.querySelector("#room3-timer") as HTMLElement).textContent = `${min}:${sec}`;
+
+    if (timerSeconds <= 0) {
+      stopTimer();
+      handleTimeout();
+    }
   }, 1000);
 }
 
@@ -229,6 +236,11 @@ function stopTimer(): void {
   }
 }
 
+function handleTimeout(): void {
+  cleanupRoom3();
+  showSection("room3-timeout");
+}
+
 /*******************************************/
 /********** NEXT ROOM BUTTON ***************/
 /*******************************************/
@@ -237,6 +249,7 @@ function stopTimer(): void {
 /*
 BORTTAGEN KOD för att den inte behövs längre när vi skickar event till main.ts istället för att main.ts ska lyssna på knappen direkt. /maria
 document.querySelector("#next-room-btn-room3")?.addEventListener("click", () => {
+  cleanupRoom3();
   showSection("room4");
 });*/
 
@@ -247,6 +260,7 @@ function notifyRoom3Completed(): void {
 
 // Körs när spelaren klickar på "Next room" i room3.
 function handleNextRoomButtonClick(): void {
+  cleanupRoom3();
   notifyRoom3Completed();
 }
 
@@ -260,7 +274,27 @@ if (nextRoomButton) {
 /*******************************************/
 
 document.querySelector("#restart-btn-room3")?.addEventListener("click", () => {
-  restartGame();
+  cleanupRoom3();
+  showSection("room1");
+});
+
+/*******************************************/
+/*************** START OVER ****************/
+/*******************************************/
+
+document.querySelector("#timeout-startover-btn")?.addEventListener("click", () => {
+  solvedRebuses.clear();
+  closedCount = 0;
+
+  (document.querySelector("#solved-count-room3") as HTMLElement).textContent = "0";
+  (document.querySelector("#closed-count-room3") as HTMLElement).textContent = "0";
+  (document.querySelector("#progress-bar-room3") as HTMLElement).style.width = "0%";
+  (document.querySelector("#room3-timer") as HTMLElement).textContent = "10:00";
+
+  const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
+  btn.style.display = "";
+
+  showSection("room1");
 });
 
 /*******************************************/
@@ -285,8 +319,9 @@ function normalise(s: string): string {
 }
 
 function updateProgressRoom3(): void {
-    const pct: number = (solvedRebuses.size / REBUSES.length) * 100;
-    (document.querySelector("#progress-bar-room3") as HTMLElement).style.width = Math.min(pct, 100) + "%";
+  const pct: number = (solvedRebuses.size / REBUSES.length) * 100;
+  (document.querySelector("#progress-bar-room3") as HTMLElement).style.width =
+    Math.min(pct, 100) + "%";
 }
 
 /*******************************************/
@@ -294,16 +329,16 @@ function updateProgressRoom3(): void {
 /*******************************************/
 
 interface IPopupOption {
-    x: number;
-    y: number;
+  x: number;
+  y: number;
 }
 
-function randomPos(w:number = 320, h:number = 240): IPopupOption {
-    const hudH = 36;
-    const barH = 8;
-    const x: number = Math.random() * (window.innerWidth - w - 20) + 10;
-    const y: number = Math.random() * (window.innerHeight - h - hudH - barH - 20) + hudH + barH + 10;
-    return { x, y };
+function randomPos(w: number = 320, h: number = 240): IPopupOption {
+  const hudH = 36;
+  const barH = 8;
+  const x: number = Math.random() * (window.innerWidth - w - 20) + 10;
+  const y: number = Math.random() * (window.innerHeight - h - hudH - barH - 20) + hudH + barH + 10;
+  return { x, y };
 }
 
 function spawnPopup(): void {
@@ -398,7 +433,8 @@ function closePopup(btn: HTMLButtonElement): void {
     popup.remove();
     activePopups--;
     closedCount++;
-    (document.querySelector("#closed-count-room3") as HTMLElement).textContent = String(closedCount);
+    (document.querySelector("#closed-count-room3") as HTMLElement).textContent =
+      String(closedCount);
     spawnPopup();
   }, 120);
 }
@@ -488,6 +524,7 @@ function checkWin(): void {
 }
 
 function restartGame(): void {
+  cleanupRoom3();
   solvedRebuses.clear();
   closedCount = 0;
   activePopups = 0;
@@ -501,7 +538,7 @@ function restartGame(): void {
   (document.querySelector("#room3-timer") as HTMLElement).textContent = "10:00";
 
   document.querySelectorAll<HTMLElement>(".popup").forEach((p) => p.remove());
-  
+
   const btn = document.querySelector("#start-room3-btn") as HTMLButtonElement;
   btn.style.display = "";
 }
@@ -584,3 +621,23 @@ function initialSpawn(): void {
 (window as any).checkRebus = checkRebus;
 (window as any).fakeSubmit = fakeSubmit;
 (window as any).restartGame = restartGame;
+
+/*******************************************/
+/***************** CLEANUP *****************/
+/*******************************************/
+
+function cleanupRoom3(): void {
+  stopTimer();
+  if (spawnInterval1 !== null) {
+    clearInterval(spawnInterval1);
+    spawnInterval1 = null;
+  }
+  if (spawnInterval2 !== null) {
+    clearInterval(spawnInterval2);
+    spawnInterval2 = null;
+  }
+  intervalsStarted = false;
+
+  document.querySelectorAll<HTMLElement>(".popup").forEach((p) => p.remove());
+  activePopups = 0;
+}
