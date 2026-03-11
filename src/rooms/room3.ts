@@ -260,6 +260,7 @@ function notifyRoom3Completed(): void {
 
 // Körs när spelaren klickar på "Next room" i room3.
 function handleNextRoomButtonClick(): void {
+  cleanupRoom3();
   notifyRoom3Completed();
 }
 

@@ -66,7 +66,7 @@ function handleStartButtonClick(): void {
   startTotalTimer();
   bgMusic.pause();
   bgMusic.currentTime = 0;
-  showSection("room1"); //ÄNDRA TILL RUM 1 INNAN PR!!
+  showSection("room3"); //ÄNDRA TILL RUM 1 INNAN PR!!
 }
 
 /*********************************************************
