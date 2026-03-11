@@ -428,8 +428,8 @@ h1 {
 }
 .highscore-top3-list li:nth-child(3) {
   animation-delay: 1.2s;
-  color: #cd7f32;
-  text-shadow: 0 0 8px #cd7f3266;
+  color: #CF853A;
+  text-shadow: 0 0 8px #CF853A66;
 }
 
 #reset-btn,
