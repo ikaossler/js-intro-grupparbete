@@ -4,7 +4,7 @@
   height: 26rem;
   overflow-y: hidden;
   width: min(42rem, 92vw);
-  margin: 0 auto;
+  margin: 10rem auto 0;
 }
 
 .room1-title {
@@ -56,4 +56,38 @@
   margin-top: 0.75rem;
   color: #39ff14;
   white-space: pre-line;
+}
+
+.room1-success-title {
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.room1-success-text {
+  margin-top: 0;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.room1-continue-button {
+  display: block;
+  max-width: 600px;
+  margin: 10px auto;
+  width: 100%;
+  padding: 0.7rem;
+  background-color: #00b32d;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 2px solid #39ff14;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.room1-continue-button:hover {
+  background-color: #00ff88;
+  box-shadow: 0 0 20px #39ff14;
+  transform: scale(1.02);
 }

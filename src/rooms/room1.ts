@@ -12,6 +12,8 @@ type Room1Elements = {
   codeInput: HTMLInputElement;
   checkButton: HTMLButtonElement;
   continueButton: HTMLButtonElement;
+  successTitle: HTMLElement;
+  successText: HTMLElement;
   message: HTMLElement;
   timer: HTMLElement;
 };
@@ -57,6 +59,10 @@ function getRoom1Elements(room: HTMLElement): Room1Elements | null {
   const checkButton = room.querySelector<HTMLButtonElement>("#check-btn");
   // Knapp för att gå vidare till rum 2 (visas när rummet är klart).
   const continueButton = room.querySelector<HTMLButtonElement>("#room1-continue-btn");
+  // Nytt: rubrik som visas när room1 är klart.
+  const successTitle = room.querySelector<HTMLElement>("#room1-success-title");
+  // Nytt: beskrivningstext som visas när room1 är klart.
+  const successText = room.querySelector<HTMLElement>("#room1-success-text");
   // Element för feedback/hints till användaren.
   const message = room.querySelector<HTMLElement>("#room1-message");
   // Element som visar timern för room1.
@@ -69,6 +75,8 @@ function getRoom1Elements(room: HTMLElement): Room1Elements | null {
     !codeInput ||
     !checkButton ||
     !continueButton ||
+    !successTitle ||
+    !successText ||
     !message ||
     !timer
   ) {
@@ -76,7 +84,17 @@ function getRoom1Elements(room: HTMLElement): Room1Elements | null {
   }
 
   // Returnerar alla hittade element samlade i ett objekt.
-  return { resendButton, flashCode, codeInput, checkButton, continueButton, message, timer };
+  return {
+    resendButton,
+    flashCode,
+    codeInput,
+    checkButton,
+    continueButton,
+    successTitle,
+    successText,
+    message,
+    timer,
+  };
 }
 
 // Formaterar tid till mm:ss.
@@ -121,9 +139,24 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
     timerId: null,
   };
 
-  // Ritar timern i UI.
+  // Visar kvarvarande tid i room1-timern.
   function renderRoomTimer(): void {
     room1Elements.timer.textContent = `Time: ${formatRoomTime(state.secondsLeft)}`;
+  }
+
+  // Gömmer "klart"-delen (rubrik + text + knapp).
+  // Enkel hjälpfunktion så vi slipper upprepa samma rader.
+  function hideSuccessUI(): void {
+    room1Elements.successTitle.hidden = true;
+    room1Elements.successText.hidden = true;
+    room1Elements.continueButton.hidden = true;
+  }
+
+  // Visar "klart"-delen när användaren löst room1.
+  function showSuccessUI(): void {
+    room1Elements.successTitle.hidden = false;
+    room1Elements.successText.hidden = false;
+    room1Elements.continueButton.hidden = false;
   }
 
   // Stoppar timern om den körs.
@@ -135,7 +168,7 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
     state.timerId = null;
   }
 
-  // Rensar väntande timeouts i room1.
+  // Stoppar gamla timeouts så timern och meddelanden inte hamnar i fel läge.
   function clearPendingTimeouts(mode: "hide" | "secondary" | "all" = "all"): void {
     if ((mode === "hide" || mode === "all") && hideCodeTimeoutId !== null) {
       window.clearTimeout(hideCodeTimeoutId);
@@ -152,26 +185,34 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
     room1Elements.flashCode.textContent = FLASH_PLACEHOLDER;
   }
 
+  // Körs när timeouten för att dölja flash-koden går ut.
+  function handleHideCodeTimeout(): void {
+    hideCodeTimeoutId = null;
+    hideFlashedCode();
+  }
+
+  // Körs när timeouten för att visa steg 2-prompten går ut.
+  function handleSecondaryPromptTimeout(): void {
+    secondaryPromptTimeoutId = null;
+    showSecondaryVerificationPrompt();
+  }
+
   // Planerar när flash-koden ska döljas.
   function scheduleHideFlashedCode(): void {
     clearPendingTimeouts("hide");
-    hideCodeTimeoutId = window.setTimeout(() => {
-      hideCodeTimeoutId = null;
-      hideFlashedCode();
-    }, 500);
+    hideCodeTimeoutId = window.setTimeout(handleHideCodeTimeout, 500);
   }
 
   // Planerar texten för verifieringssteg 2.
   function scheduleSecondaryPrompt(): void {
     clearPendingTimeouts("secondary");
-    secondaryPromptTimeoutId = window.setTimeout(() => {
-      secondaryPromptTimeoutId = null;
-      showSecondaryVerificationPrompt();
-    }, 900);
+    secondaryPromptTimeoutId = window.setTimeout(handleSecondaryPromptTimeout, 900);
   }
 
   // Visar meddelandet för andra verifieringssteget.
   function showSecondaryVerificationPrompt(): void {
+    // Om success-rutan råkar synas ska den döljas här.
+    hideSuccessUI();
     room1Elements.message.textContent = SECONDARY_VERIFICATION_PROMPT;
   }
 
@@ -186,7 +227,7 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
 
     room1Elements.codeInput.value = "";
     room1Elements.flashCode.textContent = FLASH_PLACEHOLDER;
-    room1Elements.continueButton.hidden = true;
+    hideSuccessUI();
     room1Elements.message.textContent = ROOM1_TIMEOUT_MESSAGE;
     renderRoomTimer();
   }
@@ -240,14 +281,13 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
   }
 
   // Låser upp nästa rum en gång.
-  // Hindrar att knappen visas/förbereds flera gånger.
+  // Hindrar att room1 "klaras" flera gånger.
   function unlockNextRoomOnce(): void {
     if (state.hasUnlockedNextRoom) {
       return;
     }
 
     state.hasUnlockedNextRoom = true;
-    room1Elements.continueButton.hidden = false;
     stopRoomTimer();
     clearPendingTimeouts();
   }
@@ -276,14 +316,16 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
 
   // Hanterar kontroll i andra steget (secondaryCode).
   function handleSecondaryVerification(userValue: string): void {
-    // Rätt kod i steg 2: rummet är klart och continue-knappen visas.
+    // Rätt kod i steg 2: visa success-text och knapp.
     if (userValue === state.previousCode) {
-      room1Elements.message.textContent = "Two-step verification complete. Escape successful.";
+      room1Elements.message.textContent = "";
+      showSuccessUI();
       unlockNextRoomOnce();
       return;
     }
 
-    // Fel kod i steg 2: visa separat felmeddelande för andra steget.
+    // Fel kod i steg 2: göm success och visa feltext.
+    hideSuccessUI();
     room1Elements.message.textContent = SECONDARY_FAILURE_MESSAGE;
   }
 
@@ -305,9 +347,19 @@ export function initRoom1(room: HTMLElement, onComplete: () => void): void {
     handleSecondaryVerification(userValue);
   }
 
+  // Låter Enter i inputfältet köra samma verifiering som "Verify"-knappen.
+  function handleCodeInputKeydown(event: KeyboardEvent): void {
+    if (event.key !== "Enter") {
+      return;
+    }
+    event.preventDefault();
+    handleCheckClick();
+  }
+
   // Kopplar alla klickhändelser för room1.
   room1Elements.resendButton.addEventListener("click", handleResendClick);
   room1Elements.checkButton.addEventListener("click", handleCheckClick);
+  room1Elements.codeInput.addEventListener("keydown", handleCodeInputKeydown);
   room1Elements.continueButton.addEventListener("click", handleContinueClick);
 
   // Starta room1 med en nedräkning från 03:00.

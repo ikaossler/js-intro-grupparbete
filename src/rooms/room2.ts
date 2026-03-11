@@ -1,3 +1,5 @@
+import "./room2.css";
+
 interface ICaptchaItem {
   imageSrc: string;
   isCorrect: boolean;
@@ -70,26 +72,88 @@ let roomContainer: HTMLElement;
 let focusedItemIndex: number = 0;
 let timerIntervalId: number | null = null;
 let roomStartTime: number = 0;
+let onFailCallback: (() => void) | null = null;
+let keyboardControlsHandler: ((e: KeyboardEvent) => void) | null = null;
 
+<<<<<<< HEAD:src/room2/room2.ts
 export function renderCaptchaRoom(onComplete: () => void): HTMLElement {
   resetRoomState();
   startRoomTimer();
+=======
+export function renderCaptchaRoom(onComplete: () => void, onFail: () => void): HTMLElement {
+    onFailCallback = onFail;
+    resetRoomState();
+>>>>>>> main:src/rooms/room2.ts
 
   roomContainer = document.createElement("div");
   roomContainer.id = "captcha-room";
   roomContainer.className = "room-container";
 
+<<<<<<< HEAD:src/room2/room2.ts
   injectRoundHtml(onComplete);
+=======
+    void injectRoomIntroScreen(onComplete);
+    attachKeyboardControls(onComplete);
+>>>>>>> main:src/rooms/room2.ts
 
   return roomContainer;
 }
 
+function attachKeyboardControls(onComplete: () => void): void {
+    if (keyboardControlsHandler) {
+        document.removeEventListener("keydown", keyboardControlsHandler);
+    }
+
+    keyboardControlsHandler = (event: KeyboardEvent) => {
+        if (!roomContainer.querySelector("#captcha-grid")) return;
+
+        const GRID_COLUMNS = 3;
+        const lastIndex = CAPTCHA_ROUNDS[currentRoundIndex].items.length - 1;
+
+        switch (event.key) {
+            case "ArrowRight":
+                event.preventDefault();
+                moveFocusToItem(Math.min(focusedItemIndex + 1, lastIndex), onComplete);
+                break;
+            case "ArrowLeft":
+                event.preventDefault();
+                moveFocusToItem(Math.max(focusedItemIndex - 1, 0), onComplete);
+                break;
+            case "ArrowDown":
+                event.preventDefault();
+                moveFocusToItem(Math.min(focusedItemIndex + GRID_COLUMNS, lastIndex), onComplete);
+                break;
+            case "ArrowUp":
+                event.preventDefault();
+                moveFocusToItem(Math.max(focusedItemIndex - GRID_COLUMNS, 0), onComplete);
+                break;
+            case "Enter":
+            case " ":
+                if (document.activeElement?.id === "captcha-verify-btn") return;
+                event.preventDefault();
+                toggleItemSelection(focusedItemIndex, onComplete);
+                break;
+        }
+    };
+
+    document.addEventListener("keydown", keyboardControlsHandler);
+}
+
 function resetRoomState(): void {
+<<<<<<< HEAD:src/room2/room2.ts
   currentRoundIndex = 0;
   selectedItems = new Set();
   focusedItemIndex = 0;
   timerIntervalId = null;
   roomStartTime = 0;
+=======
+    currentRoundIndex = 0;
+    selectedItems = new Set();
+    focusedItemIndex = 0;
+    stopRoomTimer();
+    timerIntervalId = null;
+    roomStartTime = 0;
+>>>>>>> main:src/rooms/room2.ts
 }
 
 function startRoomTimer(): void {
@@ -104,7 +168,32 @@ function stopRoomTimer(): void {
   }
 }
 
+function handleTimerExpiration(): void {
+    hideCaptchaHeaderElements();
+
+    roomContainer.innerHTML = `
+        <div class="captcha-screen-container">
+            <h2 class="captcha-timeout-title">Time's Up!</h2>
+            <p class="captcha-timeout-message">You failed to complete the challenge in time.</p>
+            <button
+                class="captcha-timeout-retry-btn"
+                id="captcha-retry-btn"
+                aria-label="Restart game">
+                Try again
+            </button>
+        </div>
+    `;
+    const retryButton = roomContainer.querySelector<HTMLButtonElement>("#captcha-retry-btn");
+    retryButton?.addEventListener("click", () => {
+        onFailCallback?.();
+    });
+    retryButton?.focus();
+}
+
+const ROOM_TIME_LIMIT_SECONDS = 5 * 60; 
+
 function updateTimerDisplay(): void {
+<<<<<<< HEAD:src/room2/room2.ts
   const timerElement = document.querySelector<HTMLElement>("#captcha-timer");
   if (!timerElement) return;
   const elapsedSeconds = Math.floor((Date.now() - roomStartTime) / 1000);
@@ -113,6 +202,57 @@ function updateTimerDisplay(): void {
 
   const formattedTime = `${minutes}:${seconds.toString().padStart(2, "0")}`;
   timerElement.textContent = formattedTime;
+=======
+    const timerElement = document.querySelector<HTMLElement>("#captcha-timer");
+    if (!timerElement) return;
+
+    // Don't update if timer hasn't started yet
+    if (roomStartTime === 0) return;
+
+    const elapsedSeconds = Math.floor((Date.now() - roomStartTime) / 1000);
+    const remainingSeconds = ROOM_TIME_LIMIT_SECONDS - elapsedSeconds;
+
+    if (remainingSeconds <= 0) {
+        timerElement.textContent = "0:00";
+        stopRoomTimer();
+        handleTimerExpiration();
+        return;
+    }
+
+    const minutes = Math.floor(remainingSeconds / 60);
+    const seconds = remainingSeconds % 60;
+    const formattedTime = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    timerElement.textContent = formattedTime;
+>>>>>>> main:src/rooms/room2.ts
+}
+
+async function injectRoomIntroScreen(onComplete: () => void): Promise<void> {
+    const response = await fetch(`${BASE_URL}rooms.json`);
+    const roomsData = await response.json();
+    const myRoomData = roomsData.find((room: { id: string }) => room.id === "room2");
+
+    if (!myRoomData) {
+        injectRoundHtml(onComplete);
+        return;
+    }
+
+    roomContainer.innerHTML = `
+        <div class="captcha-screen-container">
+            <h2 class="captcha-room-intro-title">Room 2: ${myRoomData.name}</h2>
+            <p class="captcha-room-intro-description">${myRoomData.description}</p>
+            <button class="captcha-room-intro-start-btn" id="captcha-start-btn" aria-label="Start Room 2">
+                Start
+            </button>
+        </div>
+    `;
+
+    const startButton = roomContainer.querySelector<HTMLButtonElement>("#captcha-start-btn");
+    startButton?.addEventListener("click", () => {
+        document.querySelector<HTMLElement>("#room2-timer-wrapper")?.removeAttribute("hidden");
+        document.querySelector<HTMLElement>(".captcha-room-title")?.removeAttribute("hidden");
+        injectRoundHtml(onComplete);
+        startRoomTimer();
+    });
 }
 
 function injectRoundHtml(onComplete: () => void): void {
@@ -225,6 +365,7 @@ function handleCorrectSelection(onComplete: () => void): void {
 function handleWrongSelection(onComplete: () => void): void {
   showFeedback("Incorrect selection. Please try again.", "error");
 
+<<<<<<< HEAD:src/room2/room2.ts
   const grid = roomContainer.querySelector<HTMLElement>("#captcha-grid");
 
   setTimeout(() => {
@@ -241,9 +382,31 @@ function showFeedback(message: string, type: "error" | "success"): void {
     feedbackElement.classList.remove("error", "success");
     feedbackElement.classList.add(`feedback-${type}`);
   }
+=======
+    setTimeout(() => {
+        selectedItems = new Set();
+        focusedItemIndex = 0;
+        injectRoundHtml(onComplete);
+    }, 2000);
+}
+
+function showFeedback(message: string, type: "error" | "success"): void {
+    const feedbackElement = roomContainer.querySelector<HTMLElement>("#captcha-feedback");
+    if (feedbackElement) {
+        feedbackElement.textContent = message;
+        feedbackElement.classList.remove("feedback-error", "feedback-success");
+        feedbackElement.classList.add(`feedback-${type}`);
+    }
+>>>>>>> main:src/rooms/room2.ts
+}
+
+function hideCaptchaHeaderElements(): void {
+    document.querySelector<HTMLElement>("#room2-timer-wrapper")?.setAttribute("hidden", "true");
+    document.querySelector<HTMLElement>(".captcha-room-title")?.setAttribute("hidden", "true");
 }
 
 function injectSuccessScreen(onComplete: () => void): void {
+<<<<<<< HEAD:src/room2/room2.ts
   roomContainer.innerHTML = `
         <h2 class="captcha-success-title">Verification Complete!</h2>
         <p class="captcha-success-message">You have successfully completed the captcha challenge.</p>
@@ -253,6 +416,21 @@ function injectSuccessScreen(onComplete: () => void): void {
             aria-label="Continue to next room">
             Continue
         </button>
+=======
+    hideCaptchaHeaderElements();
+
+    roomContainer.innerHTML = `
+        <div class="captcha-screen-container">
+            <h2 class="captcha-success-title">Verification Complete!</h2>
+            <p class="captcha-success-message">You have successfully completed the captcha challenge.</p>
+            <button
+                class="captcha-success-continue-btn"
+                id="captcha-continue-btn"
+                aria-label="Continue to next room">
+                Continue
+            </button>
+        </div>
+>>>>>>> main:src/rooms/room2.ts
     `;
 
   const continueButton = roomContainer.querySelector<HTMLButtonElement>("#captcha-continue-btn");

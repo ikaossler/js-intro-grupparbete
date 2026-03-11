@@ -6,8 +6,8 @@
   },
   {
     "id": "room2",
-    "name": "9999",
-    "description": "8888"
+    "name": "Captcha Challenge",
+    "description": "Select the correct images to verify you are not a bot. You must solve the captcha to proceed to the next room."
   },
   {
     "id": "room3",

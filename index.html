@@ -10,8 +10,18 @@
   <body>
     <header class="site-header">
       <h1>Error 404</h1>
+      <!-- TEMP START: Tillfällig reset-knapp för test/demo. Ska tas bort senare. -->
+      <button id="temp-reset-btn" type="button">Reset to Start</button>
+      <!-- TEMP END: Ska tas bort senare. -->
       <div id="total-time" class="total-timer">Time: 0:00</div>
-      <div class="progress-wrap">
+      <div
+        class="progress-wrap"
+        role="progressbar"
+        aria-label="Game progress"
+        aria-valuemin="0"
+        aria-valuemax="4"
+        aria-valuenow="0"
+      >
         <div id="progress-bar" class="progress-bar"></div>
       </div>
       <span id="logged-in-user"></span>
@@ -101,7 +111,13 @@
         />
 
         <button id="check-btn" class="room1-button" type="button">Verify</button>
-        <button id="room1-continue-btn" class="room1-button" type="button" hidden>
+        <h3 id="room1-success-title" class="room1-success-title" hidden>
+          Verification Complete!
+        </h3>
+        <p id="room1-success-text" class="room1-success-text" hidden>
+          You have successfully completed the verification challenge.
+        </p>
+        <button id="room1-continue-btn" class="room1-button room1-continue-button" type="button" hidden>
           Continue to room 2
         </button>
         <p id="room1-message" class="room1-message" aria-live="polite"></p>
@@ -114,10 +130,10 @@
 
       <!----------Filips rum ---------->
       <section id="room2" class="room2" hidden>
-        <h2 class="captcha-room-title">Confirm you are human</h2>
-        <div class="captcha-room-timer-wrapper" id="room2-timer-wrapper">
+        <h2 class="captcha-room-title" hidden>Confirm you are human</h2>
+        <div class="captcha-room-timer-wrapper" id="room2-timer-wrapper" hidden>
           <span>Time: </span>
-          <span id="captcha-timer">0:00</span>
+          <span id="captcha-timer">5:00</span>
         </div>
 
         <div id="captcha-room"></div>
@@ -243,7 +259,9 @@
         </div>
       </section>
     </main>
-    <footer></footer>
+    <footer>
+      <p>© 2026 Error 404 — The Natural Stunner Squad — Medieinstitutet</p>
+    </footer>
 
     <script type="module" src="/src/main.ts"></script>
   </body>

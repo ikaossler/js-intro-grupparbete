@@ -42,6 +42,7 @@
   pointer-events: none;
 }
 
+<<<<<<< HEAD:src/room2/room2.css
 .captcha-room-title,
 .captcha-room-timer-wrapper,
 .captcha-room-prompt,
@@ -49,11 +50,20 @@
 .captcha-success-title {
   text-align: center;
   margin-bottom: 20px;
+=======
+.captcha-room-title, .captcha-room-timer-wrapper, .captcha-room-prompt {
+    text-align: center;
+    margin-bottom: 20px;
+>>>>>>> main:src/rooms/room2.css
 }
 
 .captcha-room-verify-btn,
 .captcha-success-continue-btn {
+<<<<<<< HEAD:src/room2/room2.css
   display: block;
+=======
+  display: block; 
+>>>>>>> main:src/rooms/room2.css
   max-width: 600px;
   margin: 10px auto;
   width: 100%;
@@ -89,3 +99,59 @@
 .feedback-success {
   color: #00ff88;
 }
+<<<<<<< HEAD:src/room2/room2.css
+=======
+
+/* Intro and Timeout Screen Styling */
+.captcha-screen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.captcha-room-intro-title,
+.captcha-timeout-title,
+.captcha-success-title {
+  color: #39ff14;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.captcha-room-intro-description,
+.captcha-timeout-message,
+.captcha-success-message {
+  color: #00b32d;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.captcha-room-intro-start-btn,
+.captcha-timeout-retry-btn {
+  display: inline-block;
+  padding: 0.75rem 2.5rem;
+  background-color: #00b32d;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: 2px solid #39ff14;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.captcha-room-intro-start-btn:hover,
+.captcha-timeout-retry-btn:hover {
+  background-color: #00ff88;
+  box-shadow: 0 0 20px #39ff14;
+  transform: scale(1.05);
+}
+>>>>>>> main:src/rooms/room2.css
