@@ -1,6 +1,6 @@
 import "./room3.css";
-/* /borttagen kod för att main.ts ska lyssna på event istället för knappen direkt /maria
-import { showSection, SectionId } from "../main"; */
+/* /borttagen kod för att main.ts ska lyssna på event istället för knappen direkt /maria*/
+import { showSection, SectionId } from "../main"; 
 
 
 /*******************************************/
