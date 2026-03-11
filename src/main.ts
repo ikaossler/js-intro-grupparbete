@@ -237,10 +237,14 @@ function initRooms(): void {
   // Ladda eventuell sparad progress.
   syncUiFromSavedProgress();
   const captchaRoom = renderCaptchaRoom(() => {
-    completeRoom("room2");
-    updateProgressFromStorage();
-    showSection("room3");
-  });
+  completeRoom("room2");
+  updateProgressFromStorage();
+  showSection("room3");
+}, () => {
+  saveProgress({ currentRoom: "room1", completedRooms: [] });
+  clearSavedTotalSeconds();
+  location.reload();
+});
   
   const captchaHost = room2Section.querySelector<HTMLElement>("#captcha-room");
   if (captchaHost) {
