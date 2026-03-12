@@ -11,9 +11,6 @@
   <body>
     <header class="site-header">
       <h1>Error 404</h1>
-      <!-- TEMP START: Tillfällig reset-knapp för test/demo. Ska tas bort senare. -->
-      <button id="temp-reset-btn" type="button">Reset to Start</button>
-      <!-- TEMP END: Ska tas bort senare. -->
       <div id="total-time" class="total-timer">Time: 0:00</div>
       <div class="escape-status" role="status" aria-live="polite">
         <span id="loadingBar">ESCAPE STATUS: ░░░░░░░░░░</span>
@@ -79,58 +76,72 @@
         ╚══════════════════════════════════════════════╝
       -->
       <section id="room1" class="room1" hidden>
-        <canvas id="room1-matrix" class="room1-matrix" aria-hidden="true"></canvas>
-        <div class="room1-matrix-dim" aria-hidden="true"></div>
+        <div id="room1-intro" class="room-intro-panel">
+          <h2 id="room1-intro-title" class="room-intro-title">Room 1</h2>
+          <p id="room1-intro-description" class="room-intro-description"></p>
+          <button id="room1-intro-start-btn" class="room-intro-start-btn" type="button">
+            Start room 1
+          </button>
+        </div>
 
-        <div class="room1-wrap">
-          <div class="room1-terminal">
-            <h2 id="room1-title" class="room1-title">Verification Code</h2>
+        <div id="room1-content" hidden>
+          <canvas id="room1-matrix" class="room1-matrix" aria-hidden="true"></canvas>
+          <div class="room1-matrix-dim" aria-hidden="true"></div>
 
-            <label class="room1-label room1-visually-hidden" for="code-input">Enter access code</label>
-            <div class="room1-input-row">
-              <input
-                id="code-input"
-                class="room1-input"
-                name="code-input"
-                type="password"
-                maxlength="6"
-                autocomplete="off"
-                inputmode="numeric"
-                placeholder="ENTER CODE..."
-              />
-              <button id="check-btn" class="room1-button room1-button-primary" type="button">
-                Verify
+          <div class="room1-wrap">
+            <div class="room1-terminal">
+              <h2 id="room1-title" class="room1-title">Verification Code</h2>
+              <p class="room1-text room1-intro-text">A verification code has been sent.</p>
+              <p class="room1-text room1-intro-text">
+                Enter access code to escape.<span class="cursor">|</span>
+              </p>
+
+              <label class="room1-label room1-visually-hidden" for="code-input">Enter access code</label>
+              <div class="room1-input-row">
+                <input
+                  id="code-input"
+                  class="room1-input"
+                  name="code-input"
+                  type="password"
+                  maxlength="6"
+                  autocomplete="off"
+                  inputmode="numeric"
+                  placeholder="ENTER CODE..."
+                />
+                <button id="check-btn" class="room1-button room1-button-primary" type="button">
+                  Verify
+                </button>
+              </div>
+
+              <div class="room1-secondary-row">
+                <span class="room1-secondary-text">Didn't get the code?</span>
+                <button id="resend-btn" class="room1-button room1-button-secondary" type="button">
+                  Resend
+                </button>
+                <p id="room1-timer" class="room1-timer">Time: 00:00</p>
+              </div>
+
+              <p class="room1-hidden-code-line">
+                Code:
+                <span id="flash-code" class="room1-code" aria-live="polite">------</span>
+              </p>
+
+              <h3 id="room1-success-title" class="room1-success-title" hidden>
+                Verification Complete!
+              </h3>
+              <p id="room1-success-text" class="room1-success-text" hidden>
+                You have successfully completed the verification challenge.
+              </p>
+              <button
+                id="room1-continue-btn"
+                class="room1-button room1-continue-button"
+                type="button"
+                hidden
+              >
+                Continue to room 2
               </button>
+              <p id="room1-message" class="room1-message" aria-live="polite"></p>
             </div>
-
-            <div class="room1-secondary-row">
-              <span class="room1-secondary-text">Didn't get the code?</span>
-              <button id="resend-btn" class="room1-button room1-button-secondary" type="button">
-                Resend
-              </button>
-              <p id="room1-timer" class="room1-timer">Time: 00:00</p>
-            </div>
-
-            <p class="room1-hidden-code-line" aria-hidden="true">
-              Code:
-              <span id="flash-code" class="room1-code" aria-live="polite">------</span>
-            </p>
-
-            <h3 id="room1-success-title" class="room1-success-title" hidden>
-              Verification Complete!
-            </h3>
-            <p id="room1-success-text" class="room1-success-text" hidden>
-              You have successfully completed the verification challenge.
-            </p>
-            <button
-              id="room1-continue-btn"
-              class="room1-button room1-continue-button"
-              type="button"
-              hidden
-            >
-              Continue to room 2
-            </button>
-            <p id="room1-message" class="room1-message" aria-live="polite"></p>
           </div>
         </div>
       </section>
@@ -153,37 +164,47 @@
 
       <!---------- Kickis rum ---------->
       <section id="room3" class="room3" hidden>
-        <div id="gameContainer"></div>
-
-        <button id="start-room3-btn" class="start-room3-btn" type="button">Start the game</button>
-
-        <div id="background-art-room3" class="background-art-room3">
-          <span>POPUP CHAMBER v2.0</span>
-          <span>INITIALIZING CHAOS PROTOCOL</span>
-          <span>SOLVE THE REBUS PUZZLES</span>
-          <span>█▓▒░ GOOD LUCK ░▒▓█</span>
-          <span>ERROR 404</span>
-        </div>
-
-        <div id="hud" class="hud">
-          <div>⚠ POPUP-CHAMBER</div>
-          <div id="room3-timer">10:00</div>
-          <div class="rebus-score">REBUS SOLVED: <span id="solved-count-room3">0</span> / 10</div>
-          <div class="popup-count-room3">CLOSED: <span id="closed-count-room3">0</span></div>
-        </div>
-
-        <div id="progress-bar-wrap-room3" class="progress-bar-wrap-room3">
-          <div id="progress-bar-room3" class="progress-bar-room3"></div>
-        </div>
-
-        <div id="win-screen-room3" class="win-screen-room3">
-          <h2>YOU DID IT!</h2>
-          <p>You escaped the popup chamber!</p>
-          <div class="answer">10 / 10 CORRECT</div>
-          <button id="restart-btn-room3" class="restart-btn-room3" type="button">Play Again</button>
-          <button id="next-room-btn-room3" class="next-room-btn-room3" type="button">
-            Next Room
+        <div id="room3-intro" class="room-intro-panel">
+          <h2 id="room3-intro-title" class="room-intro-title">Room 3</h2>
+          <p id="room3-intro-description" class="room-intro-description"></p>
+          <button id="room3-intro-start-btn" class="room-intro-start-btn" type="button">
+            Start room 3
           </button>
+        </div>
+
+        <div id="room3-content" hidden>
+          <div id="gameContainer"></div>
+
+          <button id="start-room3-btn" class="start-room3-btn" type="button">Start the game</button>
+
+          <div id="background-art-room3" class="background-art-room3">
+            <span>POPUP CHAMBER v2.0</span>
+            <span>INITIALIZING CHAOS PROTOCOL</span>
+            <span>SOLVE THE REBUS PUZZLES</span>
+            <span>█▓▒░ GOOD LUCK ░▒▓█</span>
+            <span>ERROR 404</span>
+          </div>
+
+          <div id="hud" class="hud">
+            <div>⚠ POPUP-CHAMBER</div>
+            <div id="room3-timer">10:00</div>
+            <div class="rebus-score">REBUS SOLVED: <span id="solved-count-room3">0</span> / 10</div>
+            <div class="popup-count-room3">CLOSED: <span id="closed-count-room3">0</span></div>
+          </div>
+
+          <div id="progress-bar-wrap-room3" class="progress-bar-wrap-room3">
+            <div id="progress-bar-room3" class="progress-bar-room3"></div>
+          </div>
+
+          <div id="win-screen-room3" class="win-screen-room3">
+            <h2>YOU DID IT!</h2>
+            <p>You escaped the popup chamber!</p>
+            <div class="answer">10 / 10 CORRECT</div>
+            <button id="restart-btn-room3" class="restart-btn-room3" type="button">Play Again</button>
+            <button id="next-room-btn-room3" class="next-room-btn-room3" type="button">
+              Next Room
+            </button>
+          </div>
         </div>
       </section>
 
@@ -198,24 +219,34 @@
       <!----------Ikas rum-------------->
 
       <section id="room4" class="room4" hidden>
-        <h2>Enter Your Password... Please</h2>
-        <p class="room4-description">For your security, please create a strong password.</p>
-        <div id="room4-timer">Time: 0:00</div>
-        <button class="show-requirements-btn">Show Requirements</button>
+        <div id="room4-intro" class="room-intro-panel">
+          <h2 id="room4-intro-title" class="room-intro-title">Room 4</h2>
+          <p id="room4-intro-description" class="room-intro-description"></p>
+          <button id="room4-intro-start-btn" class="room-intro-start-btn" type="button">
+            Start room 4
+          </button>
+        </div>
 
-        <div class="room4-game">
-          <input
-            type="text"
-            id="password-input"
-            placeholder="Enter your password"
-            autocomplete="off"
-          />
-          <button id="room4-submit">Submit</button>
+        <div id="room4-content" hidden>
+          <h2>Enter Your Password... Please</h2>
+          <p class="room4-description">For your security, please create a strong password.</p>
+          <div id="room4-timer">Time: 0:00</div>
+          <button class="show-requirements-btn">Show Requirements</button>
 
-          <ul id="requirements-list">
-            <!---Kraven---->
-          </ul>
-          <p id="room4-message"></p>
+          <div class="room4-game">
+            <input
+              type="text"
+              id="password-input"
+              placeholder="Enter your password"
+              autocomplete="off"
+            />
+            <button id="room4-submit">Submit</button>
+
+            <ul id="requirements-list">
+              <!---Kraven---->
+            </ul>
+            <p id="room4-message"></p>
+          </div>
         </div>
       </section>
 

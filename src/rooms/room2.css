@@ -97,7 +97,6 @@
   text-align: center;
 }
 
-.captcha-room-intro-title,
 .captcha-timeout-title,
 .captcha-success-title {
   color: #39ff14;
@@ -105,9 +104,9 @@
   margin-bottom: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  text-align: center;
 }
 
-.captcha-room-intro-description,
 .captcha-timeout-message,
 .captcha-success-message {
   color: #00b32d;
@@ -115,9 +114,12 @@
   margin-bottom: 2rem;
   max-width: 500px;
   line-height: 1.6;
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.captcha-room-intro-start-btn,
 .captcha-timeout-retry-btn {
   display: inline-block;
   padding: 0.75rem 2.5rem;
@@ -132,7 +134,6 @@
   letter-spacing: 0.05em;
 }
 
-.captcha-room-intro-start-btn:hover,
 .captcha-timeout-retry-btn:hover {
   background-color: #00ff88;
   box-shadow: 0 0 20px #39ff14;
@@ -140,14 +141,13 @@
 }
 
 .captcha-item.focused {
-    outline: 3px solid white;
+    outline: 3px solid #39ff14;
     outline-offset: 2px;
 }
 
-.captcha-room-verify-btn:focus,
-.captcha-success-continue-btn:focus,
-.captcha-room-intro-start-btn:focus,
-.captcha-timeout-retry-btn:focus {
-    outline: 3px solid white;
+.captcha-room-verify-btn:focus-visible,
+.captcha-success-continue-btn:focus-visible,
+.captcha-timeout-retry-btn:focus-visible {
+    outline: 3px solid #39ff14;
     outline-offset: 2px;
 }
