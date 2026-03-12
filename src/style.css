@@ -22,6 +22,10 @@ footer {
   align-items: center;
 }
 
+h1 {
+    cursor: pointer;
+}
+
 p {
   color: #00b32d;
 }
