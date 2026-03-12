@@ -518,6 +518,9 @@ function checkWin(): void {
     stopTimer();
     setTimeout(() => {
       document.querySelector<HTMLElement>("#win-screen-room3")?.classList.add("show");
+      setTimeout(() => {
+        document.querySelector<HTMLElement>("#next-room-btn-room3")?.focus();
+      }, 100);
     }, 800);
   }
 }

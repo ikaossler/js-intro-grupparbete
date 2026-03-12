@@ -100,6 +100,11 @@ function attachKeyboardControls(onComplete: () => void): void {
         const GRID_COLUMNS = 3;
         const lastIndex = CAPTCHA_ROUNDS[currentRoundIndex].items.length - 1;
 
+        if (document.activeElement?.id === "captcha-verify-btn" && (event.key === "ArrowUp")) {
+            event.preventDefault();
+            moveFocusToItem(lastIndex, onComplete);
+            return;
+        }
         switch (event.key) {
             case "ArrowRight":
                 event.preventDefault();
@@ -111,7 +116,13 @@ function attachKeyboardControls(onComplete: () => void): void {
                 break;
             case "ArrowDown":
                 event.preventDefault();
-                moveFocusToItem(Math.min(focusedItemIndex + GRID_COLUMNS, lastIndex), onComplete);
+                if (focusedItemIndex + GRID_COLUMNS > lastIndex) {
+                    focusedItemIndex = -1;
+                    updateFocusedItemVisual();
+                    roomContainer.querySelector<HTMLButtonElement>("#captcha-verify-btn")?.focus();
+                } else {
+                    moveFocusToItem(focusedItemIndex + GRID_COLUMNS, onComplete);
+                }
                 break;
             case "ArrowUp":
                 event.preventDefault();
@@ -383,6 +394,7 @@ function hideCaptchaHeaderElements(): void {
 
 function injectSuccessScreen(onComplete: () => void): void {
   roomContainer.innerHTML = `
+    <div class="captcha-screen-container">
         <h2 class="captcha-success-title">Verification Complete!</h2>
         <p class="captcha-success-message">You have successfully completed the captcha challenge.</p>
         <button
@@ -391,6 +403,7 @@ function injectSuccessScreen(onComplete: () => void): void {
             aria-label="Continue to next room">
             Continue
         </button>
+    </div>
     `;
 
   const continueButton = roomContainer.querySelector<HTMLButtonElement>("#captcha-continue-btn");
