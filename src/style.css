@@ -5,7 +5,7 @@ tills den ska poppa upp när rum 4 är avklarat. Fattar inte helt varför än. /
 }
 
 body {
-    display: grid;
+display: grid;
   font-family: monospace, sans-serif;
   font-weight: 400;
   margin: 0;
@@ -38,6 +38,7 @@ p {
   top: 0;
   z-index: 1000;
   background: #000;
+  gap: 2.5em;
 }
 
 .escape-status {
