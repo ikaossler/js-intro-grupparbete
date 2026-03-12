@@ -42,28 +42,14 @@
   pointer-events: none;
 }
 
-<<<<<<< HEAD:src/room2/room2.css
-.captcha-room-title,
-.captcha-room-timer-wrapper,
-.captcha-room-prompt,
-.captcha-success-message,
-.captcha-success-title {
-  text-align: center;
-  margin-bottom: 20px;
-=======
 .captcha-room-title, .captcha-room-timer-wrapper, .captcha-room-prompt {
     text-align: center;
     margin-bottom: 20px;
->>>>>>> main:src/rooms/room2.css
 }
 
 .captcha-room-verify-btn,
 .captcha-success-continue-btn {
-<<<<<<< HEAD:src/room2/room2.css
-  display: block;
-=======
   display: block; 
->>>>>>> main:src/rooms/room2.css
   max-width: 600px;
   margin: 10px auto;
   width: 100%;
@@ -99,8 +85,6 @@
 .feedback-success {
   color: #00ff88;
 }
-<<<<<<< HEAD:src/room2/room2.css
-=======
 
 /* Intro and Timeout Screen Styling */
 .captcha-screen-container {
@@ -154,4 +138,16 @@
   box-shadow: 0 0 20px #39ff14;
   transform: scale(1.05);
 }
->>>>>>> main:src/rooms/room2.css
+
+.captcha-item.focused {
+    outline: 3px solid white;
+    outline-offset: 2px;
+}
+
+.captcha-room-verify-btn:focus,
+.captcha-success-continue-btn:focus,
+.captcha-room-intro-start-btn:focus,
+.captcha-timeout-retry-btn:focus {
+    outline: 3px solid white;
+    outline-offset: 2px;
+}

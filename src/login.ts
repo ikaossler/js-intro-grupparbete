@@ -132,7 +132,7 @@ function register(username: string): IResult {
     const inputName = username.toLowerCase();
 
     if (takenName === inputName) {
-      return { success: false, error: "The username is aldredy taken." };
+      return { success: false, error: "The username is already taken." };
     }
   }
 
