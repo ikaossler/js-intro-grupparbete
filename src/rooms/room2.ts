@@ -356,6 +356,7 @@ function hideCaptchaHeaderElements(): void {
 
 function injectSuccessScreen(onComplete: () => void): void {
   roomContainer.innerHTML = `
+    <div class="captcha-screen-container">
         <h2 class="captcha-success-title">Verification Complete!</h2>
         <p class="captcha-success-message">You have successfully completed the captcha challenge.</p>
         <button
@@ -364,6 +365,7 @@ function injectSuccessScreen(onComplete: () => void): void {
             aria-label="Continue to next room">
             Continue
         </button>
+    </div>
     `;
 
   const continueButton = roomContainer.querySelector<HTMLButtonElement>("#captcha-continue-btn");
