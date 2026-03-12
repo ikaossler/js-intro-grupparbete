@@ -62,25 +62,30 @@ In the game, you make your way through four rooms, each inspired ba a classic in
 The game is built as a loving tribute to all the times the internet has made us want to throw our computer out the window - except this time, you’re supposed to have fun along the way.
 
 ### Startsida
+![Startsida](/src/assets/Startsida.png)
 
 ### Rum 1
 
 I detta rum ska du lösa en omöjlig verifieringskod.
+![Rum 1](/src/assets/rum1.png)
 
 ### Rum 2
 
 I rum 2 får du en captha att lösa.
+![Rum 2](/src/assets/rum2.png)
 
 ### Rum 3
 
 Här kommer du mötas av ett pop-up kaos.
+![Rum 3](/src/assets/rum3.png)
 
 ### Rum 4
 
 I fjärde och sista rummet ska du uppfylla kraven för ett godkänt lösenord.
+![Rum 4](/src/assets/rum4.png)
 
 ### Slutsida
-
+![]()
 
 ## Beskrivning av processen
 
