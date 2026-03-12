@@ -197,20 +197,11 @@ function updateTimerDisplay(): void {
     timerElement.textContent = formattedTime;
 }
 
-async function injectRoomIntroScreen(onComplete: () => void): Promise<void> {
-    const response = await fetch(`${BASE_URL}rooms.json`);
-    const roomsData = await response.json();
-    const myRoomData = roomsData.find((room: { id: string }) => room.id === "room2");
-
-    if (!myRoomData) {
-        injectRoundHtml(onComplete);
-        return;
-    }
-
+function injectRoomIntroScreen(onComplete: () => void): void {
     roomContainer.innerHTML = `
         <div class="captcha-screen-container">
-            <h2 class="captcha-room-intro-title">Room 2: ${myRoomData.name}</h2>
-            <p class="captcha-room-intro-description">${myRoomData.description}</p>
+      <h2 class="captcha-room-intro-title">Room 2: Captcha Challenge</h2>
+      <p class="captcha-room-intro-description room-description" data-room-description-for="room2"></p>
             <button class="captcha-room-intro-start-btn" id="captcha-start-btn" aria-label="Start Room 2">
                 Start
             </button>
@@ -249,11 +240,10 @@ function injectRoundHtml(onComplete: () => void): void {
         </button>
     `;
 
-  updateTimerDisplay();
-
-  attachItemClickListeners(onComplete);
-  attachVerifyButtonListener(onComplete);
-  updateFocusedItemVisual();
+    updateTimerDisplay();
+    attachItemClickListeners(onComplete);
+    attachVerifyButtonListener(onComplete);
+    updateFocusedItemVisual();
 }
 
 function buildAllItemsHtml(items: ICaptchaItem[]): string {
@@ -278,13 +268,18 @@ function buildSingleItemHtml(item: ICaptchaItem, index: number): string {
 }
 
 function attachItemClickListeners(onComplete: () => void): void {
-  const itemButtons = roomContainer.querySelectorAll<HTMLButtonElement>(".captcha-item");
-  itemButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const index = parseInt(button.dataset.index!);
-      toggleItemSelection(index, onComplete);
+    const itemButtons = roomContainer.querySelectorAll<HTMLButtonElement>(".captcha-item");
+    itemButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const index = parseInt(button.dataset.index!);
+            toggleItemSelection(index, onComplete);
+        });
+        button.addEventListener("focus", () => {
+            const index = parseInt(button.dataset.index!);
+            focusedItemIndex = index;
+            updateFocusedItemVisual();
+        });
     });
-  });
 }
 
 function toggleItemSelection(itemIndex: number, onComplete: () => void): void {

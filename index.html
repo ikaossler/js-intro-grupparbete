@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Error 404 - a browser-based escape room game. Solve puzzles across multiple rooms, beat the clock, and find your way out. Can you escape?" />
     <link rel="icon" href="data:," />
     <title>Error 404</title>
   </head>
@@ -14,15 +15,8 @@
       <button id="temp-reset-btn" type="button">Reset to Start</button>
       <!-- TEMP END: Ska tas bort senare. -->
       <div id="total-time" class="total-timer">Time: 0:00</div>
-      <div
-        class="progress-wrap"
-        role="progressbar"
-        aria-label="Game progress"
-        aria-valuemin="0"
-        aria-valuemax="4"
-        aria-valuenow="0"
-      >
-        <div id="progress-bar" class="progress-bar"></div>
+      <div class="escape-status" role="status" aria-live="polite">
+        <span id="loadingBar">ESCAPE STATUS: ░░░░░░░░░░</span>
       </div>
       <span id="logged-in-user"></span>
       <button id="about-btn" class="about-us-btn">About</button>
@@ -85,42 +79,60 @@
         ╚══════════════════════════════════════════════╝
       -->
       <section id="room1" class="room1" hidden>
-        <h2 id="room1-title" class="room1-title">Verification Code</h2>
-        <p class="room1-text">A verification code has been sent.</p>
-        <p class="room1-text">Enter your verification code to escape.</p>
+        <canvas id="room1-matrix" class="room1-matrix" aria-hidden="true"></canvas>
+        <div class="room1-matrix-dim" aria-hidden="true"></div>
 
-        <button id="resend-btn" class="room1-button" type="button">Resend</button>
+        <div class="room1-wrap">
+          <div class="room1-terminal">
+            <h2 id="room1-title" class="room1-title">Verification Code</h2>
 
-        <p id="room1-timer" class="room1-timer">Time: 00:00</p>
+            <label class="room1-label room1-visually-hidden" for="code-input">Enter access code</label>
+            <div class="room1-input-row">
+              <input
+                id="code-input"
+                class="room1-input"
+                name="code-input"
+                type="password"
+                maxlength="6"
+                autocomplete="off"
+                inputmode="numeric"
+                placeholder="ENTER CODE..."
+              />
+              <button id="check-btn" class="room1-button room1-button-primary" type="button">
+                Verify
+              </button>
+            </div>
 
-        <p>
-          Code:
-          <span id="flash-code" class="room1-code" aria-live="polite">------</span>
-        </p>
+            <div class="room1-secondary-row">
+              <span class="room1-secondary-text">Didn't get the code?</span>
+              <button id="resend-btn" class="room1-button room1-button-secondary" type="button">
+                Resend
+              </button>
+              <p id="room1-timer" class="room1-timer">Time: 00:00</p>
+            </div>
 
-        <label class="room1-label" for="code-input">Verification code</label>
-        <input
-          id="code-input"
-          class="room1-input"
-          name="code-input"
-          type="password"
-          maxlength="6"
-          autocomplete="off"
-          inputmode="numeric"
-          placeholder="******"
-        />
+            <p class="room1-hidden-code-line" aria-hidden="true">
+              Code:
+              <span id="flash-code" class="room1-code" aria-live="polite">------</span>
+            </p>
 
-        <button id="check-btn" class="room1-button" type="button">Verify</button>
-        <h3 id="room1-success-title" class="room1-success-title" hidden>
-          Verification Complete!
-        </h3>
-        <p id="room1-success-text" class="room1-success-text" hidden>
-          You have successfully completed the verification challenge.
-        </p>
-        <button id="room1-continue-btn" class="room1-button room1-continue-button" type="button" hidden>
-          Continue to room 2
-        </button>
-        <p id="room1-message" class="room1-message" aria-live="polite"></p>
+            <h3 id="room1-success-title" class="room1-success-title" hidden>
+              Verification Complete!
+            </h3>
+            <p id="room1-success-text" class="room1-success-text" hidden>
+              You have successfully completed the verification challenge.
+            </p>
+            <button
+              id="room1-continue-btn"
+              class="room1-button room1-continue-button"
+              type="button"
+              hidden
+            >
+              Continue to room 2
+            </button>
+            <p id="room1-message" class="room1-message" aria-live="polite"></p>
+          </div>
+        </div>
       </section>
       <!--
         ╔══════════════════════════════════════════════╗
