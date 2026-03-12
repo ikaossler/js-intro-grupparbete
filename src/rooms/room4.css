@@ -98,6 +98,14 @@
   z-index: 1;
 }
 
+/* När room4 kör intro + content-wrapper behöver content centreras separat. */
+#room4-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .room4 h2 {
   font-size: 1.4rem;
   margin-bottom: 0.4rem;
