@@ -565,9 +565,10 @@ function loadRoomDescription(roomId: string): void {
         return;
       }
 
-      // Skydd: lägg inte in texten igen om den redan finns i DOM.
-      const existingDescription = section.querySelector(".room-description");
+      // Om en beskrivning redan finns (t.ex. room2-placeholder), uppdatera texten istället.
+      const existingDescription = section.querySelector<HTMLElement>(".room-description");
       if (existingDescription) {
+        existingDescription.textContent = roomData.description;
         return;
       }
 
