@@ -5,6 +5,7 @@ tills den ska poppa upp när rum 4 är avklarat. Fattar inte helt varför än. /
 }
 
 body {
+    display: grid;
   font-family: monospace, sans-serif;
   font-weight: 400;
   margin: 0;
@@ -85,6 +86,10 @@ p {
 .login-btn:hover {
   background: #00b32d;
   box-shadow: 0 0 8px #00b32d;
+}
+
+#logged-in-user {
+  margin-top: 20px;
 }
 
 @keyframes slideDown {
