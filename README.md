@@ -85,7 +85,7 @@ I fjärde och sista rummet ska du uppfylla kraven för ett godkänt lösenord.
 ![Rum 4](/src/assets/rum4.png)
 
 ### Slutsida
-![]()
+![](/src/assets/Resultat.png)
 
 ## Beskrivning av processen
 
