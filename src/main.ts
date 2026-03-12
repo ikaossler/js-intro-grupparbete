@@ -573,6 +573,17 @@ shareBtn?.addEventListener("click", () => {
   });
 });
 
+function handleTitleClickWithConfirmation(): void {
+    const confirmed = confirm("This will clear your progress and restart the game. Are you sure?");
+    if (!confirmed) return;
+    localStorage.removeItem("game-progress-v1");
+    localStorage.removeItem("error404-total-seconds");
+    location.reload();
+}
+
+const siteTitle = document.querySelector<HTMLElement>("h1");
+siteTitle?.addEventListener("click", handleTitleClickWithConfirmation);
+
 // Startar appen sist, efter att alla variabler/funktioner är initierade.
 registerRoomCompletionListeners();
 initRooms();

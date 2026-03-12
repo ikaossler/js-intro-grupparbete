@@ -309,6 +309,7 @@ h3 {
 h1 {
   display: flex;
   justify-content: left;
+  cursor: pointer;
 }
 
 .total-timer {
