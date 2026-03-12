@@ -4,6 +4,7 @@ import { initRoom1 } from "./rooms/room1";
 import { renderCaptchaRoom } from "./rooms/room2";
 import "./rooms/room3";
 import "./rooms/room4";
+import { setupRoomIntro } from "./rooms/roomIntro";
 import { updateUserDisplay, isLoggedIn } from "./login";
 
 const startButton = document.getElementById("start-btn") as HTMLButtonElement;
@@ -25,11 +26,6 @@ document.addEventListener(
   },
   { once: true }
 );
-
-// OBS! Rummen initieras just nu på olika sätt.
-// room1 använder init-funktion, medan andra rum körs via side-effect import.
-// Kommer antagligen ändra detta senare för att få en mer enhetlig struktur /maria
-
 
 
 // Lista med alla sektioner i spelet i den ordning de finns i HTML.
@@ -66,7 +62,7 @@ function handleStartButtonClick(): void {
   startTotalTimer();
   bgMusic.pause();
   bgMusic.currentTime = 0;
-  showSection("room1"); //ÄNDRA TILL RUM 1 INNAN PR!!
+  showSection("room1");
 }
 
 /*********************************************************
@@ -172,8 +168,6 @@ function completeRoom(roomId: RoomId): void {
 // Visar den valda sektionen.
 // Gömmer alla andra sektioner.
 export function showSection(activeId: SectionId): void {
-  loadRoomDescription(activeId);
-
   sectionOrder.forEach((id) => {
     const section = document.querySelector<HTMLElement>(`#${id}`);
     if (!section) {
@@ -238,10 +232,14 @@ function registerRoomCompletionListeners(): void {
 function initRooms(): void {
   const room1Section = document.querySelector<HTMLElement>("#room1");
   const room2Section = document.querySelector<HTMLElement>("#room2");
+  const room3StartButton = document.querySelector<HTMLButtonElement>("#start-room3-btn");
   // Om room1 eller room2 inte finns i HTML kan vi inte starta spelet.
   if (!room1Section || !room2Section) {
     return;
   }
+  // Alias efter guard så TypeScript vet att elementet finns.
+  const safeRoom1Section = room1Section;
+  const safeRoom2Section = room2Section;
   // Ladda eventuell sparad progress.
   syncUiFromSavedProgress();
   const captchaRoom = renderCaptchaRoom(() => {
@@ -254,19 +252,63 @@ function initRooms(): void {
   location.reload();
 });
   
-  const captchaHost = room2Section.querySelector<HTMLElement>("#captcha-room");
+  const captchaHost = safeRoom2Section.querySelector<HTMLElement>("#captcha-room");
   if (captchaHost) {
     captchaHost.replaceWith(captchaRoom);
   } else {
-    room2Section.appendChild(captchaRoom);
+    safeRoom2Section.appendChild(captchaRoom);
   }
+
+  let room1IsInitialized = false;
+
   function handleRoom1Completed(): void {
     completeRoom("room1");
     updateProgressFromStorage();
     showSection("room2");
   }
-  // När room1 är klart: uppdatera progress och visa room2.
-  initRoom1(room1Section, handleRoom1Completed);
+
+  // Startar room1-logiken först när intro-knappen klickas.
+  function startRoom1FromIntro(): void {
+    if (room1IsInitialized) {
+      return;
+    }
+    room1IsInitialized = true;
+    initRoom1(safeRoom1Section, handleRoom1Completed);
+  }
+
+  // Intro för room1: visar json-info innan spelet börjar.
+  void setupRoomIntro({
+    roomId: "room1",
+    introId: "room1-intro",
+    titleId: "room1-intro-title",
+    descriptionId: "room1-intro-description",
+    startButtonId: "room1-intro-start-btn",
+    contentId: "room1-content",
+    onStart: startRoom1FromIntro,
+  });
+
+  // Intro för room3: när intro startas "klickar" vi på befintlig startknapp.
+  void setupRoomIntro({
+    roomId: "room3",
+    introId: "room3-intro",
+    titleId: "room3-intro-title",
+    descriptionId: "room3-intro-description",
+    startButtonId: "room3-intro-start-btn",
+    contentId: "room3-content",
+    onStart: () => {
+      room3StartButton?.click();
+    },
+  });
+
+  // Intro för room4: visar json-info innan spelaren börjar.
+  void setupRoomIntro({
+    roomId: "room4",
+    introId: "room4-intro",
+    titleId: "room4-intro-title",
+    descriptionId: "room4-intro-description",
+    startButtonId: "room4-intro-start-btn",
+    contentId: "room4-content",
+  });
 }
 /********************************************/
 /**************** ABOUT US*******************/
@@ -495,7 +537,6 @@ loadHighscores();
  **********************************************************/
 
 const resetBtn = document.getElementById("reset-btn") as HTMLButtonElement;
-const tempResetBtn = document.getElementById("temp-reset-btn") as HTMLButtonElement;
 
 
 
@@ -512,14 +553,6 @@ function handleResetClick(): void {
 // });
 
 resetBtn?.addEventListener("click", handleResetClick);
-
-/*
-  TEMP START:
-  Tillfällig knapp i headern för att nollställa spelet och gå tillbaka till startsidan.
-  Ska tas bort sen
-*/
-tempResetBtn?.addEventListener("click", handleResetClick);
-/* TEMP END */
 
 /*********************************************************
  **********************SHARE RESULTS***********************
@@ -540,44 +573,6 @@ shareBtn?.addEventListener("click", () => {
   });
 });
 
-/********************************************/
-/******* FUNCTION FOR ROOM DESCRIPTION ******/
-/********************************************/
-
-const loadedDescriptions = new Set<string>();
-
-function loadRoomDescription(roomId: string): void {
-  if (loadedDescriptions.has(roomId)) {
-    return;
-  }
-  loadedDescriptions.add(roomId);
-
-  fetch(`${import.meta.env.BASE_URL}rooms.json`)
-    .then((res) => res.json())
-    .then((rooms) => {
-      const roomData = rooms.find((room: { id: string }) => room.id === roomId);
-      if (!roomData) {
-        return;
-      }
-
-      const section = document.querySelector<HTMLElement>(`#${roomId}`);
-      if (!section) {
-        return;
-      }
-
-      // Om en beskrivning redan finns (t.ex. room2-placeholder), uppdatera texten istället.
-      const existingDescription = section.querySelector<HTMLElement>(".room-description");
-      if (existingDescription) {
-        existingDescription.textContent = roomData.description;
-        return;
-      }
-
-      const descriptionEl = document.createElement("p");
-      descriptionEl.textContent = roomData.description;
-      descriptionEl.classList.add("room-description");
-      section.insertAdjacentElement("afterbegin", descriptionEl);
-    });
-}
 // Startar appen sist, efter att alla variabler/funktioner är initierade.
 registerRoomCompletionListeners();
 initRooms();

@@ -63,10 +63,13 @@
 
 .room1-terminal {
   width: 100%;
-  max-width: 520px;
+  max-width: 620px;
+  height: 500px;
   background: rgba(0, 0, 0, 0.88);
   border: 1px solid #00ff66;
   padding: 34px;
+  box-sizing: border-box;
+  overflow-y: auto;
   box-shadow:
     0 0 10px rgba(0, 255, 102, 0.25),
     0 0 25px rgba(0, 255, 102, 0.12),
@@ -110,17 +113,20 @@
 .room1-text {
   margin: 0 0 10px;
   line-height: 1.5;
+  /* Överskriver global p-stil så room1-texten ligger till vänster. */
+  display: block;
+  text-align: left;
 }
 
 .room1-intro-text {
   overflow: hidden;
   white-space: nowrap;
   width: 0;
-  animation: typing 3s steps(30) forwards;
+  animation: typing 2s steps(30) forwards;
 }
 
 .room1-intro-text + .room1-intro-text {
-  animation-delay: 3.1s;
+  animation-delay: 2.1s;
   margin-bottom: 44px;
 }
 
@@ -229,7 +235,8 @@
 }
 
 .room1-message {
-  min-height: 0.5rem;
+  /* Fast höjd gör att terminal-rutan inte ändrar storlek mellan olika meddelanden. */
+  height: 5.2rem;
   margin-top: 28px;
   color: #00ff66;
   white-space: pre-line;
@@ -258,12 +265,17 @@
 .room1-continue-button {
   display: block;
   width: 100%;
-  margin: 0 auto;
+  margin: 14px auto 0;
   box-sizing: border-box;
   background-color: #00b32d;
   color: #000;
   font-weight: 700;
   border: 2px solid #39ff14;
+}
+
+/* När continue-knappen syns: minska luft direkt under knappen. */
+.room1-continue-button:not([hidden]) + .room1-message {
+  margin-top: 10px;
 }
 
 .room1-continue-button:hover {
@@ -272,7 +284,7 @@
 }
 
 .cursor {
-  animation: blink 1s step-end infinite;
+  animation: blink 1s infinite;
 }
 
 @keyframes typing {
@@ -292,6 +304,7 @@
 
 @media (max-width: 600px) {
   .room1-terminal {
+    height: auto;
     padding: 22px;
   }
 
