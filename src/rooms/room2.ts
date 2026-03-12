@@ -210,14 +210,17 @@ function updateTimerDisplay(): void {
 
 function injectRoomIntroScreen(onComplete: () => void): void {
     roomContainer.innerHTML = `
-        <div class="captcha-screen-container">
-      <h2 class="captcha-room-intro-title">Room 2: Captcha Challenge</h2>
-      <p class="captcha-room-intro-description room-description" data-room-description-for="room2"></p>
-            <button class="captcha-room-intro-start-btn" id="captcha-start-btn" aria-label="Start Room 2">
+        <div class="room-intro-panel">
+      <h2 class="room-intro-title" id="captcha-room2-intro-title">Room 2</h2>
+      <p class="room-intro-description room-description" data-room-description-for="room2"></p>
+            <button class="room-intro-start-btn" id="captcha-start-btn" aria-label="Start Room 2">
                 Start
             </button>
         </div>
     `;
+
+    // Fyll room2-introt med namn + beskrivning från rooms.json.
+    void loadRoom2IntroFromJson();
 
     const startButton = roomContainer.querySelector<HTMLButtonElement>("#captcha-start-btn");
     startButton?.addEventListener("click", () => {
@@ -225,6 +228,30 @@ function injectRoomIntroScreen(onComplete: () => void): void {
         document.querySelector<HTMLElement>(".captcha-room-title")?.removeAttribute("hidden");
         injectRoundHtml(onComplete);
         startRoomTimer();
+    });
+}
+
+// Hämtar room2-text från JSON och skriver in i intro-rutan.
+function loadRoom2IntroFromJson(): void {
+  fetch(`${BASE_URL}rooms.json`)
+    .then((response) => response.json())
+    .then((rooms: Array<{ id: string; name: string; description: string }>) => {
+      const room2Data = rooms.find((room) => room.id === "room2");
+      if (!room2Data) {
+        return;
+      }
+
+      const introTitle = roomContainer.querySelector<HTMLElement>("#captcha-room2-intro-title");
+      const introDescription = roomContainer.querySelector<HTMLElement>(
+        '[data-room-description-for="room2"]'
+      );
+
+      if (introTitle) {
+        introTitle.textContent = `Room 2: ${room2Data.name}`;
+      }
+      if (introDescription) {
+        introDescription.textContent = room2Data.description;
+      }
     });
 }
 
