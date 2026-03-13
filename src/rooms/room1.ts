@@ -183,7 +183,7 @@ function startRoom1Matrix(room: HTMLElement): (() => void) | null {
 
   const matrixIntervalId = window.setInterval(drawMatrix, MATRIX_INTERVAL_MS);
   window.addEventListener("resize", handleMatrixResize);
-  
+
   // Returnera en funktion som städar upp när vi lämnar room1.
   return () => {
     window.clearInterval(matrixIntervalId);

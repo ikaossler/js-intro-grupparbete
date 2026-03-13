@@ -1,4 +1,3 @@
-
 // data från rooms.json, varje rum har en id, namn och beskrivning.
 type RoomJsonItem = {
   id: string;

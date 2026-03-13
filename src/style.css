@@ -5,7 +5,7 @@ tills den ska poppa upp när rum 4 är avklarat. Fattar inte helt varför än. /
 }
 
 body {
-display: grid;
+  display: grid;
   font-family: monospace, sans-serif;
   font-weight: 400;
   margin: 0;
@@ -263,14 +263,13 @@ p {
   z-index: 0;
 }
 
-  .start-content {
+.start-content {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 
 #start h2,
 p,
@@ -470,8 +469,8 @@ h1 {
 }
 .highscore-top3-list li:nth-child(3) {
   animation-delay: 1.2s;
-  color: #CF853A;
-  text-shadow: 0 0 8px #CF853A66;
+  color: #cf853a;
+  text-shadow: 0 0 8px #cf853a66;
 }
 
 #reset-btn,

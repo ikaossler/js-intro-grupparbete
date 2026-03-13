@@ -1,6 +1,5 @@
 import "./room3.css";
-import { showSection, SectionId } from "../main"; 
-
+import { showSection, SectionId } from "../main";
 
 /*******************************************/
 /***************** TYPES *******************/
@@ -243,7 +242,6 @@ function handleTimeout(): void {
 /*******************************************/
 /********** NEXT ROOM BUTTON ***************/
 /*******************************************/
-
 
 /*
 BORTTAGEN KOD för att den inte behövs längre när vi skickar event till main.ts istället för att main.ts ska lyssna på knappen direkt. /maria

@@ -179,7 +179,10 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 0 0 8px rgba(0, 255, 102, 0.12);
-  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
 }
 
 .room1-button:hover {

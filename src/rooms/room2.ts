@@ -76,77 +76,77 @@ let onFailCallback: (() => void) | null = null;
 let keyboardControlsHandler: ((e: KeyboardEvent) => void) | null = null;
 
 export function renderCaptchaRoom(onComplete: () => void, onFail: () => void): HTMLElement {
-    onFailCallback = onFail;
-    resetRoomState();
+  onFailCallback = onFail;
+  resetRoomState();
 
   roomContainer = document.createElement("div");
   roomContainer.id = "captcha-room";
   roomContainer.className = "room-container";
 
-    void injectRoomIntroScreen(onComplete);
-    attachKeyboardControls(onComplete);
+  void injectRoomIntroScreen(onComplete);
+  attachKeyboardControls(onComplete);
 
   return roomContainer;
 }
 
 function attachKeyboardControls(onComplete: () => void): void {
-    if (keyboardControlsHandler) {
-        document.removeEventListener("keydown", keyboardControlsHandler);
+  if (keyboardControlsHandler) {
+    document.removeEventListener("keydown", keyboardControlsHandler);
+  }
+
+  keyboardControlsHandler = (event: KeyboardEvent) => {
+    if (!roomContainer.querySelector("#captcha-grid")) return;
+
+    const GRID_COLUMNS = 3;
+    const lastIndex = CAPTCHA_ROUNDS[currentRoundIndex].items.length - 1;
+
+    if (document.activeElement?.id === "captcha-verify-btn" && event.key === "ArrowUp") {
+      event.preventDefault();
+      moveFocusToItem(lastIndex, onComplete);
+      return;
     }
-
-    keyboardControlsHandler = (event: KeyboardEvent) => {
-        if (!roomContainer.querySelector("#captcha-grid")) return;
-
-        const GRID_COLUMNS = 3;
-        const lastIndex = CAPTCHA_ROUNDS[currentRoundIndex].items.length - 1;
-
-        if (document.activeElement?.id === "captcha-verify-btn" && (event.key === "ArrowUp")) {
-            event.preventDefault();
-            moveFocusToItem(lastIndex, onComplete);
-            return;
+    switch (event.key) {
+      case "ArrowRight":
+        event.preventDefault();
+        moveFocusToItem(Math.min(focusedItemIndex + 1, lastIndex), onComplete);
+        break;
+      case "ArrowLeft":
+        event.preventDefault();
+        moveFocusToItem(Math.max(focusedItemIndex - 1, 0), onComplete);
+        break;
+      case "ArrowDown":
+        event.preventDefault();
+        if (focusedItemIndex + GRID_COLUMNS > lastIndex) {
+          focusedItemIndex = -1;
+          updateFocusedItemVisual();
+          roomContainer.querySelector<HTMLButtonElement>("#captcha-verify-btn")?.focus();
+        } else {
+          moveFocusToItem(focusedItemIndex + GRID_COLUMNS, onComplete);
         }
-        switch (event.key) {
-            case "ArrowRight":
-                event.preventDefault();
-                moveFocusToItem(Math.min(focusedItemIndex + 1, lastIndex), onComplete);
-                break;
-            case "ArrowLeft":
-                event.preventDefault();
-                moveFocusToItem(Math.max(focusedItemIndex - 1, 0), onComplete);
-                break;
-            case "ArrowDown":
-                event.preventDefault();
-                if (focusedItemIndex + GRID_COLUMNS > lastIndex) {
-                    focusedItemIndex = -1;
-                    updateFocusedItemVisual();
-                    roomContainer.querySelector<HTMLButtonElement>("#captcha-verify-btn")?.focus();
-                } else {
-                    moveFocusToItem(focusedItemIndex + GRID_COLUMNS, onComplete);
-                }
-                break;
-            case "ArrowUp":
-                event.preventDefault();
-                moveFocusToItem(Math.max(focusedItemIndex - GRID_COLUMNS, 0), onComplete);
-                break;
-            case "Enter":
-            case " ":
-                if (document.activeElement?.id === "captcha-verify-btn") return;
-                event.preventDefault();
-                toggleItemSelection(focusedItemIndex, onComplete);
-                break;
-        }
-    };
+        break;
+      case "ArrowUp":
+        event.preventDefault();
+        moveFocusToItem(Math.max(focusedItemIndex - GRID_COLUMNS, 0), onComplete);
+        break;
+      case "Enter":
+      case " ":
+        if (document.activeElement?.id === "captcha-verify-btn") return;
+        event.preventDefault();
+        toggleItemSelection(focusedItemIndex, onComplete);
+        break;
+    }
+  };
 
-    document.addEventListener("keydown", keyboardControlsHandler);
+  document.addEventListener("keydown", keyboardControlsHandler);
 }
 
 function resetRoomState(): void {
-    currentRoundIndex = 0;
-    selectedItems = new Set();
-    focusedItemIndex = 0;
-    stopRoomTimer();
-    timerIntervalId = null;
-    roomStartTime = 0;
+  currentRoundIndex = 0;
+  selectedItems = new Set();
+  focusedItemIndex = 0;
+  stopRoomTimer();
+  timerIntervalId = null;
+  roomStartTime = 0;
 }
 
 function startRoomTimer(): void {
@@ -162,9 +162,9 @@ function stopRoomTimer(): void {
 }
 
 function handleTimerExpiration(): void {
-    hideCaptchaHeaderElements();
+  hideCaptchaHeaderElements();
 
-    roomContainer.innerHTML = `
+  roomContainer.innerHTML = `
         <div class="captcha-screen-container">
             <h2 class="captcha-timeout-title">Time's Up!</h2>
             <p class="captcha-timeout-message">You failed to complete the challenge in time.</p>
@@ -176,40 +176,40 @@ function handleTimerExpiration(): void {
             </button>
         </div>
     `;
-    const retryButton = roomContainer.querySelector<HTMLButtonElement>("#captcha-retry-btn");
-    retryButton?.addEventListener("click", () => {
-        onFailCallback?.();
-    });
-    retryButton?.focus();
+  const retryButton = roomContainer.querySelector<HTMLButtonElement>("#captcha-retry-btn");
+  retryButton?.addEventListener("click", () => {
+    onFailCallback?.();
+  });
+  retryButton?.focus();
 }
 
-const ROOM_TIME_LIMIT_SECONDS = 5 * 60; 
+const ROOM_TIME_LIMIT_SECONDS = 5 * 60;
 
 function updateTimerDisplay(): void {
-    const timerElement = document.querySelector<HTMLElement>("#captcha-timer");
-    if (!timerElement) return;
+  const timerElement = document.querySelector<HTMLElement>("#captcha-timer");
+  if (!timerElement) return;
 
-    // Don't update if timer hasn't started yet
-    if (roomStartTime === 0) return;
+  // Don't update if timer hasn't started yet
+  if (roomStartTime === 0) return;
 
-    const elapsedSeconds = Math.floor((Date.now() - roomStartTime) / 1000);
-    const remainingSeconds = ROOM_TIME_LIMIT_SECONDS - elapsedSeconds;
+  const elapsedSeconds = Math.floor((Date.now() - roomStartTime) / 1000);
+  const remainingSeconds = ROOM_TIME_LIMIT_SECONDS - elapsedSeconds;
 
-    if (remainingSeconds <= 0) {
-        timerElement.textContent = "0:00";
-        stopRoomTimer();
-        handleTimerExpiration();
-        return;
-    }
+  if (remainingSeconds <= 0) {
+    timerElement.textContent = "0:00";
+    stopRoomTimer();
+    handleTimerExpiration();
+    return;
+  }
 
-    const minutes = Math.floor(remainingSeconds / 60);
-    const seconds = remainingSeconds % 60;
-    const formattedTime = `${minutes}:${seconds.toString().padStart(2, "0")}`;
-    timerElement.textContent = formattedTime;
+  const minutes = Math.floor(remainingSeconds / 60);
+  const seconds = remainingSeconds % 60;
+  const formattedTime = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  timerElement.textContent = formattedTime;
 }
 
 function injectRoomIntroScreen(onComplete: () => void): void {
-    roomContainer.innerHTML = `
+  roomContainer.innerHTML = `
         <div class="room-intro-panel">
       <h2 class="room-intro-title" id="captcha-room2-intro-title">Room 2</h2>
       <p class="room-intro-description room-description" data-room-description-for="room2"></p>
@@ -219,16 +219,16 @@ function injectRoomIntroScreen(onComplete: () => void): void {
         </div>
     `;
 
-    // Fyll room2-introt med namn + beskrivning från rooms.json.
-    void loadRoom2IntroFromJson();
+  // Fyll room2-introt med namn + beskrivning från rooms.json.
+  void loadRoom2IntroFromJson();
 
-    const startButton = roomContainer.querySelector<HTMLButtonElement>("#captcha-start-btn");
-    startButton?.addEventListener("click", () => {
-        document.querySelector<HTMLElement>("#room2-timer-wrapper")?.removeAttribute("hidden");
-        document.querySelector<HTMLElement>(".captcha-room-title")?.removeAttribute("hidden");
-        injectRoundHtml(onComplete);
-        startRoomTimer();
-    });
+  const startButton = roomContainer.querySelector<HTMLButtonElement>("#captcha-start-btn");
+  startButton?.addEventListener("click", () => {
+    document.querySelector<HTMLElement>("#room2-timer-wrapper")?.removeAttribute("hidden");
+    document.querySelector<HTMLElement>(".captcha-room-title")?.removeAttribute("hidden");
+    injectRoundHtml(onComplete);
+    startRoomTimer();
+  });
 }
 
 // Hämtar room2-text från JSON och skriver in i intro-rutan.
@@ -278,10 +278,10 @@ function injectRoundHtml(onComplete: () => void): void {
         </button>
     `;
 
-    updateTimerDisplay();
-    attachItemClickListeners(onComplete);
-    attachVerifyButtonListener(onComplete);
-    updateFocusedItemVisual();
+  updateTimerDisplay();
+  attachItemClickListeners(onComplete);
+  attachVerifyButtonListener(onComplete);
+  updateFocusedItemVisual();
 }
 
 function buildAllItemsHtml(items: ICaptchaItem[]): string {
@@ -306,18 +306,18 @@ function buildSingleItemHtml(item: ICaptchaItem, index: number): string {
 }
 
 function attachItemClickListeners(onComplete: () => void): void {
-    const itemButtons = roomContainer.querySelectorAll<HTMLButtonElement>(".captcha-item");
-    itemButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            const index = parseInt(button.dataset.index!);
-            toggleItemSelection(index, onComplete);
-        });
-        button.addEventListener("focus", () => {
-            const index = parseInt(button.dataset.index!);
-            focusedItemIndex = index;
-            updateFocusedItemVisual();
-        });
+  const itemButtons = roomContainer.querySelectorAll<HTMLButtonElement>(".captcha-item");
+  itemButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const index = parseInt(button.dataset.index!);
+      toggleItemSelection(index, onComplete);
     });
+    button.addEventListener("focus", () => {
+      const index = parseInt(button.dataset.index!);
+      focusedItemIndex = index;
+      updateFocusedItemVisual();
+    });
+  });
 }
 
 function toggleItemSelection(itemIndex: number, onComplete: () => void): void {
@@ -388,8 +388,8 @@ function showFeedback(message: string, type: "error" | "success"): void {
 }
 
 function hideCaptchaHeaderElements(): void {
-    document.querySelector<HTMLElement>("#room2-timer-wrapper")?.setAttribute("hidden", "true");
-    document.querySelector<HTMLElement>(".captcha-room-title")?.setAttribute("hidden", "true");
+  document.querySelector<HTMLElement>("#room2-timer-wrapper")?.setAttribute("hidden", "true");
+  document.querySelector<HTMLElement>(".captcha-room-title")?.setAttribute("hidden", "true");
 }
 
 function injectSuccessScreen(onComplete: () => void): void {

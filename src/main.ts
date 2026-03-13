@@ -27,7 +27,6 @@ document.addEventListener(
   { once: true }
 );
 
-
 // Lista med alla sektioner i spelet i den ordning de finns i HTML.
 const sectionOrder = [
   "start",
@@ -42,8 +41,6 @@ const sectionOrder = [
 // Skapar en typ av alla tillåtna sektionsnamn.
 // Exempel: "start" | "room1" | "room2" | "room3" | "room4".
 export type SectionId = (typeof sectionOrder)[number];
-
-
 
 startButton?.addEventListener("click", handleStartButtonClick);
 function handleStartButtonClick(): void {
@@ -242,16 +239,19 @@ function initRooms(): void {
   const safeRoom2Section = room2Section;
   // Ladda eventuell sparad progress.
   syncUiFromSavedProgress();
-  const captchaRoom = renderCaptchaRoom(() => {
-  completeRoom("room2");
-  updateProgressFromStorage();
-  showSection("room3");
-}, () => {
-  saveProgress({ currentRoom: "room1", completedRooms: [] });
-  clearSavedTotalSeconds();
-  location.reload();
-});
-  
+  const captchaRoom = renderCaptchaRoom(
+    () => {
+      completeRoom("room2");
+      updateProgressFromStorage();
+      showSection("room3");
+    },
+    () => {
+      saveProgress({ currentRoom: "room1", completedRooms: [] });
+      clearSavedTotalSeconds();
+      location.reload();
+    }
+  );
+
   const captchaHost = safeRoom2Section.querySelector<HTMLElement>("#captcha-room");
   if (captchaHost) {
     captchaHost.replaceWith(captchaRoom);
@@ -422,7 +422,7 @@ export function showResults() {
 
   if (finalTimeDisplay) {
     finalTimeDisplay.textContent = timeOnly;
-  } 
+  }
   displayTop3();
 }
 
@@ -538,8 +538,6 @@ loadHighscores();
 
 const resetBtn = document.getElementById("reset-btn") as HTMLButtonElement;
 
-
-
 function handleResetClick(): void {
   // Rensar bara spelprogress, men behåller highscore/login.
   localStorage.removeItem(PROGRESS_KEY);
@@ -574,11 +572,11 @@ shareBtn?.addEventListener("click", () => {
 });
 
 function handleTitleClickWithConfirmation(): void {
-    const confirmed = confirm("This will clear your progress and restart the game. Are you sure?");
-    if (!confirmed) return;
-    localStorage.removeItem("game-progress-v1");
-    localStorage.removeItem("error404-total-seconds");
-    location.reload();
+  const confirmed = confirm("This will clear your progress and restart the game. Are you sure?");
+  if (!confirmed) return;
+  localStorage.removeItem("game-progress-v1");
+  localStorage.removeItem("error404-total-seconds");
+  location.reload();
 }
 
 const siteTitle = document.querySelector<HTMLElement>("h1");

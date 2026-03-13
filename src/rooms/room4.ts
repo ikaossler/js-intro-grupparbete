@@ -142,15 +142,14 @@ submitButton.addEventListener("click", () => {
     messageElement.textContent = "✅ SUCCESS! Password accepted!";
     messageElement.style.color = "green";
 
- setTimeout(() => {
-  const user = getLoggedInUser();
-  const username = user ? user.username : "Anonymous";
-  addScore(username, getTotalTime());
-  notifyRoom4Completed(); //tillagger att main.ts får veta att rummet är klart så den kan visa resultsidan /maria
-  showResults();
-   resultSound.play();
-}, 1000);
-
+    setTimeout(() => {
+      const user = getLoggedInUser();
+      const username = user ? user.username : "Anonymous";
+      addScore(username, getTotalTime());
+      notifyRoom4Completed(); //tillagger att main.ts får veta att rummet är klart så den kan visa resultsidan /maria
+      showResults();
+      resultSound.play();
+    }, 1000);
   } else {
     failCount++;
     errorSound.play();
